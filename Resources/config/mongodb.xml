@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="blackroom_user.manager.user">Blackroom\Bundle\UserBundle\Document\UserManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="blackroom_user.document.manager" alias="doctrine.odm.mongodb.document_manager" />
+
+        <service id="blackroom_user.manager.user" class="%blackroom_user.manager.user%">
+            <argument type="service" id="blackroom_user.document.manager" />
+            <argument>%blackroom_user.model.user.class%</argument>
+        </service>
+    </services>
+</container>

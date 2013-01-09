@@ -23,6 +23,11 @@ abstract class User implements UserInterface, \Serializable
     protected $username;
 
     /**
+     * @var email
+     */
+    protected $email;
+
+    /**
      * Encrypted password, must be persisted
      *
      * @var string
@@ -131,6 +136,26 @@ abstract class User implements UserInterface, \Serializable
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * Set the mail address
+     *
+     * @param $mail
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get the user mail address
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**

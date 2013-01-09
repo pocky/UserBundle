@@ -34,6 +34,7 @@ class UserType extends AbstractType
 
         $builder
             ->add('username', 'text')
+            ->add('email', 'email')
             ->add('isActive', 'checkbox', array(
                 'label'     => 'Is active?',
                 'required'  => false
@@ -47,7 +48,7 @@ class UserType extends AbstractType
                 'required'  => false
             ))
             ->add('person', 'document', array(
-                'class'         => 'Blackroom\Bundle\ERPBundle\Document\Person',
+                'class'         => 'Blackroom\Bundle\ConnectBundle\Document\Person',
                 'property'      => 'name',
                 'empty_value'   => 'Associate a person',
                 'required'      => false

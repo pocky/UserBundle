@@ -36,6 +36,15 @@ class User extends AbstractUser
 
     /**
      * @ODM\String
+     * @ODM\UniqueIndex
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    protected $email;
+
+    /**
+     * @ODM\String
      * @Assert\Type(type="string")
      */
     protected $password;

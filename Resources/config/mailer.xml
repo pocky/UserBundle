@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="blackroom_user.register.email.template">BlackroomUserBundle:Register:mail.txt.twig</parameter>
+    </parameters>
+
+    <services>
+        <service id="blackroom_user.mailer.default" class="Blackroom\Bundle\UserBundle\Mailer\Mailer" public="false">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="blackroom_engine.manager.config" />
+            <argument type="collection">
+                <argument key="template" type="collection">
+                    <argument key="register">%blackroom_user.register.email.template%</argument>
+                </argument>
+            </argument>
+        </service>
+    </services>
+
+</container>

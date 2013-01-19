@@ -1,0 +1,25 @@
+{% block subject %}
+    {% autoescape %}
+    {{ subject }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape %}
+    {{ message }}
+
+    {{ url('register_confirmation', {'token': token}) }}
+
+    {{ footer }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {{ message }}
+
+    <a href="{{ url('register_confirmation', {'token': token}) }}">
+        {{ url('register_confirmation', {'token': token}) }}
+    </a>
+
+    {{ footer }}
+{% endblock %}

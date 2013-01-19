@@ -10,7 +10,6 @@
  */
 namespace Blackroom\Bundle\UserBundle\Model;
 
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;

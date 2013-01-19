@@ -48,7 +48,7 @@ class UserType extends AbstractType
                 'required'  => false
             ))
             ->add('person', 'document', array(
-                'class'         => 'Blackroom\Bundle\ConnectBundle\Document\Person',
+                'class'         => 'BlackroomConnectBundle:Person',
                 'property'      => 'name',
                 'empty_value'   => 'Associate a person',
                 'required'      => false

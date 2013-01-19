@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addUserSection($rootNode);
+        $this->addServiceSection($rootNode);
 
         return $treeBuilder;
     }
@@ -62,12 +63,44 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('name')->defaultValue('blackroom_user')->end()
                                 ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\UserType')->end()
-                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler')->end()
+                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.user')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('register')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('name')->defaultValue('blackroom_register')->end()
+                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\RegisterType')->end()
+                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.register')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('front_user')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('name')->defaultValue('blackroom_front_user')->end()
+                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\FrontUserType')->end()
+                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.front_user')->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
 
+            ->end()
+        ;
+    }
+
+    private function addServiceSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('service')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('mailer')->defaultValue('blackroom_user.mailer.default')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
     }

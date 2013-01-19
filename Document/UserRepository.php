@@ -40,6 +40,23 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    public function loadUserByConfirmationToken($token)
+    {
+        $qb = $this->createQueryBuilder()
+                ->field('confirmationToken')->equals($token)
+                ->getQuery();
+
+        try {
+            $user = $qb->getSingleResult();
+        } catch (DocumentNotFoundException $e) {
+            throw new UsernameNotFoundException(
+                sprintf('Unable to find an active user object identified by "%s".', $token)
+            );
+        }
+
+        return $user;
+    }
+
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);

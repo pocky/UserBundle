@@ -33,7 +33,8 @@ class RegisterType extends AbstractType
             ->add('username', 'text', array(
                 'label'             => 'Your username',
                 'attr'              => array(
-                    'class'         => 'span6'
+                    'class'         => 'span6',
+                    'pattern'       => '.{6,15}'
                 )
             ))
             ->add('email', 'email', array(
@@ -50,7 +51,7 @@ class RegisterType extends AbstractType
                     'attr'              => array(
                         'class'         => 'span6'
                     )),
-                'second_options'    => array('label' => 'Repeat your password',
+                'second_options'    => array('label' => 'Confirm your password',
                     'attr'              => array(
                         'class'         => 'span6'
                     ))

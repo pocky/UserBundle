@@ -73,9 +73,14 @@ class UserManager extends DocumentManager
      *
      * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $property
      */
-    public function updateUser(UserInterface $property)
+    public function updateUser(UserInterface $user)
     {
-        $this->_dm->merge($property);
+        $this->_dm->merge($user);
+        $this->_dm->flush();
+    }
+
+    public function flush()
+    {
         $this->_dm->flush();
     }
 
@@ -88,6 +93,28 @@ class UserManager extends DocumentManager
     public function findUserBy(array $criteria)
     {
         return $this->_repository->findBy($criteria);
+    }
+
+    /**
+     * Find user by token
+     *
+     * @param array $criteria
+     * @return array
+     */
+    public function findUserByToken($token)
+    {
+        return $this->_repository->loadUserByConfirmationToken($token);
+    }
+
+    /**
+     * Find user by username
+     *
+     * @param array $criteria
+     * @return array
+     */
+    public function findUserByUsername($username)
+    {
+        return $this->_repository->loadUserByUsername($username);
     }
 
     /**

@@ -46,7 +46,11 @@ class BlackroomUserExtension extends Extension
             )
         ));
 
-        $loader->load('user.xml');
+        foreach (array('user', 'front_user', 'register', 'mailer') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $container->setAlias('blackroom_user.mailer', $config['service']['mailer']);
     }
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

@@ -47,7 +47,7 @@ class RegisterType extends AbstractType
                 'type'              => 'password',
                 'label'             => 'your.password',
                 'invalid_message'   => 'Password must match!',
-                'first_options'     => array('label' => 'Your password',
+                'first_options'     => array('label' => 'your.password',
                     'attr'              => array(
                         'class'         => 'span6'
                     )),

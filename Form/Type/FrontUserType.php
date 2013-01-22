@@ -33,8 +33,12 @@ class FrontUserType extends AbstractType
         $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add('username', 'text')
-            ->add('email', 'email')
+            ->add('username', 'text', array(
+                'label'     => 'your.username'
+            ))
+            ->add('email', 'email', array(
+                'label'     => 'your.password'
+            ))
         ;
     }
 

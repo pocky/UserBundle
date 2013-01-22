@@ -41,8 +41,6 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
 
             ->end()
-
-
         ;
 
         $this->addUserSection($rootNode);
@@ -84,7 +82,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
             ->end()
         ;
     }

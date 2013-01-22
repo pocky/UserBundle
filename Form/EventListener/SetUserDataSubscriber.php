@@ -48,19 +48,19 @@ class SetUserDataSubscriber implements EventSubscriberInterface
         if (!$data->getId()) {
             $form->add($this->factory->createNamed('rawPassword', 'repeated', null, array(
                 'type'              => 'password',
-                'label'             => 'Password',
-                'invalid_message'   => 'Password must match!',
-                'first_options'     => array('label' => 'Password'),
-                'second_options'    => array('label' => 'Repeat password')
+                'label'             => 'your.password',
+                'invalid_message'   => 'your.password.error',
+                'first_options'     => array('label' => 'your.password'),
+                'second_options'    => array('label' => 'your.password.confirm')
             )));
         } else {
             $form->add($this->factory->createNamed('rawPassword', 'repeated', null, array(
                 'type'              => 'password',
-                'label'             => 'Password',
+                'label'             => 'your.password.confirm',
                 'required'          => false,
-                'invalid_message'   => 'Password must match!',
-                'first_options'     => array('label' => 'Password'),
-                'second_options'    => array('label' => 'Repeat password')
+                'invalid_message'   => 'your.password.error',
+                'first_options'     => array('label' => 'your.password'),
+                'second_options'    => array('label' => 'your.password.confirm')
             )));
         }
     }

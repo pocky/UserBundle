@@ -15,11 +15,15 @@
 {% endblock %}
 
 {% block body_html %}
-    {{ message }}
+    {% autoescape false %}
+    {{ message|raw }}
 
-    <a href="{{ url('register_confirmation', {'token': token}) }}">
-        {{ url('register_confirmation', {'token': token}) }}
-    </a>
+    <p>
+        <a href="{{ url('register_confirmation', {'token': token}) }}">
+            {{ url('register_confirmation', {'token': token}) }}
+        </a>
+    </p>
 
-    {{ footer }}
+    {{ footer|raw }}
+    {% endautoescape %}
 {% endblock %}

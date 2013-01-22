@@ -1,6 +1,6 @@
 login:
     default: Se connecter
-    welcome: Utiliser votre identifiant et votre mot de passe !
+    welcome: Nous n'attendons que vous !
     form:
         title: N'hésitez pas une seconde
 
@@ -13,7 +13,11 @@ register:
         login: S'enregister ou se connecter
     step:
         one: "Première étape :"
+        two: "Seconde étape :"
+        three: "Troisième étape :"
     step.one.title: Créer votre compte utilisateur
+    step.two.title: Confirmer votre compte
+    step.three.title: Votre compte est créé !
     form:
         title: Voila de quoi nous avons besoin !
 
@@ -29,4 +33,16 @@ your:
         address: "Votre adresse email"
     password: "Votre mot de passe"
     password.confirm: "Confirmer votre mot de passe"
+    password.error: "Les mots de passe doivent correspondre !"
+    gender:
+        label: "Votre sexe"
+        choose: "Choisissez votre sexe"
+        male: "Homme"
+        female: "Femme"
+    given: "Votre prénom"
+    family: "Votre nom"
+    birthdate: "Votre date de naissance"
+    url: "Votre site internet"
+    background: "Votre fond d'écran"
+    biography: "Votre biographie ou votre description (faites-en ce que vous voulez)"
 

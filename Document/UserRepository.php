@@ -44,6 +44,7 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
     {
         $qb = $this->createQueryBuilder()
                 ->field('confirmationToken')->equals($token)
+                ->field('locked')->equals(false)
                 ->getQuery();
 
         try {

@@ -3,6 +3,8 @@ login:
     welcome: Nous n'attendons que vous !
     form:
         title: N'hésitez pas une seconde
+    reactivate: <a href="%url" title="Cliquer ici pour réactiver votre compte">Réactiver votre compte</a>
+    lost: <a href="%url%" title="Cliquer ici pour retrouver votre mot de passe">Mot de passe perdu ?</a>
 
 logout:
     default: Déconnexion

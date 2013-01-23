@@ -128,6 +128,11 @@ class UserManager extends DocumentManager
         return $this->_repository->find($id);
     }
 
+    public function refreshUser($user)
+    {
+        $this->_repository->refreshUser($user);
+    }
+
     /**
      * Create a new Config Object
      *

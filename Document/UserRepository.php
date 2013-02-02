@@ -25,7 +25,7 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
 
         $qb = $qb
                 ->addOr($qb->expr()->field('username')->equals($username))
-                ->addOr($qb->expr()->field('person.email')->equals($username))
+                ->addOr($qb->expr()->field('email')->equals($username))
                 ->getQuery()
             ;
 
@@ -44,8 +44,76 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
     {
         $qb = $this->createQueryBuilder()
                 ->field('confirmationToken')->equals($token)
+                ->field('isActive')->equals(false)
                 ->field('locked')->equals(false)
                 ->getQuery();
+
+        try {
+            $user = $qb->getSingleResult();
+        } catch (DocumentNotFoundException $e) {
+            throw new UsernameNotFoundException(
+                sprintf('Unable to find an active user object identified by "%s".', $token)
+            );
+        }
+
+        return $user;
+    }
+
+    public function loadLockedUser($username = null, $token = null)
+    {
+        if (null === $username && null === $token) {
+            throw new UsernameNotFoundException('Unable to find an active user object identified by "%s".');
+        }
+
+        $qb = $this->createQueryBuilder()
+                ->field('isActive')->equals(false)
+                ->field('locked')->equals(true)
+            ;
+
+        if (null !== $username) {
+            $qb = $qb
+                    ->addOr($qb->expr()->field('username')->equals($username))
+                    ->addOr($qb->expr()->field('person.email')->equals($username))
+                ;
+        }
+
+        if (null !== $token) {
+            $qb->expr()->field('token')->equals($token);
+        }
+
+        $qb = $qb->getQuery();
+
+        try {
+            $user = $qb->getSingleResult();
+        } catch (DocumentNotFoundException $e) {
+            throw new UsernameNotFoundException(
+                sprintf('Unable to find an active user object identified by "%s".', $token)
+            );
+        }
+
+        return $user;
+    }
+
+    public function loadLostUser($username = null, $token = null)
+    {
+        $qb = $this->createQueryBuilder()
+                ->field('isActive')->equals(true)
+                ->field('locked')->equals(false)
+            ;
+
+        if (null !== $username) {
+            $qb = $qb
+                    ->addOr($qb->expr()->field('username')->equals($username))
+                    ->addOr($qb->expr()->field('person.email')->equals($username))
+            ;
+        }
+
+        if (null !== $token) {
+            echo 'salut';
+            $qb->expr()->field('token')->equals($token);
+        }
+
+        $qb = $qb->getQuery();
 
         try {
             $user = $qb->getSingleResult();

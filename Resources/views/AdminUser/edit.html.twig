@@ -1,0 +1,67 @@
+{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% block body %}
+
+    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackroomUserBundle:AdminUser:sidebar.html.twig' %}
+
+    {% set admin_index = 'admin_user_index' %}
+    {% set admin_delete = 'admin_user_delete' %}
+
+    <div id="content">
+        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.edit.title"} %}
+        {% include 'BlackroomUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
+
+        <!-- Main content -->
+        <div class="wrapper">
+
+            {% include 'BlackroomAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
+            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+
+            <div class="fluid">
+
+                <form id="validate" class="main grid9" action="{{ path('admin_user_edit', { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
+                    {% include 'BlackroomAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "user.admin.edit.title"} %}
+                </form>
+
+                {% include 'BlackroomAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var roleCount = '{{ form.roles | length }}';
+
+        jQuery(document).ready(function() {
+            jQuery('#blackroom_user_user_roles').children('.formRow').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+
+            jQuery('#add-another-role').click(function() {
+                var roleList = jQuery('#blackroom_user_user_roles');
+
+                var newWidget = roleList.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, roleCount);
+                roleCount++;
+
+                var newLi = jQuery('<li></li>').html(newWidget);
+                newLi.appendTo(jQuery('#blackroom_user_user_roles'));
+
+                return false;
+            });
+        })
+
+        function addTagFormDeleteLink($tagFormLi) {
+            var $removeFormA = $('<a href="#">{% trans %}user.admin.remove.role{% endtrans %}</a>');
+            $tagFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                e.preventDefault();
+                $tagFormLi.remove();
+            });
+        }
+    </script>
+
+{% endblock %}

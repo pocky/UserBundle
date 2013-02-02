@@ -33,30 +33,35 @@ class UserType extends AbstractType
         $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add('username', 'text')
-            ->add('email', 'email')
+            ->add('username', 'text', array(
+                'label'     => 'user.admin.form.username'
+            ))
+            ->add('email', 'email', array(
+                'label'     => 'user.admin.form.email'
+            ))
             ->add('isActive', 'checkbox', array(
-                'label'     => 'Is active?',
+                'label'     => 'user.admin.form.isActive',
                 'required'  => false
             ))
             ->add('isRoot', 'checkbox', array(
-                'label'     => 'Is superadmin?',
+                'label'     => 'user.admin.form.isRoot',
                 'required'  => false
             ))
             ->add('locked', 'checkbox', array(
-                'label'     => 'Is locked?',
+                'label'     => 'user.admin.form.isLocked',
                 'required'  => false
             ))
             ->add('person', 'document', array(
                 'class'         => 'BlackroomConnectBundle:Person',
                 'property'      => 'name',
-                'empty_value'   => 'Associate a person',
+                'label'         => 'user.admin.form.person.label',
+                'empty_value'   => 'user.admin.form.person.input',
                 'required'      => false
             ))
             ->add('roles', 'collection', array(
                 'type'          => 'text',
                 'required'      => false,
-                'label'         => 'Roles',
+                'label'         => 'user.admin.form.roles',
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'attr'          => array(
@@ -65,7 +70,7 @@ class UserType extends AbstractType
                 ),
                 'options' => array(
                     'required'  => true,
-                    'label'     => 'Role'
+                    'label'     => 'user.admin.form.role'
                 )
             ))
         ;

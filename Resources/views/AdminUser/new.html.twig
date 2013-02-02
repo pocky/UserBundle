@@ -1,0 +1,37 @@
+{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% block body %}
+
+    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackroomUserBundle:AdminUser:sidebar.html.twig' %}
+
+    {% set title = "user.admin.new.title" %}
+    {% set admin_index = 'admin_users' %}
+    {% set admin_delete = 'admin_user_delete' %}
+
+    <div id="content">
+        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.new"} %}
+        {% include 'BlackroomUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
+
+        <!-- Main content -->
+        <div class="wrapper">
+
+            {% include 'BlackroomAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
+            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+
+            <div class="fluid">
+
+                <form id="validate" class="main grid9" action="{{ path('admin_user_new') }}"  method="post" {{ form_enctype(form) }}>
+                    <fieldset>
+                        {% include 'BlackroomAdminBundle:AdminForm:fieldset.html.twig' with {'form': form} %}
+                    </fieldset>
+                </form>
+
+                {% include 'BlackroomAdminBundle:AdminForm:actions.html.twig' %}
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

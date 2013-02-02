@@ -1,0 +1,29 @@
+{% block subject %}
+    {% autoescape %}
+    {{ subject }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape %}
+    {{ message }}
+
+    {{ url('register_password_back', {'token': token}) }}
+
+    {{ footer }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    {{ message|raw }}
+
+    <p>
+        <a href="{{ url('register_password_back', {'token': token}) }}">
+            {{ url('register_password_back', {'token': token}) }}
+        </a>
+    </p>
+
+    {{ footer|raw }}
+    {% endautoescape %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="loginWrapper container" style="margin-top: 30px">
+
+        <div class="row">
+
+            <div class="span6 offset3">
+                {% trans with { '%mail%': path('register_resend', {'username': username}) } %}user.confirmation.text{% endtrans %}
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

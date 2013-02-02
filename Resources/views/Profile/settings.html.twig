@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section id="services" class="container">
+        <div class="span12">
+            <div class="row">
+                <div class="span7 offset3">
+                    <form id="login" action="{{ path("profile_settings") }}" method="post">
+
+                        {% if error is defined %}
+                            <div class="alert alert-error">{{ error.message }}</div>
+                        {% endif %}
+
+                        <div class="span3">
+                            {{ form_row(form.username) }}
+                            {{ form_row(form.email) }}
+                        </div>
+
+                        <div class="span3">
+                            {{ form_row(form.rawPassword) }}
+                        </div>
+
+                        <div class="span7">
+                            {{ form_rest(form) }}
+                            <div class="logControl offset1">
+                                <input type="submit" name="_submit" value="{% trans %}form.submit{% endtrans %}" class="btn rounded span3" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="container">
+        <div class="container">
+            <div class="row">
+                <h3>{% trans %}user.account.title{% endtrans %}</h3>
+                <hr>
+                <div class="span12">
+                    <div class="row">
+                        <h4>{% trans %}user.account.desactivate.title{% endtrans %}</h4>
+                        {% trans with {"%url%": url('register_desactivation', {}, true)} %}user.account.desactivate.content{% endtrans %}
+
+                        <h4>{% trans %}user.account.delete.title{% endtrans %}</h4>
+                        {% trans with {"%url%": url('register_delete', {'token': csrf.generateCsrfToken('delete' ~ user.id)}, true)} %}user.account.delete.content{% endtrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

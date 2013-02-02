@@ -6,6 +6,10 @@
 
     <parameters>
         <parameter key="blackroom_user.register.email.template">BlackroomUserBundle:Register:mail.txt.twig</parameter>
+        <parameter key="blackroom_user.suspend.email.template">BlackroomUserBundle:Register:suspend.txt.twig</parameter>
+        <parameter key="blackroom_user.byebye.email.template">BlackroomUserBundle:Register:byebye.txt.twig</parameter>
+        <parameter key="blackroom_user.lost.email.template">BlackroomUserBundle:Register:lost.txt.twig</parameter>
+        <parameter key="blackroom_user.back.email.template">BlackroomUserBundle:Register:back.txt.twig</parameter>
     </parameters>
 
     <services>
@@ -16,6 +20,10 @@
             <argument type="collection">
                 <argument key="template" type="collection">
                     <argument key="register">%blackroom_user.register.email.template%</argument>
+                    <argument key="suspend">%blackroom_user.suspend.email.template%</argument>
+                    <argument key="byebye">%blackroom_user.byebye.email.template%</argument>
+                    <argument key="lost">%blackroom_user.lost.email.template%</argument>
+                    <argument key="back">%blackroom_user.back.email.template%</argument>
                 </argument>
             </argument>
         </service>

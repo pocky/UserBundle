@@ -31,27 +31,26 @@ class RegisterType extends AbstractType
     {
         $builder
             ->add('username', 'text', array(
-                'label'             => 'your.username',
+                'label'             => 'user.your.username',
                 'attr'              => array(
                     'class'         => 'span6',
                     'pattern'       => '.{6,15}'
                 )
             ))
             ->add('email', 'email', array(
-                'label'             => 'your.email.address',
+                'label'             => 'user.your.email',
                 'attr'              => array(
                     'class'         => 'span6'
                 )
             ))
             ->add('rawPassword', 'repeated', array(
                 'type'              => 'password',
-                'label'             => 'your.password',
                 'invalid_message'   => 'Password must match!',
-                'first_options'     => array('label' => 'your.password',
+                'first_options'     => array('label' => 'user.your.password.main',
                     'attr'              => array(
                         'class'         => 'span6'
                     )),
-                'second_options'    => array('label' => 'your.password.confirm',
+                'second_options'    => array('label' => 'user.your.password.confirm',
                     'attr'              => array(
                         'class'         => 'span6'
                     ))

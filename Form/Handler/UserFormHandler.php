@@ -44,11 +44,11 @@ class UserFormHandler
 
                 $this->addRoles($user);
 
-                $this->setFlash('success', $user->getUsername() . ' was successfully updated!');
+                $this->setFlash('success', 'user.handler.success.admin');
 
                 return true;
             } else {
-                $this->setFlash('failure', 'The form is not valid');
+                $this->setFlash('failure', 'user.handler.error.admin');
             }
         }
     }
@@ -78,6 +78,6 @@ class UserFormHandler
 
     protected function setFlash($name, $msg)
     {
-        return $this->session->setFlash($name, $msg);
+        return $this->session->getFlashBag()->add($name, $msg);
     }
 }

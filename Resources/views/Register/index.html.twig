@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'BlackroomConnectBundle:FrontForm:fields.html.twig' %}
+
+{% block body %}
+    <div class="loginWrapper container">
+
+        <div class="row">
+            <div class="span6">
+                <h3>{% trans %}user.register.default{% endtrans %}</h3>
+                {% trans %}user.register.text{% endtrans %}
+            </div>
+
+            <div class="span6">
+                <h3>{% trans %}user.register.form.title{% endtrans %}</h3>
+                <form id="register" action="{{ path("register_index") }}" method="post">
+
+                    {% if error is defined %}
+                        <div class="alert alert-error">{{ error.message }}</div>
+                    {% endif %}
+
+                    {{ form_widget(form) }}
+
+                    <div class="logControl">
+                        <input type="submit" name="_submit" value="{% trans %}form.submit{% endtrans %}" class="btn pull-right span3" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

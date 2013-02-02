@@ -1,0 +1,21 @@
+{% block subject %}
+    {% autoescape %}
+    {{ subject }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape %}
+    {{ message }}
+
+    {{ footer }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    {{ message|raw }}
+
+    {{ footer|raw }}
+    {% endautoescape %}
+{% endblock %}

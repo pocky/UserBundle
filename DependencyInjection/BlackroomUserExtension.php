@@ -46,7 +46,7 @@ class BlackroomUserExtension extends Extension
             )
         ));
 
-        foreach (array('user', 'front_user', 'register', 'mailer') as $basename) {
+        foreach (array('user', 'front_user', 'register', 'mailer', 'unlock') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 

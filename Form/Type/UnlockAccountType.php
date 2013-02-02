@@ -13,31 +13,24 @@ namespace Blackroom\Bundle\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Blackroom\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
-class FrontUserType extends AbstractType
+/**
+ * Contact Type
+ *
+ * @class ContactType
+ */
+class UnlockAccountType extends AbstractType
 {
-    private $class;
-
     /**
-     * @param string $class The User class name
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array                                        $options
      */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $subscriber = new SetUserDataSubscriber($builder->getFormFactory(), $this->class);
-        $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add('username', 'text', array(
-                'label'     => 'user.your.username'
-            ))
-            ->add('email', 'email', array(
-                'label'     => 'user.your.password.main'
+            ->add('_username', 'text', array(
+                'label' => 'user.loginoremail',
             ))
         ;
     }
@@ -45,12 +38,15 @@ class FrontUserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => $this->class,
+            'data_class' => null
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
-        return 'blackengine_user_front_user';
+        return 'blackroom_user_unlock';
     }
 }

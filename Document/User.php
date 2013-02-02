@@ -11,6 +11,7 @@
 namespace Blackroom\Bundle\UserBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 use Symfony\Component\Validator\Constraints as Assert;
 use Blackroom\Bundle\UserBundle\Model\User as AbstractUser;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -19,7 +20,9 @@ use Blackroom\Bundle\EngineBundle\Traits\ThingDocument;
 /**
  * User Document
  *
- * @ODM\MappedSuperClass()
+ * @ODM\MappedSuperclass()
+ * @Unique("username")
+ * @Unique("email")
  */
 class User extends AbstractUser
 {

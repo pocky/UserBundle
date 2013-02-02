@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% include 'BlackroomConnectBundle:Front:header.html.twig' %}
+
+    <section id="title" class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>{% trans %}register.step.three{% endtrans %} <span class="color-text">{% trans %}register.step.three.title{% endtrans %}</span></h1>
+            </div>
+        </div>
+    </section>
+
+    <div class="loginWrapper container" style="margin-top: 30px">
+
+        <div class="row">
+            <div class="span6 offset3">
+             {% trans with { '%username%': document.username } %}connect.final.text{% endtrans %}
+            </div>
+        </div>
+    </div>
+    {% include 'BlackroomConnectBundle:Front:footer.html.twig' %}
+
+{% endblock body %}

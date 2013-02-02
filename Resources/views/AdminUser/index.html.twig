@@ -1,0 +1,37 @@
+{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% block body %}
+
+    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackroomUserBundle:AdminUser:sidebar.html.twig' %}
+    <!-- todo: prise en charge de la pagination -->
+
+    {% set admin_edit = 'admin_user_edit' %}
+    {% set admin_delete = 'admin_user_delete' %}
+
+    <div id="content">
+
+        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.manage"} %}
+        {% include 'BlackroomUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
+
+        <!-- Main content -->
+        <div class="wrapper">
+
+            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+
+            <form id="validate" class="main grid9" action="{{ path('admin_user_batch') }}" method="post">
+                <div class="fluid">
+                    <div class="widget check">
+                        <div class="whead">
+                            <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
+                            <h6>{% trans %}user.admin.title{% endtrans %}</h6>
+                            <div class="clear"></div>
+                        </div>
+                        {% include 'BlackroomAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

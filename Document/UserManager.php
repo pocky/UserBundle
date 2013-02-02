@@ -46,25 +46,45 @@ class UserManager extends DocumentManager
         return $this->_dm;
     }
 
+    public function getDocumentRepository()
+    {
+        return $this->_repository;
+    }
+
     /**
      * Save and Flush a new property
      *
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $property
+     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
      */
-    public function persistAndFlush(UserInterface $property)
+    public function persistAndFlush(UserInterface $user)
     {
-        $this->_dm->persist($property);
+        $this->_dm->persist($user);
+        $this->_dm->flush();
+    }
+
+    /**
+     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
+     */
+    public function persist($user) {
+        $this->_dm->persist($user);
+    }
+
+    /**
+     *
+     */
+    public function flush()
+    {
         $this->_dm->flush();
     }
 
     /**
      * Delete a property
      *
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $id
+     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
      */
-    public function removeAndFlush(UserInterface $property)
+    public function removeAndFlush(UserInterface $user)
     {
-        $this->_dm->remove($property);
+        $this->_dm->remove($user);
         $this->_dm->flush();
     }
 
@@ -76,11 +96,6 @@ class UserManager extends DocumentManager
     public function updateUser(UserInterface $user)
     {
         $this->_dm->merge($user);
-        $this->_dm->flush();
-    }
-
-    public function flush()
-    {
         $this->_dm->flush();
     }
 
@@ -126,6 +141,11 @@ class UserManager extends DocumentManager
     public function findUserById($id)
     {
         return $this->_repository->find($id);
+    }
+
+    public function findAll()
+    {
+        return $this->_repository->findAll();
     }
 
     public function refreshUser($user)

@@ -1,0 +1,40 @@
+<!-- Secondary nav -->
+<div class="secNav">
+    <div class="secWrapper">
+        <div class="secTop">
+            <div class="balance">
+                <div class="balInfo">{% trans %}user.admin.title{% endtrans %}</div>
+            </div>
+        </div>
+
+        <!-- Tabs container -->
+        <div id="tab-container" class="tab-container">
+
+            <ul class="iconsLine ic3 etabs" style="display: none;">
+                <li><a href="#general" title=""><span class="icos-fullscreen"></span></a></li>
+                <li><a href="#alt1" title=""><span class="icos-user"></span></a></li>
+                <li><a href="#alt2" title=""><span class="icos-archive"></span></a></li>
+            </ul>
+
+            <div class="divider"><span></span></div>
+
+            {% set currentPath = '' %}
+            <div id="general">
+                <ul class="subNav">
+                    <li>
+                        <a href="{{ path('admin_users') }}" title="{% trans %}user.admin.nav.a{% endtrans %}" {% if currentPath == path('admin_users') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans %}user.admin.nav.title{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="divider"><span></span></div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+<!-- Sidebar ends -->

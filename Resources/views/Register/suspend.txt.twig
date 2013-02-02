@@ -1,0 +1,29 @@
+{% block subject %}
+    {% autoescape %}
+    {{ subject }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape %}
+    {{ message }}
+
+    {{ url('register_reactivation_link', {'token': token}) }}
+
+    {{ footer }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    {{ message|raw }}
+
+    <p>
+        <a href="{{ url('register_reactivation_link', {'token': token}) }}">
+            {{ url('register_reactivation_link', {'token': token}) }}
+        </a>
+    </p>
+
+    {{ footer|raw }}
+    {% endautoescape %}
+{% endblock %}

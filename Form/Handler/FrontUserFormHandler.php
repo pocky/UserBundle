@@ -44,11 +44,11 @@ class FrontUserFormHandler
                 $user->encodePassword($encoder);
                 $this->checkActivity($user);
 
-                $this->setFlash('success', 'Your profile was successfully updated!');
+                $this->setFlash('success', 'user.handler.success.front');
 
                 return true;
             } else {
-                $this->setFlash('failure', 'The form is not valid');
+                $this->setFlash('failure', 'user.handler.error.front');
             }
         }
     }
@@ -72,6 +72,6 @@ class FrontUserFormHandler
 
     protected function setFlash($name, $msg)
     {
-        return $this->session->setFlash($name, $msg);
+        return $this->session->getFlashBag()->add($name, $msg);
     }
 }

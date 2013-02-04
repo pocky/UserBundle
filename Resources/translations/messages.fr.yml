@@ -56,39 +56,39 @@ user:
 
     handler:
         success:
-            front:
-            register:
-            admin:
+            front: trad à faire
+            register: trad à faire
+            admin: trad à faire
         error:
-            front:
-            register:
-            admin:
+            front: trad à faire
+            register: trad à faire
+            admin: trad à faire
 
     mailer:
         register:
-            subject:
-            message:
+            subject: trad à faire
+            message: trad à faire
         suspend:
-            subject:
-            message:
+            subject: trad à faire
+            message: trad à faire
         lost:
-            subject:
-            message:
+            subject: trad à faire
+            message: trad à faire
         back:
-            subject:
-            message:
+            subject: trad à faire
+            message: trad à faire
         bye:
-            subject:
-            message:
+            subject: trad à faire
+            message: trad à faire
 
     account:
-        title:
+        title: trad à faire
         desactivate:
-            title:
-            content:
+            title: trad à faire
+            content: trad à faire
         delete:
-            title:
-            content:
+            title: trad à faire
+            content: trad à faire
 
     admin:
         title: Utilisateurs

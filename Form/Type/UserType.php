@@ -52,7 +52,7 @@ class UserType extends AbstractType
                 'required'  => false
             ))
             ->add('person', 'document', array(
-                'class'         => 'BlackroomConnectBundle:Person',
+                'class'         => 'ActivCompanyERPBundle:Person',
                 'property'      => 'name',
                 'label'         => 'user.admin.form.person.label',
                 'empty_value'   => 'user.admin.form.person.input',

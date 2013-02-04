@@ -34,4 +34,24 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        var roleCount = '{{ form.roles | length }}';
+
+        jQuery(document).ready(function() {
+
+            jQuery('#add-another-role').click(function() {
+                var roleList = jQuery('#blackroom_user_user_roles');
+
+                var newWidget = roleList.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, roleCount);
+                roleCount++;
+
+                var newLi = jQuery('<li></li>').html(newWidget);
+                newLi.appendTo(jQuery('#blackroom_user_user_roles'));
+
+                return false;
+            });
+        })
+    </script>
+
 {% endblock %}

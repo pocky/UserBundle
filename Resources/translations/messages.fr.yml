@@ -15,6 +15,7 @@ user:
         password:
             main: Mot de passe
             confirm: Confirmation de mot de passe
+        error: Le champ est obligatoire
 
     password:
         lost:

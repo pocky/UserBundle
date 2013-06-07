@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\DependencyInjection;
+namespace Black\Bundle\UserBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-class BlackroomUserExtension extends Extension
+class BlackUserExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -31,7 +31,7 @@ class BlackroomUserExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (!isset($config['db_driver'])) {
-            throw new \InvalidArgumentException('You must provide the blackroom_user.db_driver configuration');
+            throw new \InvalidArgumentException('You must provide the black_user.db_driver configuration');
         }
 
         try {
@@ -42,7 +42,7 @@ class BlackroomUserExtension extends Extension
 
         $this->remapParametersNamespaces($config, $container, array(
             ''  => array(
-                'user_class'    => 'blackroom_user.model.user.class',
+                'user_class'    => 'black_user.model.user.class',
             )
         ));
 
@@ -50,7 +50,7 @@ class BlackroomUserExtension extends Extension
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $container->setAlias('blackroom_user.mailer', $config['service']['mailer']);
+        $container->setAlias('black_user.mailer', $config['service']['mailer']);
     }
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
@@ -86,6 +86,6 @@ class BlackroomUserExtension extends Extension
 
     public function getAlias()
     {
-        return 'blackroom_user';
+        return 'black_user';
     }
 }

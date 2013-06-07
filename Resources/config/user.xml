@@ -5,23 +5,23 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="blackroom_user.form.user.type">Blackroom\Bundle\UserBundle\Form\Type\UserType</parameter>
+        <parameter key="black_user.form.user.type">Black\Bundle\UserBundle\Form\Type\UserType</parameter>
     </parameters>
 
     <services>
-        <service id="blackroom_user.form.user" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
-            <argument>blackroom_user_user</argument>
-            <argument type="service" id="blackroom_user.form.user.type" />
+        <service id="black_user.form.user" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>black_user_user</argument>
+            <argument type="service" id="black_user.form.user.type" />
             <argument>null</argument>
         </service>
 
-        <service id="blackroom_user.form.user.type" class="%blackroom_user.form.user.type%">
-            <argument>%blackroom_user.model.user.class%</argument>
+        <service id="black_user.form.user.type" class="%black_user.form.user.type%">
+            <argument>%black_user.model.user.class%</argument>
             <tag name="form.type" />
         </service>
 
-        <service id="blackroom_user.form.handler.user" class="Blackroom\Bundle\UserBundle\Form\Handler\UserFormHandler" scope="request" public="true">
-            <argument type="service" id="blackroom_user.form.user" />
+        <service id="black_user.form.handler.user" class="Black\Bundle\UserBundle\Form\Handler\UserFormHandler" scope="request" public="true">
+            <argument type="service" id="black_user.form.user" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
             <argument type="service" id="security.encoder_factory" />

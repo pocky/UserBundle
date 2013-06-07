@@ -1,12 +1,12 @@
 <?php
 
-namespace Blackroom\Bundle\UserBundle\Controller;
+namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
+use Black\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -29,7 +29,7 @@ class ProfileController extends Controller
             throw new AccessDeniedException('user.exception.settings');
         }
 
-        $formHandler    = $this->get('blackroom_user.form.handler.front_user');
+        $formHandler    = $this->get('black_user.form.handler.front_user');
         $process        = $formHandler->process($user);
 
         if ($process) {
@@ -50,6 +50,6 @@ class ProfileController extends Controller
      */
     private function getUserManager()
     {
-        return $this->get('blackroom_user.manager.user');
+        return $this->get('black_user.manager.user');
     }
 }

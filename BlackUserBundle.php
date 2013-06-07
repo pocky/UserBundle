@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle;
+namespace Black\Bundle\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BlackroomUserBundle extends Bundle
+class BlackUserBundle extends Bundle
 {
 }

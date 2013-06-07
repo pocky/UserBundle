@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 use Symfony\Component\Validator\Constraints as Assert;
-use Blackroom\Bundle\UserBundle\Model\User as AbstractUser;
+use Black\Bundle\UserBundle\Model\User as AbstractUser;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Blackroom\Bundle\EngineBundle\Traits\ThingDocument;
+use Black\Bundle\EngineBundle\Traits\ThingDocument;
 
 /**
  * User Document
@@ -31,8 +31,7 @@ class User extends AbstractUser
      * @ODM\UniqueIndex
      * @Assert\Type(type="string")
      * @Assert\NotBlank()
-     * @Assert\MinLength(6)
-     * @Assert\MaxLength(15)
+     * @Assert\Length(min="6", max="15")
      * @Assert\Regex("/^[a-z][a-z0-9]+$/i")
      */
     protected $username;
@@ -54,7 +53,7 @@ class User extends AbstractUser
 
     /**
      * @ODM\String
-     * @Assert\MinLength(6)
+     * @Assert\Length(min="6")
      * @Assert\Type(type="string")
      */
     protected $rawPassword;

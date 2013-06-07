@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Controller;
+namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Blackroom\Bundle\UserBundle\Form\Type\RegisterType;
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
+use Black\Bundle\UserBundle\Form\Type\RegisterType;
+use Black\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -35,7 +35,7 @@ class RegisterController extends Controller
         $manager    = $this->getUserManager();
         $document   = $manager->createUser();
 
-        $formHandler    = $this->get('blackroom_user.form.handler.register');
+        $formHandler    = $this->get('black_user.form.handler.register');
         $process        = $formHandler->process($document);
 
         if ($process) {
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             throw new AccessDeniedException('user.exception.resend');
         }
 
-        $mailer = $this->get('blackroom_user.mailer');
+        $mailer = $this->get('black_user.mailer');
         $mailer->sendRegisterMessage($document, $document->getConfirmationToken());
 
         return $this->redirect($this->generateUrl('register_success', array('username' => $username)));
@@ -134,7 +134,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $mailer = $this->get('blackroom_user.mailer');
+        $mailer = $this->get('black_user.mailer');
         $mailer->sendSuspendMessage($user, $token);
 
         $security->setToken(null);
@@ -152,9 +152,9 @@ class RegisterController extends Controller
     public function reactivationFormAction()
     {
         $request    = $this->get('request');
-        $parameters = $request->request->get('blackroom_user_unlock');
+        $parameters = $request->request->get('black_user_unlock');
 
-        $form = $this->createForm($this->get('blackroom_user.register.unlock_form.type'));
+        $form = $this->createForm($this->get('black_user.register.unlock_form.type'));
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -220,9 +220,9 @@ class RegisterController extends Controller
     public function passwordLostAction()
     {
         $request    = $this->get('request');
-        $parameters = $request->request->get('blackroom_user_unlock');
+        $parameters = $request->request->get('black_user_unlock');
 
-        $form = $this->createForm($this->get('blackroom_user.register.unlock_form.type'));
+        $form = $this->createForm($this->get('black_user.register.unlock_form.type'));
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -243,7 +243,7 @@ class RegisterController extends Controller
 
                 $manager->flush();
 
-                $mailer = $this->get('blackroom_user.mailer');
+                $mailer = $this->get('black_user.mailer');
                 $mailer->sendLostPasswordMessage($user, $token);
 
                 return $this->redirect($this->generateUrl('main_login'));
@@ -280,7 +280,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $mailer = $this->get('blackroom_user.mailer');
+        $mailer = $this->get('black_user.mailer');
         $mailer->sendBackPasswordMessage($user, $random);
 
         $this->get('session')->getFlashBag()->add('success', 'user.flash.success.back');
@@ -311,7 +311,7 @@ class RegisterController extends Controller
             throw new AccessDeniedException('user.exception.delete');
         }
 
-        $mailer = $this->get('blackroom_user.mailer');
+        $mailer = $this->get('black_user.mailer');
         $mailer->sendGoodByeMessage($user);
 
         $manager->removeAndFlush($user);
@@ -330,6 +330,6 @@ class RegisterController extends Controller
      */
     private function getUserManager()
     {
-        return $this->get('blackroom_user.manager.user');
+        return $this->get('black_user.manager.user');
     }
 }

@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Form\Type;
+namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Blackroom\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
+use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
 class UserType extends AbstractType
 {
-    private $class;
+    protected $class;
 
     /**
      * @param string $class The User class name
@@ -29,8 +29,8 @@ class UserType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $subscriber = new SetUserDataSubscriber($builder->getFormFactory(), $this->class);
-        $builder->addEventSubscriber($subscriber);
+        //$subscriber = new SetUserDataSubscriber($builder->getFormFactory(), $this->class);
+        //$builder->addEventSubscriber($subscriber);
 
         $builder
             ->add('username', 'text', array(
@@ -52,7 +52,7 @@ class UserType extends AbstractType
                 'required'  => false
             ))
             ->add('person', 'document', array(
-                'class'         => 'BlackroomConnectBundle:Person',
+                'class'         => 'ActivCompanyERPBundle:Person',
                 'property'      => 'name',
                 'label'         => 'user.admin.form.person.label',
                 'empty_value'   => 'user.admin.form.person.input',

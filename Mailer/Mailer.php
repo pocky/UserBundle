@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\UserBundle\Mailer;
+namespace Black\Bundle\UserBundle\Mailer;
 
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
-use Blackroom\Bundle\EngineBundle\Model\Config\ConfigManagerInterface;
+use Black\Bundle\UserBundle\Model\UserInterface;
+use Black\Bundle\EngineBundle\Model\Config\ConfigManagerInterface;
 
 class Mailer
 {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\DependencyInjection;
+namespace Black\Bundle\UserBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('blackroom_user');
+        $rootNode = $treeBuilder->root('black_user');
 
         $supportedDrivers = array('mongodb');
 
@@ -59,25 +59,25 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('blackroom_user')->end()
-                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\UserType')->end()
-                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.user')->end()
+                                ->scalarNode('name')->defaultValue('black_user')->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\UserType')->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.user')->end()
                             ->end()
                         ->end()
                         ->arrayNode('register')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('blackroom_register')->end()
-                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\RegisterType')->end()
-                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.register')->end()
+                                ->scalarNode('name')->defaultValue('black_register')->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\RegisterType')->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.register')->end()
                             ->end()
                         ->end()
                         ->arrayNode('front_user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('blackroom_front_user')->end()
-                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\UserBundle\\Form\\Type\\FrontUserType')->end()
-                                ->scalarNode('handler')->defaultValue('blackroom_user.form.handler.front_user')->end()
+                                ->scalarNode('name')->defaultValue('black_front_user')->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType')->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.front_user')->end()
                             ->end()
                         ->end()
                     ->end()
@@ -94,7 +94,7 @@ class Configuration implements ConfigurationInterface
                     ->arrayNode('service')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode('mailer')->defaultValue('blackroom_user.mailer.default')->end()
+                            ->scalarNode('mailer')->defaultValue('black_user.mailer.default')->end()
                         ->end()
                     ->end()
                 ->end()

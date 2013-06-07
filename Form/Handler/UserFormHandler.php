@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Form\Handler;
+namespace Black\Bundle\UserBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
+use Black\Bundle\UserBundle\Model\UserInterface;
 
 class UserFormHandler
 {

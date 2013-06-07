@@ -5,23 +5,23 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="blackroom_user.form.front_user.type">Blackroom\Bundle\UserBundle\Form\Type\FrontUserType</parameter>
+        <parameter key="black_user.form.front_user.type">Black\Bundle\UserBundle\Form\Type\FrontUserType</parameter>
     </parameters>
 
     <services>
-        <service id="blackroom_user.form.front_user" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
-            <argument>blackroom_user_front_user</argument>
-            <argument type="service" id="blackroom_user.form.front_user.type" />
+        <service id="black_user.form.front_user" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>black_user_front_user</argument>
+            <argument type="service" id="black_user.form.front_user.type" />
             <argument>null</argument>
         </service>
 
-        <service id="blackroom_user.form.front_user.type" class="%blackroom_user.form.front_user.type%">
-            <argument>%blackroom_user.model.user.class%</argument>
+        <service id="black_user.form.front_user.type" class="%black_user.form.front_user.type%">
+            <argument>%black_user.model.user.class%</argument>
             <tag name="form.type" />
         </service>
 
-        <service id="blackroom_user.form.handler.front_user" class="Blackroom\Bundle\UserBundle\Form\Handler\FrontUserFormHandler" scope="request" public="true">
-            <argument type="service" id="blackroom_user.form.front_user" />
+        <service id="black_user.form.handler.front_user" class="Black\Bundle\UserBundle\Form\Handler\FrontUserFormHandler" scope="request" public="true">
+            <argument type="service" id="black_user.form.front_user" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
             <argument type="service" id="security.encoder_factory" />

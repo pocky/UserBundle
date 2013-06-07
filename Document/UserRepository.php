@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Document;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -16,8 +16,9 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Doctrine\ODM\MongoDB\DocumentNotFoundException;
+use Black\Bundle\UserBundle\Model\UserRepositoryInterface;
 
-class UserRepository extends DocumentRepository implements UserProviderInterface
+class UserRepository extends DocumentRepository implements UserProviderInterface, UserRepositoryInterface
 {
     public function loadUserByUsername($username)
     {

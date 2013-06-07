@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Form\Type;
+namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Blackroom\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
+use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
 class FrontUserType extends AbstractType
 {
-    private $class;
+    protected $class;
 
     /**
      * @param string $class The User class name

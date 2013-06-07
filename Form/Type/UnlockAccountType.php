@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\UserBundle\Form\Type;
+namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,6 +47,6 @@ class UnlockAccountType extends AbstractType
      */
     public function getName()
     {
-        return 'blackroom_user_unlock';
+        return 'black_user_unlock';
     }
 }

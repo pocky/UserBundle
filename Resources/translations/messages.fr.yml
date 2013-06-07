@@ -58,12 +58,12 @@ user:
     handler:
         success:
             front: trad à faire
-            register: trad à faire
+            register: Utilisateur créer
             admin: trad à faire
         error:
-            front: trad à faire
-            register: trad à faire
-            admin: trad à faire
+            front: Formulaire non valide
+            register: Formulaire non valide
+            admin: Formulaire non valide
 
     mailer:
         register:
@@ -113,8 +113,8 @@ user:
             isRoot: Est super-admin ?
             isLocked: Est verrouillé ?
             person:
-                label: Associer une personne
-                input: Choisir la personne
+                label: Associer à une fiche client
+                input: Choisir le client
             roles: Permissions
             role: Permission
 

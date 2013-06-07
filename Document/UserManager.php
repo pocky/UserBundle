@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Document;
 
-use Blackroom\Bundle\UserBundle\Model\UserInterface;
+use Black\Bundle\UserBundle\Model\UserInterface;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Configuration;
+use Black\Bundle\UserBundle\Model\UserManagerInterface;
 
-class UserManager extends DocumentManager
+class UserManager extends DocumentManager implements UserManagerInterface
 {
     protected $_dm;
     protected $_repository;
@@ -54,7 +55,7 @@ class UserManager extends DocumentManager
     /**
      * Save and Flush a new property
      *
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
+     * @param \Black\Bundle\UserBundle\Model\UserInterface $user
      */
     public function persistAndFlush(UserInterface $user)
     {
@@ -63,7 +64,7 @@ class UserManager extends DocumentManager
     }
 
     /**
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
+     * @param \Black\Bundle\UserBundle\Model\UserInterface $user
      */
     public function persist($user) {
         $this->_dm->persist($user);
@@ -80,7 +81,7 @@ class UserManager extends DocumentManager
     /**
      * Delete a property
      *
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $user
+     * @param \Black\Bundle\UserBundle\Model\UserInterface $user
      */
     public function removeAndFlush(UserInterface $user)
     {
@@ -91,7 +92,7 @@ class UserManager extends DocumentManager
     /**
      * Update a property
      *
-     * @param \Blackroom\Bundle\UserBundle\Model\UserInterface $property
+     * @param \Black\Bundle\UserBundle\Model\UserInterface $property
      */
     public function updateUser(UserInterface $user)
     {
@@ -136,7 +137,7 @@ class UserManager extends DocumentManager
      * Find property by it's id
      *
      * @param $id
-     * @return \Blackroom\Bundle\UserBundle\Model\UserInterface|object
+     * @return \Black\Bundle\UserBundle\Model\UserInterface|object
      */
     public function findUserById($id)
     {

@@ -1,9 +1,9 @@
-{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% extends 'BlackAdminBundle::base.html.twig' %}
 {% block body %}
 
-    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackroomUserBundle:AdminUser:sidebar.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackUserBundle:AdminUser:sidebar.html.twig' %}
     <!-- todo: prise en charge de la pagination -->
 
     {% set admin_edit = 'admin_user_edit' %}
@@ -11,13 +11,13 @@
 
     <div id="content">
 
-        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.manage"} %}
-        {% include 'BlackroomUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
+        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.manage"} %}
+        {% include 'BlackUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
 
         <!-- Main content -->
         <div class="wrapper">
 
-            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
 
             <form id="validate" class="main grid9" action="{{ path('admin_user_batch') }}" method="post">
                 <div class="fluid">
@@ -27,7 +27,7 @@
                             <h6>{% trans %}user.admin.title{% endtrans %}</h6>
                             <div class="clear"></div>
                         </div>
-                        {% include 'BlackroomAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
+                        {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
                     </div>
                 </div>
             </form>

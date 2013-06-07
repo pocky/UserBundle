@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\UserBundle\Controller;
+namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AdminUserController extends Controller
      *
      * @Method("GET")
      * @Route("/index.html", name="admin_users")
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function indexAction()
@@ -61,7 +61,7 @@ class AdminUserController extends Controller
      *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_user_new")
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function newAction()
@@ -69,7 +69,7 @@ class AdminUserController extends Controller
         $documentManager    = $this->getUserManager();
         $document           = $documentManager->createUser();
 
-        $formHandler    = $this->get('blackroom_user.form.handler.user');
+        $formHandler    = $this->get('black_user.form.handler.user');
         $process        = $formHandler->process($document);
 
         if ($process) {
@@ -90,7 +90,7 @@ class AdminUserController extends Controller
      *
      * @Method({"GET", "POST"})
      * @Route("/{id}/edit", name="admin_user_edit")
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      *
      * @param string $id The document ID
@@ -112,7 +112,7 @@ class AdminUserController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $formHandler    = $this->get('blackroom_user.form.handler.user');
+        $formHandler    = $this->get('black_user.form.handler.user');
         $process        = $formHandler->process($document);
 
         if ($process) {
@@ -133,7 +133,7 @@ class AdminUserController extends Controller
      *
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete", name="admin_user_delete")
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_ADMIN")
      * @param string $id The document ID
      *
      * @return array
@@ -229,6 +229,6 @@ class AdminUserController extends Controller
 
     protected function getUserManager()
     {
-        return $this->get('blackroom_user.manager.user');
+        return $this->get('black_user.manager.user');
     }
 }

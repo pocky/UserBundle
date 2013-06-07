@@ -1,30 +1,30 @@
-{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% extends 'BlackAdminBundle::base.html.twig' %}
 {% block body %}
 
-    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackroomUserBundle:AdminUser:sidebar.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackUserBundle:AdminUser:sidebar.html.twig' %}
 
     {% set admin_index = 'admin_user_index' %}
     {% set admin_delete = 'admin_user_delete' %}
 
     <div id="content">
-        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.edit.title"} %}
-        {% include 'BlackroomUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
+        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.edit.title"} %}
+        {% include 'BlackUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
 
         <!-- Main content -->
         <div class="wrapper">
 
-            {% include 'BlackroomAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
 
             <div class="fluid">
 
                 <form id="validate" class="main grid9" action="{{ path('admin_user_edit', { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
-                    {% include 'BlackroomAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "user.admin.edit.title"} %}
+                    {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "user.admin.edit.title"} %}
                 </form>
 
-                {% include 'BlackroomAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
+                {% include 'BlackAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
 
             </div>
 
@@ -35,19 +35,19 @@
         var roleCount = '{{ form.roles | length }}';
 
         jQuery(document).ready(function() {
-            jQuery('#blackroom_user_user_roles').children('.formRow').each(function() {
+            jQuery('#black_user_user_roles').children('.formRow').each(function() {
                 addTagFormDeleteLink($(this));
             });
 
             jQuery('#add-another-role').click(function() {
-                var roleList = jQuery('#blackroom_user_user_roles');
+                var roleList = jQuery('#black_user_user_roles');
 
                 var newWidget = roleList.attr('data-prototype');
                 newWidget = newWidget.replace(/__name__/g, roleCount);
                 roleCount++;
 
                 var newLi = jQuery('<li></li>').html(newWidget);
-                newLi.appendTo(jQuery('#blackroom_user_user_roles'));
+                newLi.appendTo(jQuery('#black_user_user_roles'));
 
                 return false;
             });

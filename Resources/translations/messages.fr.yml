@@ -1,124 +1,124 @@
-user:
-    loginoremail: Identifiant ou adresse email
-    register:
-        default: Inscription
-        text: >
-            <p>
-                Ce formulaire à pour but de vous permettre de vous inscrire sur notre site.
-            </p>
-        form:
-            title: Formulaire d'inscription
-
-    your:
-        username: Nom d'utilisateur
-        email: Adresse email
-        password:
-            main: Mot de passe
-            confirm: Confirmation de mot de passe
-        error: Le champ est obligatoire
-
-    password:
-        lost:
-            title: Récupération de mot de passe
-
-    recovery:
-        form:
-            title: Réactivation de votre compte
-
-    confirmation:
-        text: Votre compte a bien été créé !
-
-    exception:
-        resend: L'utilisateur n'a pas été trouvé !
-        confirmation: Ce token n'existe pas !
-        suspend: L'utilisateur n'a pas été trouvé !
-        delete: L'utilisateur n'a pas été trouvé !
-        settings: L'utilisateur n'a pas été trouvé !
-
-    flash:
-        success:
-            suspend: Votre compte a bien été désactivé !
-            recovery: Votre compte a bien été réactivé !
-            reactivation: Votre compte a bien été réactivé !
-            back: Votre mot de passe vous a été renvoyé !
-            delete: Votre compte a bien été supprimé !
-        error:
-            recovery: Une erreur est survenue pendant la réactivation de votre compte
-            reactivation: Une erreur est survenue pendant la réactivation de votre compte
-            lost: Une erreur est survenue pendant la récupération de votre mot de passe
-            back: Une erreur est survenue pendant la récupération de votre mot de passe
-            delete: Une erreur est survenue pendant la supression de votre compte
-            batch:
-                select: Vous devez sélectionner au moins un utilisateur !
-                action: L'action demandée n'existe pas
-                csrf: Violation de token !
-
-    notFound: L'utilisateur n'a pas été trouvé !
-
-    handler:
-        success:
-            front: trad à faire
-            register: Utilisateur créer
-            admin: trad à faire
-        error:
-            front: Formulaire non valide
-            register: Formulaire non valide
-            admin: Formulaire non valide
-
-    mailer:
-        register:
-            subject: trad à faire
-            message: trad à faire
-        suspend:
-            subject: trad à faire
-            message: trad à faire
-        lost:
-            subject: trad à faire
-            message: trad à faire
-        back:
-            subject: trad à faire
-            message: trad à faire
-        bye:
-            subject: trad à faire
-            message: trad à faire
-
-    account:
-        title: trad à faire
-        desactivate:
-            title: trad à faire
-            content: trad à faire
-        delete:
-            title: trad à faire
-            content: trad à faire
-
-    admin:
-        title: Utilisateurs
-        breadcrumb: Utilisateurs
-        manage: Gérer vos utilisateurs
-        new: Nouvel utilisateur
-
-        nav:
-            title: Comptes utilisateurs
-            a: Accéder à la gestion des comptes
-
-        edit:
-            title: Éditer un utilisateur
-
-        new.title: Créer un nouvel utilisateur
-
-        form:
-            username: Nom d'utilisateur
-            email: Adresse email
-            isActive: Est actif ?
-            isRoot: Est super-admin ?
-            isLocked: Est verrouillé ?
-            person:
-                label: Associer à une fiche client
-                input: Choisir le client
-            roles: Permissions
-            role: Permission
-
-        remove:
-            role: Supprimer cette permission
-
-
+#user:
+#    loginoremail: Identifiant ou adresse email
+#    register:
+#        default: Inscription
+#        text: >
+#            <p>
+#                Ce formulaire à pour but de vous permettre de vous inscrire sur notre site.
+#            </p>
+#        form:
+#            title: Formulaire d'inscription
+#
+#    your:
+#        username: Nom d'utilisateur
+#        email: Adresse email
+#        password:
+#            main: Mot de passe
+#            confirm: Confirmation de mot de passe
+#        error: Le champ est obligatoire
+#
+#    password:
+#        lost:
+#            title: Récupération de mot de passe
+#
+#    recovery:
+#        form:
+#            title: Réactivation de votre compte
+#
+#    confirmation:
+#        text: Votre compte a bien été créé !
+#
+#    exception:
+#        resend: L'utilisateur n'a pas été trouvé !
+#        confirmation: Ce token n'existe pas !
+#        suspend: L'utilisateur n'a pas été trouvé !
+#        delete: L'utilisateur n'a pas été trouvé !
+#        settings: L'utilisateur n'a pas été trouvé !
+#
+#    flash:
+#        success:
+#            suspend: Votre compte a bien été désactivé !
+#            recovery: Votre compte a bien été réactivé !
+#            reactivation: Votre compte a bien été réactivé !
+#            back: Votre mot de passe vous a été renvoyé !
+#            delete: Votre compte a bien été supprimé !
+#        error:
+#            recovery: Une erreur est survenue pendant la réactivation de votre compte
+#            reactivation: Une erreur est survenue pendant la réactivation de votre compte
+#            lost: Une erreur est survenue pendant la récupération de votre mot de passe
+#            back: Une erreur est survenue pendant la récupération de votre mot de passe
+#            delete: Une erreur est survenue pendant la supression de votre compte
+#            batch:
+#                select: Vous devez sélectionner au moins un utilisateur !
+#                action: L'action demandée n'existe pas
+#                csrf: Violation de token !
+#
+#    notFound: L'utilisateur n'a pas été trouvé !
+#
+#    handler:
+#        success:
+#            front: Utilisateur modifié
+#            register: Utilisateur enregistré
+#            admin: Utilisateur modifié
+#        error:
+#            front: Formulaire non valide
+#            register: Formulaire non valide
+#            admin: Formulaire non valide
+#
+#    mailer:
+#        register:
+#            subject: trad à faire
+#            message: trad à faire
+#        suspend:
+#            subject: trad à faire
+#            message: trad à faire
+#        lost:
+#            subject: trad à faire
+#            message: trad à faire
+#        back:
+#            subject: trad à faire
+#            message: trad à faire
+#        bye:
+#            subject: trad à faire
+#            message: trad à faire
+#
+#    account:
+#        title: trad à faire
+#        desactivate:
+#            title: trad à faire
+#            content: trad à faire
+#        delete:
+#            title: trad à faire
+#            content: trad à faire
+#
+#    admin:
+#        title: Utilisateurs
+#        breadcrumb: Utilisateurs
+#        manage: Gérer vos utilisateurs
+#        new: Nouvel utilisateur
+#
+#        nav:
+#            title: Comptes utilisateurs
+#            a: Accéder à la gestion des comptes
+#
+#        edit:
+#            title: Éditer un utilisateur
+#
+#        new.title: Créer un nouvel utilisateur
+#
+#        form:
+#            username: Nom d'utilisateur
+#            email: Adresse email
+#            isActive: Est actif ?
+#            isRoot: Est super-admin ?
+#            isLocked: Est verrouillé ?
+#            person:
+#                label: Associer à une fiche client
+#                input: Choisir le client
+#            roles: Permissions
+#            role: Permission
+#
+#        remove:
+#            role: Supprimer cette permission
+#
+#

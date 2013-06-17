@@ -1,13 +1,13 @@
-<!-- Secondary nav -->
+{#  Secondary nav  #}
 <div class="secNav">
     <div class="secWrapper">
         <div class="secTop">
             <div class="balance">
-                <div class="balInfo">{% trans %}user.admin.title{% endtrans %}</div>
+                <div class="balInfo">{% trans from "views" %}user.admin.sidebar.users.text{% endtrans %}</div>
             </div>
         </div>
 
-        <!-- Tabs container -->
+        {#  Tabs container  #}
         <div id="tab-container" class="tab-container">
 
             <ul class="iconsLine ic3 etabs" style="display: none;">
@@ -22,8 +22,8 @@
             <div id="general">
                 <ul class="subNav">
                     <li>
-                        <a href="{{ path('admin_users') }}" title="{% trans %}user.admin.nav.a{% endtrans %}" {% if currentPath == path('admin_users') %}class="this"{% endif %}>
-                            <span class="icos-list2"></span>{% trans %}user.admin.nav.title{% endtrans %}
+                        <a href="{{ path('admin_users') }}" title="{% trans from "views" %}user.admin.sidebar.users.a.title{% endtrans %}" {% if currentPath == path('admin_users') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans from "views" %}user.admin.sidebar.users.a.text{% endtrans %}
                         </a>
                     </li>
                 </ul>
@@ -37,4 +37,4 @@
     <div class="clear"></div>
 </div>
 </div>
-<!-- Sidebar ends -->
+{#  Sidebar ends  #}

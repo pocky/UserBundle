@@ -45,7 +45,7 @@ class AdminUserController extends Controller
         foreach ($rawDocuments as $document) {
             $documents[] = array(
                 'id'                    => $document->getId(),
-                'user.your.username'    => $document->getUsername()
+                'user.admin.user.username.text' => $document->getUsername()
             );
         }
 
@@ -67,7 +67,7 @@ class AdminUserController extends Controller
     public function newAction()
     {
         $documentManager    = $this->getUserManager();
-        $document           = $documentManager->createUser();
+        $document           = $documentManager->createInstance();
 
         $formHandler    = $this->get('black_user.form.handler.user');
         $process        = $formHandler->process($document);
@@ -132,7 +132,7 @@ class AdminUserController extends Controller
      * Deletes a User document.
      *
      * @Method({"POST", "GET"})
-     * @Route("/{id}/delete", name="admin_user_delete")
+     * @Route("/{id}/delete/{token}", name="admin_user_delete")
      * @Secure(roles="ROLE_ADMIN")
      * @param string $id The document ID
      *
@@ -147,27 +147,26 @@ class AdminUserController extends Controller
 
         $form->bind($request);
 
-        if (null === $token) {
-            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $request->query->get('token'));
+        if (null !== $token) {
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
         }
 
         if ($form->isValid() || true === $token) {
 
             $dm         = $this->getUserManager();
-            $repository = $dm->getDocumentRepository();
-            $document   = $repository->findOneById($id);
-
+            $document   = $dm->findUserById($id);
+            
             if (!$document) {
                 throw $this->createNotFoundException('user.notFound');
             }
 
-            $dm->remove($document);
+            $dm->removeAndFlush($document);
             $dm->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'user.flash.success.delete');
+            $this->get('session')->getFlashBag()->add('success', 'success.user.admin.delete');
 
         } else {
-            $this->get('session')->getFlashBag()->add('failure', 'user.flash.error.delete');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.admin.delete');
         }
 
         return $this->redirect($this->generateUrl('admin_users'));
@@ -189,12 +188,12 @@ class AdminUserController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashBag()->add('failure', 'user.flash.error.batch.select');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.admin.batch.select');
             return $this->redirect($this->generateUrl('admin_users'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('failure', 'user.flash.error.batch.action');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.admin.batch.action');
             return $this->redirect($this->generateUrl('admin_users'));
         }
 
@@ -205,7 +204,7 @@ class AdminUserController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('failure', 'user.flash.error.batch.csrf');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.admin.batch.crsf');
 
             return $this->redirect($this->generateUrl('admin_users'));
         }

@@ -1,0 +1,93 @@
+user:
+  admin:
+    breadLine:
+      breadcrumb:
+        user:
+          a:
+            text: Utilisateurs
+            title: Utilisateurs
+        shortcut:
+          text: Raccourci
+      new:
+        text: Créer un utilisateur
+    
+    contentTop:
+      users:
+        text: Utilisateurs
+      edit:
+        text: Editer un utilisateur
+      new:
+        text: Créer un utilisateur
+    
+    fieldset:
+      edit:
+        text: Editer un utilisateur
+      new:
+        text: Créer un utilisateur
+    
+    form:
+      item:
+        delete:
+          text: Supprimer
+    
+    index:
+      title:
+        text: Utilisateurs
+    
+    mainNav:
+      user:
+        a:
+          text: Utilisateurs
+          title: Utilisateurs
+        img:
+          alt: Utilisateurs
+    
+    sidebar:
+      users:
+        text: Utilisateurs
+        a:
+          text: Utilisateurs
+          title: Utilisateurs
+    
+  www:
+    confirmation:
+      connect:
+        text: Vous pouvez désormais vous connectez %username%
+      step:
+        text: Etape 3
+        title:
+          text: Confirmation
+    
+    index:
+      register:
+        default: Inscription
+        text: >
+          <p>
+            Ce formulaire à pour but de vous permettre de vous inscrire sur notre site.
+          </p>
+        form:
+          title:
+            text: Formulaire d'inscription
+            
+    passwordLost:
+      title:
+        text: Récupération de mot de passe
+
+    recovery:
+      title:
+        text: Réactivation de votre compte
+
+    settings:
+      account:
+        text: Votre compte
+        desactivate:
+          text: Désactivation du compte
+          content:
+            text: Désactivation du compte (message à compléter user.www.setings.account.desactivate.content.text)
+        delete:
+          text: Suppression du compte
+          content:
+            text: Suppression du compte (message à compléter user.www.setings.account.delete.content.text)
+            
+    success:
+      text: Votre compte a bien été créé !

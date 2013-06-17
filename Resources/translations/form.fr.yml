@@ -1,0 +1,64 @@
+user:
+  admin:
+    user:
+      username:
+        text: Nom d'utilisateur
+      email:
+        text: Adresse email
+      isActive:
+        text: Est actif ?
+      isRoot:
+        text: Est super-admin ?
+      isLocked:
+        text: Est verrouillé ?
+      person:
+        text: Associer à une fiche client
+        input: Choisir le client
+      roles:
+        text: Permissions
+      role:
+        text: Permission
+      remove:
+        role:
+          text: Supprimer cette permission
+       
+  www:
+    frontuser:
+      username:
+        text: Nom d'utilisateur
+      password:
+        text: Mot de passe
+    
+    index:
+      submit:
+        value: Envoyer
+    
+    passwordLost:
+      submit:
+        value: Envoyer
+    
+    unlockaccount:
+      loginoremail:
+        text: Adresse mail ou nom d'utilisateur
+    
+    reactivationForm:
+      submit:
+        value: Envoyer
+    
+    register:
+      email:
+        text: Adresse mail
+      username:
+        text: Nom d'utilisateur
+      password:
+        confirm:
+          text: Confirmer le mot de passe
+        main:
+          text: Mot de passe
+        not:
+          match:
+            text: Les mots de passes doivent être identiques!
+            
+    settings:
+      submit:
+        value: Envoyer

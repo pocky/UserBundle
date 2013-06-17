@@ -6,7 +6,7 @@
     <section id="title" class="container">
         <div class="row">
             <div class="span12">
-                <h1>{% trans %}register.step.three{% endtrans %} <span class="color-text">{% trans %}register.step.three.title{% endtrans %}</span></h1>
+                <h1>{% trans from "views" %}user.www.confirmation.step.text{% endtrans %} <span class="color-text">{% trans from "views" %}user.www.confirmation.step.title.text{% endtrans %}</span></h1>
             </div>
         </div>
     </section>
@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="span6 offset3">
-             {% trans with { '%username%': document.username } %}connect.final.text{% endtrans %}
+             {% trans with { '%username%': document.username } from "views" %}user.www.confirmation.connect.text{% endtrans %}
             </div>
         </div>
     </div>

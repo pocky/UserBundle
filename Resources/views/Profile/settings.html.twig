@@ -8,7 +8,7 @@
                     <form id="login" action="{{ path("profile_settings") }}" method="post">
 
                         {% if error is defined %}
-                            <div class="alert alert-error">{{ error.message }}</div>
+                            <div class="alert alert-error">{{ error.message|trans() }}</div>
                         {% endif %}
 
                         <div class="span3">
@@ -23,7 +23,7 @@
                         <div class="span7">
                             {{ form_rest(form) }}
                             <div class="logControl offset1">
-                                <input type="submit" name="_submit" value="{% trans %}form.submit{% endtrans %}" class="btn rounded span3" />
+                                <input type="submit" name="_submit" value="{% trans form "form" %}user.www.settings.submit.value{% endtrans %}" class="btn rounded span3" />
                             </div>
                         </div>
                     </form>
@@ -35,15 +35,15 @@
     <section id="team" class="container">
         <div class="container">
             <div class="row">
-                <h3>{% trans %}user.account.title{% endtrans %}</h3>
+                <h3>{% trans from "views" %}user.www.settings.account.text{% endtrans %}</h3>
                 <hr>
                 <div class="span12">
                     <div class="row">
-                        <h4>{% trans %}user.account.desactivate.title{% endtrans %}</h4>
-                        {% trans with {"%url%": url('register_desactivation', {}, true)} %}user.account.desactivate.content{% endtrans %}
+                        <h4>{% trans from "views" %}user.www.settings.account.desactivate.text{% endtrans %}</h4>
+                        {% trans with {"%url%": url('register_desactivation', {}, true)} from "views" %}user.www.settings.account.desactivate.content.text{% endtrans %}
 
-                        <h4>{% trans %}user.account.delete.title{% endtrans %}</h4>
-                        {% trans with {"%url%": url('register_delete', {'token': csrf.generateCsrfToken('delete' ~ user.id)}, true)} %}user.account.delete.content{% endtrans %}
+                        <h4>{% trans from "views" %}user.www.settings.account.delete.text{% endtrans %}</h4>
+                        {% trans with {"%url%": url('register_delete', {'token': csrf.generateCsrfToken('delete' ~ user.id)}, true)} from "views" %}user.www.settings.account.delete.content.text{% endtrans %}
                     </div>
                 </div>
             </div>

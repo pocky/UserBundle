@@ -44,11 +44,11 @@ class FrontUserFormHandler
                 $user->encodePassword($encoder);
                 $this->checkActivity($user);
 
-                $this->setFlash('success', 'user.handler.success.front');
+                $this->setFlash('success', 'success.user.www.edit');
 
                 return true;
             } else {
-                $this->setFlash('failure', 'user.handler.error.front');
+                $this->setFlash('error', 'error.user.www.edit');
             }
         }
     }

@@ -30,7 +30,7 @@ class UnlockAccountType extends AbstractType
 
         $builder
             ->add('_username', 'text', array(
-                'label' => 'user.loginoremail',
+                'label' => 'user.www.unlockaccount.loginoremail.text',
             ))
         ;
     }

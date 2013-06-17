@@ -33,7 +33,7 @@ class RegisterController extends Controller
     public function indexAction()
     {
         $manager    = $this->getUserManager();
-        $document   = $manager->createUser();
+        $document   = $manager->createInstance();
 
         $formHandler    = $this->get('black_user.form.handler.register');
         $process        = $formHandler->process($document);
@@ -139,7 +139,7 @@ class RegisterController extends Controller
 
         $security->setToken(null);
         $this->get('request')->getSession()->invalidate();
-        $this->get('session')->getFlashBag()->add('success', 'user.flash.success.suspend');
+        $this->get('session')->getFlashBag()->add('success', 'success.user.www.suspend');
 
         return $this->redirect($this->generateUrl('index'));
     }
@@ -166,7 +166,7 @@ class RegisterController extends Controller
                 $user  = $repository->loadLockedUser($parameters['_username']);
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
-                    $this->get('session')->getFlashBag()->add('error', 'user.flash.error.recovery');
+                    $this->get('session')->getFlashBag()->add('error', 'error.user.www.recovery');
                     return $this->redirect($this->generateUrl('register_reactivation_form'));
                 }
 
@@ -176,7 +176,7 @@ class RegisterController extends Controller
 
                 $manager->flush();
 
-                $this->get('session')->getFlashBag()->add('success', 'user.flash.success.recovery');
+                $this->get('session')->getFlashBag()->add('success', 'success.user.www.recovery');
                 return $this->redirect($this->generateUrl('main_login'));
             }
         }
@@ -198,7 +198,7 @@ class RegisterController extends Controller
         $user  = $repository->loadLockedUser(null, $token);
 
         if (!is_object($user) || !$user instanceof UserInterface) {
-            $this->get('session')->getFlashBag()->add('error', 'user.flash.error.reactivation');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.www.reactivation');
             return $this->redirect($this->generateUrl('register_reactivation_form'));
         }
 
@@ -208,7 +208,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'user.flash.success.reactivation');
+        $this->get('session')->getFlashBag()->add('success', 'success.user.www.reactivation');
         return $this->redirect($this->generateUrl('main_login'));
     }
 
@@ -234,7 +234,7 @@ class RegisterController extends Controller
                 $user  = $repository->loadLostUser($parameters['_username']);
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
-                    $this->get('session')->getFlashBag()->add('error', 'user.flash.error.lost');
+                    $this->get('session')->getFlashBag()->add('error', 'error.user.www.lost');
                     return $this->redirect($this->generateUrl('main_login'));
                 }
 
@@ -267,7 +267,7 @@ class RegisterController extends Controller
         $user  = $repository->loadLostUser(null, $token);
 
         if (!is_object($user) || !$user instanceof UserInterface) {
-            $this->get('session')->getFlashBag()->add('error', 'user.flash.error.back');
+            $this->get('session')->getFlashBag()->add('error', 'error.user.www.back');
             return $this->redirect($this->generateUrl('register_password_lost'));
         }
 
@@ -283,7 +283,7 @@ class RegisterController extends Controller
         $mailer = $this->get('black_user.mailer');
         $mailer->sendBackPasswordMessage($user, $random);
 
-        $this->get('session')->getFlashBag()->add('success', 'user.flash.success.back');
+        $this->get('session')->getFlashBag()->add('success', 'success.user.www.back');
 
         return $this->redirect($this->generateUrl('main_login'));
     }
@@ -318,7 +318,7 @@ class RegisterController extends Controller
 
         $security->setToken(null);
         $this->get('request')->getSession()->invalidate();
-        $this->get('session')->getFlashBag()->add('success', 'user.flash.success.delete');
+        $this->get('session')->getFlashBag()->add('success', 'success.user.www.delete');
 
         return $this->redirect($this->generateUrl('index'));
     }

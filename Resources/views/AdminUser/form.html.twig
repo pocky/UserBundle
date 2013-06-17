@@ -1,0 +1,36 @@
+{% extends 'BlackUserBundle:AdminUser:base.html.twig' %}
+{% block form_javascript %}
+    <script type="text/javascript">
+        var roleCount = '{{ form.roles | length }}';
+
+        jQuery(document).ready(function() {
+            jQuery('#black_user_user_roles').children('.formRow').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+
+            jQuery('#add-another-role').click(function() {
+                var roleList = jQuery('#black_user_user_roles');
+
+                var newWidget = roleList.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, roleCount);
+                roleCount++;
+
+                var newDiv = jQuery('<div class="formRow noBorderB"></div>').html(newWidget);
+                addTagFormDeleteLink(newDiv);
+                newDiv.appendTo(jQuery('#black_user_user_roles'));
+
+                return false;
+            });
+        });
+
+        function addTagFormDeleteLink($tagFormDiv) {
+            var $removeFormA = $('<a href="#" class="add buttonS bRed mt10">{% trans from "views" %}user.admin.form.item.delete.text{% endtrans %}</a>');
+            $tagFormDiv.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                e.preventDefault();
+                $tagFormDiv.remove();
+            });
+        }
+    </script>
+{% endblock %}

@@ -50,7 +50,7 @@ class RegisterFormHandler
 
                 return true;
             } else {
-                $this->setFlash('failure', 'user.handler.error.register');
+                $this->setFlash('error', 'error.user.www.register');
             }
         }
     }

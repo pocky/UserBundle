@@ -1,57 +1,15 @@
-{% extends 'BlackAdminBundle::base.html.twig' %}
-{% block body %}
+{% extends 'BlackUserBundle:AdminUser:form.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.contentTop.new.text"} %}
+{% endblock %}
+{% block page_content %}
+<div class="fluid">
+    <form id="validate" class="main grid9" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "user.admin.fieldset.new.text"} %}
+            </fieldset>
+        </form>
 
-    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackUserBundle:AdminUser:sidebar.html.twig' %}
-
-    {% set title = "user.admin.new.title" %}
-    {% set admin_index = 'admin_users' %}
-    {% set admin_delete = 'admin_user_delete' %}
-
-    <div id="content">
-        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.new"} %}
-        {% include 'BlackUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
-
-        <!-- Main content -->
-        <div class="wrapper">
-
-            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
-
-            <div class="fluid">
-
-                <form id="validate" class="main grid9" action="{{ path('admin_user_new') }}"  method="post" {{ form_enctype(form) }}>
-                    <fieldset>
-                        {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form} %}
-                    </fieldset>
-                </form>
-
-                {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
-
-            </div>
-
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        var roleCount = '{{ form.roles | length }}';
-
-        jQuery(document).ready(function() {
-
-            jQuery('#add-another-role').click(function() {
-                var roleList = jQuery('#black_user_user_roles');
-
-                var newWidget = roleList.attr('data-prototype');
-                newWidget = newWidget.replace(/__name__/g, roleCount);
-                roleCount++;
-
-                var newLi = jQuery('<li></li>').html(newWidget);
-                newLi.appendTo(jQuery('#black_user_user_roles'));
-
-                return false;
-            });
-        })
-    </script>
-
+    {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
+</div>
 {% endblock %}

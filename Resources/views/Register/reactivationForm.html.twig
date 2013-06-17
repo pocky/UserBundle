@@ -6,13 +6,13 @@
 
         <div class="row">
             <div class="span6 offset3">
-                <h5>{% trans %}user.recovery.form.title{% endtrans %}</h5>
+                <h5>{% trans from "views" %}user.www.reactivationForm.title.text{% endtrans %}</h5>
                 <form id="recovery" action="{{ url('register_reactivation_form', {}, true) }}" method="post">
 
                     {{ form_rest(form) }}
 
                     <div class="logControl">
-                        <input type="submit" name="_submit" value="{% trans %}form.submit{% endtrans %}" class="btn rounded pull-right span2" style="margin-right: 0" />
+                        <input type="submit" name="_submit" value="{% trans from "form" %}user.www.reactivationForm.submit.value{% endtrans %}" class="btn rounded pull-right span2" style="margin-right: 0" />
                     </div>
                 </form>
             </div>

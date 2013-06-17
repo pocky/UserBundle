@@ -1,0 +1,31 @@
+success:
+  user:
+    admin:
+      delete: Votre compte a bien été supprimé!
+      edit: Utilisateur modifié
+      register: Utilisateur enregistré
+    www:
+      back: Votre mot de passe vous a été renvoyé !
+      delete: Votre compte a bien été supprimé!
+      edit: Utilisateur modifié
+      suspend: Votre compte a bien été désactivé!
+      reactivation: Votre compte a bien été réactivé !
+      recovery: Votre compte a bien été réactivé !
+      register: Utilisateur enregistré
+
+error:
+  user:
+    admin:
+      batch:
+        select: Vous devez sélectionner au moins un utilisateur!
+        action: L'action demandée n'existe pas.
+        crsf:  L'action demandée n'existe pas.
+      delete: Une erreur est survenue pendant la supression de votre compte!
+      edit: Formulaire non valide
+    www:
+      back: Une erreur est survenue pendant la récupération de votre mot de passe!
+      edit: Formulaire non valide
+      lost: Une erreur est survenue pendant la récupération de votre mot de passe!
+      reactivation: Une erreur est survenue pendant la réactivation de votre compte!
+      recovery: Une erreur est survenue pendant la réactivation de votre compte!
+      register: Formulaire non valide

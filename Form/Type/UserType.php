@@ -34,34 +34,34 @@ class UserType extends AbstractType
 
         $builder
             ->add('username', 'text', array(
-                'label'     => 'user.admin.form.username'
+                'label'     => 'user.admin.user.username.text'
             ))
             ->add('email', 'email', array(
-                'label'     => 'user.admin.form.email'
+                'label'     => 'user.admin.user.email.text'
             ))
             ->add('isActive', 'checkbox', array(
-                'label'     => 'user.admin.form.isActive',
+                'label'     => 'user.admin.user.isActive.text',
                 'required'  => false
             ))
             ->add('isRoot', 'checkbox', array(
-                'label'     => 'user.admin.form.isRoot',
+                'label'     => 'user.admin.user.isRoot.text',
                 'required'  => false
             ))
             ->add('locked', 'checkbox', array(
-                'label'     => 'user.admin.form.isLocked',
+                'label'     => 'user.admin.user.isLocked.text',
                 'required'  => false
             ))
             ->add('person', 'document', array(
                 'class'         => 'ActivCompanyERPBundle:Person',
                 'property'      => 'name',
-                'label'         => 'user.admin.form.person.label',
-                'empty_value'   => 'user.admin.form.person.input',
+                'label'         => 'user.admin.user.person.text',
+                'empty_value'   => 'user.admin.user.person.input',
                 'required'      => false
             ))
             ->add('roles', 'collection', array(
                 'type'          => 'text',
                 'required'      => false,
-                'label'         => 'user.admin.form.roles',
+                'label'         => 'user.admin.user.roles.text',
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'attr'          => array(
@@ -70,7 +70,7 @@ class UserType extends AbstractType
                 ),
                 'options' => array(
                     'required'  => true,
-                    'label'     => 'user.admin.form.role'
+                    'label'     => 'user.admin.user.role.text'
                 )
             ))
         ;

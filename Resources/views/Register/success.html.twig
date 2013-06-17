@@ -6,7 +6,7 @@
         <div class="row">
 
             <div class="span6 offset3">
-                {% trans with { '%mail%': path('register_resend', {'username': username}) } %}user.confirmation.text{% endtrans %}
+                {% trans with { '%mail%': path('register_resend', {'username': username}) from "views" } %}user.www.success.text{% endtrans %}
             </div>
         </div>
 

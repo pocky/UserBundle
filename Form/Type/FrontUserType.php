@@ -34,10 +34,10 @@ class FrontUserType extends AbstractType
 
         $builder
             ->add('username', 'text', array(
-                'label'     => 'user.your.username'
+                'label'     => 'user.www.frontuser.username.text'
             ))
             ->add('email', 'email', array(
-                'label'     => 'user.your.password.main'
+                'label'     => 'user.www.frontuser.password.text'
             ))
         ;
     }

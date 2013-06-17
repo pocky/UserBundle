@@ -41,6 +41,29 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param $id
+     *
+     * @return object
+     * @throws UsernameNotFoundException
+     */
+    public function getUserByPersonId($id)
+    {
+        $qb = $this->createQueryBuilder()
+            ->field('person.$id')->equals(new \MongoId($id))
+            ->getQuery();
+        try {
+            $user = $qb->getSingleResult();
+
+        } catch (DocumentNotFoundException $e) {
+            throw new UsernameNotFoundException(
+                sprintf('Unable to find an active person object identified by "%s".', $id)
+            );
+        }
+
+        return $user;
+    }
+
     public function loadUserByConfirmationToken($token)
     {
         $qb = $this->createQueryBuilder()

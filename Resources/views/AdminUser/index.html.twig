@@ -1,37 +1,15 @@
-{% extends 'BlackAdminBundle::base.html.twig' %}
-{% block body %}
-
-    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackUserBundle:AdminUser:sidebar.html.twig' %}
-    <!-- todo: prise en charge de la pagination -->
-
-    {% set admin_edit = 'admin_user_edit' %}
-    {% set admin_delete = 'admin_user_delete' %}
-
-    <div id="content">
-
-        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "user.admin.manage"} %}
-        {% include 'BlackUserBundle:AdminUser:breadLine.html.twig' with {'route': 'admin_user_new', 'text': "user.admin.new"} %}
-
-        <!-- Main content -->
-        <div class="wrapper">
-
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
-
-            <form id="validate" class="main grid9" action="{{ path('admin_user_batch') }}" method="post">
-                <div class="fluid">
-                    <div class="widget check">
-                        <div class="whead">
-                            <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
-                            <h6>{% trans %}user.admin.title{% endtrans %}</h6>
-                            <div class="clear"></div>
-                        </div>
-                        {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
-                    </div>
-                </div>
-            </form>
+{% extends 'BlackUserBundle:AdminUser:base.html.twig' %}
+{% block page_content %}
+<form id="validate" class="main grid9" action="{{ path(admin_batch) }}" method="post">
+    <div class="fluid">
+        <div class="widget check">
+            <div class="whead">
+                <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
+                <h6>{% trans from "views" %}user.admin.index.title.text{% endtrans %}</h6>
+                <div class="clear"></div>
+            </div>
+            {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
         </div>
     </div>
-
+</form>
 {% endblock %}

@@ -36,7 +36,7 @@ class UserManager extends BaseManager implements UserManagerInterface
      */
     public function findUserBy(array $criteria)
     {
-        return $this->getDocumentRepository()->findBy($criteria);
+        return $this->getRepository()->findBy($criteria);
     }
 
     /**
@@ -47,7 +47,7 @@ class UserManager extends BaseManager implements UserManagerInterface
      */
     public function findUserByToken($token)
     {
-        return $this->getDocumentRepository()->loadUserByConfirmationToken($token);
+        return $this->getRepository()->loadUserByConfirmationToken($token);
     }
 
     /**
@@ -58,7 +58,7 @@ class UserManager extends BaseManager implements UserManagerInterface
      */
     public function findUserByUsername($username)
     {
-        return $this->getDocumentRepository()->loadUserByUsername($username);
+        return $this->getRepository()->loadUserByUsername($username);
     }
 
     /**
@@ -69,16 +69,16 @@ class UserManager extends BaseManager implements UserManagerInterface
      */
     public function findUserByPersonId($id)
     {
-        return $this->getDocumentRepository()->getUserByPersonId($id);
+        return $this->getRepository()->getUserByPersonId($id);
     }
 
     public function findAll()
     {
-        return $this->getDocumentRepository()->findAll();
+        return $this->getRepository()->findAll();
     }
 
     public function refreshUser($user)
     {
-        $this->getDocumentRepository()->refreshUser($user);
+        $this->getRepository()->refreshUser($user);
     }
 }

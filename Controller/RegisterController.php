@@ -161,7 +161,7 @@ class RegisterController extends Controller
 
             if ($form->isValid()) {
                 $manager    = $this->getUserManager();
-                $repository = $manager->getDocumentRepository();
+                $repository = $manager->getRepository();
 
                 $user  = $repository->loadLockedUser($parameters['_username']);
 
@@ -193,7 +193,7 @@ class RegisterController extends Controller
     public function reactivationLinkAction($token)
     {
         $manager    = $this->getUserManager();
-        $repository = $manager->getDocumentRepository();
+        $repository = $manager->getRepository();
 
         $user  = $repository->loadLockedUser(null, $token);
 
@@ -229,7 +229,7 @@ class RegisterController extends Controller
 
             if ($form->isValid()) {
                 $manager    = $this->getUserManager();
-                $repository = $manager->getDocumentRepository();
+                $repository = $manager->getRepository();
 
                 $user  = $repository->loadLostUser($parameters['_username']);
 
@@ -262,7 +262,7 @@ class RegisterController extends Controller
     public function passwordBackAction($token)
     {
         $manager    = $this->getUserManager();
-        $repository = $manager->getDocumentRepository();
+        $repository = $manager->getRepository();
 
         $user  = $repository->loadLostUser(null, $token);
 

@@ -102,7 +102,7 @@ class AdminUserController extends Controller
     public function editAction($id)
     {
         $documentManager = $this->getUserManager();
-        $repository = $documentManager->getDocumentRepository();
+        $repository = $documentManager->getRepository();
 
         $document = $repository->findOneById($id);
 

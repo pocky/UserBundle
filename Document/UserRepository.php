@@ -27,8 +27,7 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         $qb = $qb
                 ->addOr($qb->expr()->field('username')->equals($username))
                 ->addOr($qb->expr()->field('email')->equals($username))
-                ->getQuery()
-            ;
+                ->getQuery();
 
         try {
             $user = $qb->getSingleResult();
@@ -91,14 +90,12 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
 
         $qb = $this->createQueryBuilder()
                 ->field('isActive')->equals(false)
-                ->field('locked')->equals(true)
-            ;
+                ->field('locked')->equals(true);
 
         if (null !== $username) {
             $qb = $qb
                     ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username))
-                ;
+                    ->addOr($qb->expr()->field('person.email')->equals($username));
         }
 
         if (null !== $token) {
@@ -122,14 +119,12 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
     {
         $qb = $this->createQueryBuilder()
                 ->field('isActive')->equals(true)
-                ->field('locked')->equals(false)
-            ;
+                ->field('locked')->equals(false);
 
         if (null !== $username) {
             $qb = $qb
                     ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username))
-            ;
+                    ->addOr($qb->expr()->field('person.email')->equals($username));
         }
 
         if (null !== $token) {

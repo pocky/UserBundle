@@ -41,7 +41,9 @@ class RegisterController extends Controller
         if ($process) {
             $manager->persistAndFlush($document);
 
-            return $this->redirect($this->generateUrl('register_success', array('username' => $document->getUsername())));
+            return $this->redirect(
+                $this->generateUrl('register_success', array('username' => $document->getUsername()))
+            );
         }
 
         return array(

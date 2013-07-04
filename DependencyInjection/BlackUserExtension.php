@@ -37,14 +37,20 @@ class BlackUserExtension extends Extension
         try {
             $loader->load(sprintf('%s.xml', $config['db_driver']));
         } catch (\InvalidArgumentException $e) {
-            throw new \InvalidArgumentException(sprintf('The db_driver "%s" is not supported by user', $config['db_driver']));
+            throw new \InvalidArgumentException(
+                sprintf('The db_driver "%s" is not supported by user', $config['db_driver'])
+            );
         }
 
-        $this->remapParametersNamespaces($config, $container, array(
-            ''  => array(
-                'user_class'    => 'black_user.model.user.class',
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                ''  => array(
+                    'user_class'    => 'black_user.model.user.class',
+                )
             )
-        ));
+        );
 
         foreach (array('user', 'front_user', 'register', 'mailer', 'unlock') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));

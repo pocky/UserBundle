@@ -23,8 +23,12 @@ class UserFormHandler
     protected $factory;
     protected $session;
 
-    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory)
-    {
+    public function __construct(
+        FormInterface $form,
+        Request $request,
+        SessionInterface $session,
+        EncoderFactoryInterface $factory
+    ) {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;

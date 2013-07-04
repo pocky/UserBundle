@@ -21,8 +21,12 @@ class Mailer
     protected $parameters;
     protected $config;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, ConfigManagerInterface $manager, array $parameters)
-    {
+    public function __construct(
+        \Swift_Mailer $mailer,
+        \Twig_Environment $twig,
+        ConfigManagerInterface $manager,
+        array $parameters
+    ) {
         $this->mailer       = $mailer;
         $this->twig         = $twig;
         $this->manager      = $manager;
@@ -35,8 +39,10 @@ class Mailer
         $property   = $this->getRegisterProperty();
 
         $context    = array(
-            'subject'   => $property['mail_register_header'] ? $property['mail_register_header'] : 'user.mailer.register.subject',
-            'message'   => $property['mail_register_text'] ? $property['mail_register_text'] : 'user.mailer.register.message',
+            'subject'   => $property['mail_register_header'] ?
+                            $property['mail_register_header'] : 'user.mailer.register.subject',
+            'message'   => $property['mail_register_text'] ?
+                            $property['mail_register_text'] : 'user.mailer.register.message',
             'token'     => $token,
             'user'      => $user,
             'footer'    => $property['mail_footer_note']
@@ -53,8 +59,10 @@ class Mailer
         $property   = $this->getRegisterProperty();
 
         $context    = array(
-            'subject'   => $property['mail_suspend_header'] ? $property['mail_suspend_header'] : 'user.mailer.suspend.subject',
-            'message'   => $property['mail_suspend_text'] ? $property['mail_suspend_text'] : 'user.mailer.suspend.message',
+            'subject'   => $property['mail_suspend_header'] ?
+                            $property['mail_suspend_header'] : 'user.mailer.suspend.subject',
+            'message'   => $property['mail_suspend_text'] ?
+                            $property['mail_suspend_text'] : 'user.mailer.suspend.message',
             'token'     => $token,
             'user'      => $user,
             'footer'    => $property['mail_footer_note']
@@ -71,8 +79,10 @@ class Mailer
         $property   = $this->getRegisterProperty();
 
         $context    = array(
-            'subject'   => $property['mail_lost_header'] ? $property['mail_lost_header'] : 'user.mailer.lost.subject',
-            'message'   => $property['mail_lost_text'] ? $property['mail_lost_text'] : 'user.mailer.lost.message',
+            'subject'   => $property['mail_lost_header'] ?
+                            $property['mail_lost_header'] : 'user.mailer.lost.subject',
+            'message'   => $property['mail_lost_text'] ?
+                            $property['mail_lost_text'] : 'user.mailer.lost.message',
             'token'     => $token,
             'user'      => $user,
             'footer'    => $property['mail_footer_note']
@@ -89,8 +99,10 @@ class Mailer
         $property   = $this->getRegisterProperty();
 
         $context    = array(
-            'subject'   => $property['mail_back_header'] ? $property['mail_back_header'] : 'user.mailer.back.subject',
-            'message'   => $property['mail_back_text'] ? $property['mail_back_text'] : 'user.mailer.back.message',
+            'subject'   => $property['mail_back_header'] ?
+                            $property['mail_back_header'] : 'user.mailer.back.subject',
+            'message'   => $property['mail_back_text'] ?
+                            $property['mail_back_text'] : 'user.mailer.back.message',
             'user'      => $user,
             'password'  => $password,
             'footer'    => $property['mail_footer_note']
@@ -107,8 +119,10 @@ class Mailer
         $property   = $this->getRegisterProperty();
 
         $context    = array(
-            'subject'   => $property['mail_byebye_header'] ? $property['mail_byebye_header'] : 'user.mailer.bye.subject',
-            'message'   => $property['mail_byebye_text'] ? $property['mail_byebye_text'] : 'user.mailer.bye.message',
+            'subject'   => $property['mail_byebye_header'] ?
+                            $property['mail_byebye_header'] : 'user.mailer.bye.subject',
+            'message'   => $property['mail_byebye_text'] ?
+                            $property['mail_byebye_text'] : 'user.mailer.bye.message',
             'user'      => $user,
             'footer'    => $property['mail_footer_note']
         );
@@ -152,5 +166,4 @@ class Mailer
 
         return $property->getValue();
     }
-
 }

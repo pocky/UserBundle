@@ -140,7 +140,7 @@ class AdminUserController extends Controller
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
-    public function deleteAction($id, $token = NULL)
+    public function deleteAction($id, $token = null)
     {
         $form       = $this->createDeleteForm($id);
         $request    = $this->getRequest();

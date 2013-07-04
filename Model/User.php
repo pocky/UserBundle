@@ -527,18 +527,20 @@ abstract class User implements UserInterface, \Serializable
 
     public function serialize()
     {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->isActive,
-            $this->isRoot,
-            $this->locked,
-            $this->expired,
-            $this->expiresAt,
-            $this->lastLogin,
-            $this->registeredAt
-        ));
+        return serialize(
+            array(
+                $this->id,
+                $this->username,
+                $this->password,
+                $this->isActive,
+                $this->isRoot,
+                $this->locked,
+                $this->expired,
+                $this->expiresAt,
+                $this->lastLogin,
+                $this->registeredAt
+            )
+        );
     }
 
     public function unserialize($serialized)

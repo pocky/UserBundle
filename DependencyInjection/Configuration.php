@@ -34,14 +34,16 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifNotInArray($supportedDrivers)
-                        ->thenInvalid('The database driver %s is not supported, please use one of them' . json_encode($supportedDrivers))
+                        ->thenInvalid(
+                            'The database driver %s is not supported, please use one of them'
+                            . json_encode($supportedDrivers)
+                        )
                     ->end()
                 ->end()
 
                 ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
 
-            ->end()
-        ;
+            ->end();
 
         $this->addUserSection($rootNode);
         $this->addServiceSection($rootNode);
@@ -59,31 +61,43 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('black_user')->end()
-                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\UserType')->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.user')->end()
+                                ->scalarNode('name')->defaultValue('black_user')
+                                ->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\UserType')
+                                ->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.user')
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('register')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('black_register')->end()
-                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\RegisterType')->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.register')->end()
+                                ->scalarNode('name')->defaultValue('black_register')
+                                ->end()
+                                ->scalarNode('type')->defaultValue(
+                                    'Black\\Bundle\\UserBundle\\Form\\Type\\RegisterType'
+                                )
+                                ->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.register')
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('front_user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('black_front_user')->end()
-                                ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType')->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.front_user')->end()
+                                ->scalarNode('name')->defaultValue('black_front_user')
+                                ->end()
+                                ->scalarNode('type')->defaultValue(
+                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType'
+                                )
+                                ->end()
+                                ->scalarNode('handler')->defaultValue('black_user.form.handler.front_user')
+                                ->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     private function addServiceSection(ArrayNodeDefinition $node)
@@ -98,7 +112,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 }

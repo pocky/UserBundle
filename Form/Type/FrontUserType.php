@@ -33,20 +33,29 @@ class FrontUserType extends AbstractType
         $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add('username', 'text', array(
-                'label'     => 'user.www.frontuser.username.text'
-            ))
-            ->add('email', 'email', array(
-                'label'     => 'user.www.frontuser.password.text'
-            ))
-        ;
+            ->add(
+                'username',
+                'text',
+                array(
+                    'label'     => 'user.www.frontuser.username.text'
+                )
+            )
+            ->add(
+                'email',
+                'email',
+                array(
+                    'label'     => 'user.www.frontuser.password.text'
+                )
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => $this->class,
+            )
+        );
     }
 
     public function getName()

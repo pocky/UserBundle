@@ -13,5 +13,4 @@ namespace Black\Bundle\UserBundle\Model;
 
 interface UserManagerInterface
 {
-  
 }

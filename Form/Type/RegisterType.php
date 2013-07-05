@@ -30,20 +30,31 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text', array(
-                'label'             => 'user.www.register.username.text',
-                'attr'              => array(
-                    'class'         => 'span6',
-                    'pattern'       => '.{6,15}'
+            ->add(
+                'username',
+                'text',
+                array(
+                    'label'             => 'user.www.register.username.text',
+                    'attr'              => array(
+                        'class'         => 'span6',
+                        'pattern'       => '.{6,15}'
+                    )
                 )
-            ))
-            ->add('email', 'email', array(
-                'label'             => 'user.www.register.email.text',
-                'attr'              => array(
-                    'class'         => 'span6'
+            )
+            ->add(
+                'email',
+                'email',
+                array(
+                    'label'             => 'user.www.register.email.text',
+                    'attr'              => array(
+                        'class'         => 'span6'
+                    )
                 )
-            ))
-            ->add('rawPassword', 'repeated', array(
+            )
+            ->add(
+                'rawPassword',
+                'repeated',
+                array(
                 'type'              => 'password',
                 'invalid_message'   => 'user.www.register.password.not.match.text',
                 'first_options'     => array('label' => 'user.www.register.password.main.text',
@@ -54,15 +65,17 @@ class RegisterType extends AbstractType
                     'attr'              => array(
                         'class'         => 'span6'
                     ))
-            ))
-        ;
+                )
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => $this->class,
+            )
+        );
     }
 
     public function getName()

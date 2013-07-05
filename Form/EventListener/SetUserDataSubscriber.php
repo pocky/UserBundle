@@ -46,20 +46,34 @@ class SetUserDataSubscriber implements EventSubscriberInterface
     private function addPassword($data, $form)
     {
         if (!$data->getId()) {
-            $form->add($this->factory->createNamed('rawPassword', 'repeated', null, array(
-                'type'              => 'password',
-                'invalid_message'   => 'user.your.password.error',
-                'first_options'     => array('label' => 'user.your.password.main'),
-                'second_options'    => array('label' => 'user.your.password.confirm')
-            )));
+            $form->add(
+                $this->factory->createNamed(
+                    'rawPassword',
+                    'repeated',
+                    null,
+                    array(
+                        'type'              => 'password',
+                        'invalid_message'   => 'user.your.password.error',
+                        'first_options'     => array('label' => 'user.your.password.main'),
+                        'second_options'    => array('label' => 'user.your.password.confirm')
+                    )
+                )
+            );
         } else {
-            $form->add($this->factory->createNamed('rawPassword', 'repeated', null, array(
-                'type'              => 'password',
-                'required'          => false,
-                'invalid_message'   => 'user.your.password.error',
-                'first_options'     => array('label' => 'user.your.password.main'),
-                'second_options'    => array('label' => 'user.your.password.confirm')
-            )));
+            $form->add(
+                $this->factory->createNamed(
+                    'rawPassword',
+                    'repeated',
+                    null,
+                    array(
+                        'type'              => 'password',
+                        'required'          => false,
+                        'invalid_message'   => 'user.your.password.error',
+                        'first_options'     => array('label' => 'user.your.password.main'),
+                        'second_options'    => array('label' => 'user.your.password.confirm')
+                    )
+                )
+            );
         }
     }
 }

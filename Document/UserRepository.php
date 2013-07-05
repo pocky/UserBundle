@@ -128,7 +128,6 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         }
 
         if (null !== $token) {
-            echo 'salut';
             $qb->expr()->field('token')->equals($token);
         }
 

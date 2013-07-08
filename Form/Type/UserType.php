@@ -33,54 +33,83 @@ class UserType extends AbstractType
         //$builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add('username', 'text', array(
-                'label'     => 'user.admin.user.username.text'
-            ))
-            ->add('email', 'email', array(
-                'label'     => 'user.admin.user.email.text'
-            ))
-            ->add('isActive', 'checkbox', array(
-                'label'     => 'user.admin.user.isActive.text',
-                'required'  => false
-            ))
-            ->add('isRoot', 'checkbox', array(
-                'label'     => 'user.admin.user.isRoot.text',
-                'required'  => false
-            ))
-            ->add('locked', 'checkbox', array(
-                'label'     => 'user.admin.user.isLocked.text',
-                'required'  => false
-            ))
-            ->add('person', 'document', array(
-                'class'         => 'ActivCompanyERPBundle:Person',
-                'property'      => 'name',
-                'label'         => 'user.admin.user.person.text',
-                'empty_value'   => 'user.admin.user.person.input',
-                'required'      => false
-            ))
-            ->add('roles', 'collection', array(
-                'type'          => 'text',
-                'required'      => false,
-                'label'         => 'user.admin.user.roles.text',
-                'allow_add'     => true,
-                'allow_delete'  => true,
-                'attr'          => array(
-                    'class' => 'roles-collection',
-                    'add'   => 'add-another-role'
-                ),
-                'options' => array(
-                    'required'  => true,
-                    'label'     => 'user.admin.user.role.text'
+            ->add(
+                'username',
+                'text',
+                array(
+                    'label'     => 'user.admin.user.username.text'
                 )
-            ))
-        ;
+            )
+            ->add(
+                'email',
+                'email',
+                array(
+                    'label'     => 'user.admin.user.email.text'
+                )
+            )
+            ->add(
+                'isActive',
+                'checkbox',
+                array(
+                    'label'     => 'user.admin.user.isActive.text',
+                    'required'  => false
+                )
+            )
+            ->add(
+                'isRoot',
+                'checkbox',
+                array(
+                    'label'     => 'user.admin.user.isRoot.text',
+                    'required'  => false
+                )
+            )
+            ->add(
+                'locked',
+                'checkbox',
+                array(
+                    'label'     => 'user.admin.user.isLocked.text',
+                    'required'  => false
+                )
+            )
+            ->add(
+                'person',
+                'document',
+                array(
+                    'class'         => 'ActivCompanyERPBundle:Person',
+                    'property'      => 'name',
+                    'label'         => 'user.admin.user.person.text',
+                    'empty_value'   => 'user.admin.user.person.input',
+                    'required'      => false
+                )
+            )
+            ->add(
+                'roles',
+                'collection',
+                array(
+                    'type'          => 'text',
+                    'required'      => false,
+                    'label'         => 'user.admin.user.roles.text',
+                    'allow_add'     => true,
+                    'allow_delete'  => true,
+                    'attr'          => array(
+                        'class' => 'roles-collection',
+                        'add'   => 'add-another-role'
+                    ),
+                    'options' => array(
+                        'required'  => true,
+                        'label'     => 'user.admin.user.role.text'
+                    )
+                )
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => $this->class,
+            )
+        );
     }
 
     public function getName()

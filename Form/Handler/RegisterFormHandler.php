@@ -24,8 +24,13 @@ class RegisterFormHandler
     protected $factory;
     protected $session;
 
-    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory, Mailer $mailer)
-    {
+    public function __construct(
+        FormInterface $form,
+        Request $request,
+        SessionInterface $session,
+        EncoderFactoryInterface $factory,
+        Mailer $mailer
+    ) {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;

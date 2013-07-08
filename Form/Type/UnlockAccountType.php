@@ -29,17 +29,22 @@ class UnlockAccountType extends AbstractType
     {
 
         $builder
-            ->add('_username', 'text', array(
-                'label' => 'user.www.unlockaccount.loginoremail.text',
-            ))
-        ;
+            ->add(
+                '_username',
+                'text',
+                array(
+                    'label' => 'user.www.unlockaccount.loginoremail.text',
+                )
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => null
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => null
+            )
+        );
     }
 
     /**

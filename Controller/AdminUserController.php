@@ -69,7 +69,7 @@ class AdminUserController extends Controller
         $documentManager    = $this->getUserManager();
         $document           = $documentManager->createInstance();
 
-        $formHandler    = $this->get('black_user.form.handler.user');
+        $formHandler    = $this->get('black_user.user.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
@@ -112,7 +112,7 @@ class AdminUserController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $formHandler    = $this->get('black_user.form.handler.user');
+        $formHandler    = $this->get('black_user.user.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {

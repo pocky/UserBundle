@@ -47,16 +47,67 @@ class BlackUserExtension extends Extension
             $container,
             array(
                 ''  => array(
+                    'db_driver'     => 'black_user.db_driver',
                     'user_class'    => 'black_user.model.user.class',
                 )
             )
         );
+        
+        if (!empty($config['user'])) {
+            $this->loadUser($config['user'], $container, $loader);
+        }
+        
+        if (!empty($config['register'])) {
+            $this->loadRegister($config['register'], $container, $loader);
+        }
+        
+        if (!empty($config['front_user'])) {
+            $this->loadFrontUser($config['front_user'], $container, $loader);
+        }
 
-        foreach (array('user', 'front_user', 'register', 'mailer', 'unlock') as $basename) {
+        foreach (array('mailer', 'unlock') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
         $container->setAlias('black_user.mailer', $config['service']['mailer']);
+    }
+    
+    private function loadUser(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('user.xml');
+        
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'form' => 'black_user.user.form.%s',
+            )
+        );
+    }
+    private function loadRegister(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('register.xml');
+        
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'form' => 'black_user.register.form.%s',
+            )
+        );
+    }
+    
+    private function loadFrontUser(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('front_user.xml');
+        
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'form' => 'black_user.front_user.form.%s',
+            )
+        );
     }
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

@@ -35,7 +35,7 @@ class RegisterController extends Controller
         $manager    = $this->getUserManager();
         $document   = $manager->createInstance();
 
-        $formHandler    = $this->get('black_user.form.handler.register');
+        $formHandler    = $this->get('black_user.register.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {

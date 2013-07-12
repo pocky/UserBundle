@@ -58,6 +58,8 @@ user:
         not:
           match:
             text: Les mots de passes doivent être identiques!
+      submit:
+        value: S'enregistrer
             
     settings:
       submit:

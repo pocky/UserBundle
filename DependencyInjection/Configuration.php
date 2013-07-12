@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('black_user');
 
-        $supportedDrivers = array('mongodb');
+        $supportedDrivers = array('mongodb', 'mysql');
 
         $rootNode
             ->children()

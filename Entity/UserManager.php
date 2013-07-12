@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Entity;
 
 use Black\Bundle\UserBundle\Model\UserInterface;
-use Black\Bundle\UserBundle\Document\BaseManager;
+use Black\Bundle\UserBundle\Entity\BaseManager;
 use Black\Bundle\UserBundle\Model\UserManagerInterface;
 
 class UserManager extends BaseManager implements UserManagerInterface

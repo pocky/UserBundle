@@ -15,7 +15,6 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Black\Bundle\EngineBundle\Traits\ThingDocument;
 
 /**
  * User Document

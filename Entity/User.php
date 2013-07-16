@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
-use Black\Bundle\EngineBundle\Traits\ThingEntity;
 
 /**
  * User Entity
@@ -28,6 +27,15 @@ use Black\Bundle\EngineBundle\Traits\ThingEntity;
  */
 class User extends AbstractUser
 {
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
     /**
      * @ORM\Column(name="username", type="string", length=15, unique=true)
      * @Assert\Type(type="string")

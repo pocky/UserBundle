@@ -14,6 +14,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * BlacUser Configuration
+ */
 class Configuration implements ConfigurationInterface
 {
     /**
@@ -24,7 +27,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('black_user');
 
-        $supportedDrivers = array('mongodb', 'mysql');
+        $supportedDrivers = array('mongodb', 'orm');
 
         $rootNode
             ->children()
@@ -42,6 +45,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('user_manager')->defaultValue('Black\\Bundle\\UserBundle\\Doctrine\\UserManager')->end()
 
             ->end();
 

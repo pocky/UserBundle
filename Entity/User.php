@@ -8,26 +8,36 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Black\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Entity;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
-use Symfony\Component\Validator\Constraints as Assert;
-use Black\Bundle\UserBundle\Model\User as AbstractUser;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
+use Black\Bundle\UserBundle\Model\User as AbstractUser;
 
 /**
- * User Document
+ * User Entity
  *
- * @ODM\MappedSuperclass()
- * @Unique("username")
- * @Unique("email")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Black\Bundle\UserBundle\Entity\UserRepository")
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User extends AbstractUser
 {
     /**
-     * @ODM\String
-     * @ODM\UniqueIndex
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name="username", type="string", length=15, unique=true)
      * @Assert\Type(type="string")
      * @Assert\NotBlank()
      * @Assert\Length(min="6", max="15")
@@ -36,8 +46,7 @@ class User extends AbstractUser
     protected $username;
 
     /**
-     * @ODM\String
-     * @ODM\UniqueIndex
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\Type(type="string")
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -45,74 +54,74 @@ class User extends AbstractUser
     protected $email;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      * @Assert\Type(type="string")
      */
     protected $password;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="raw_password", type="string", length=255, nullable=true)
      * @Assert\Length(min="6")
      * @Assert\Type(type="string")
      */
     protected $rawPassword;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      * @Assert\Type(type="string")
      */
     protected $salt;
 
     /**
-     * @ODM\Boolean
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      * @Assert\Type(type="bool")
      */
     protected $isActive;
 
     /**
-     * @ODM\Boolean
+     * @ORM\Column(name="is_root", type="boolean", nullable=true)
      * @Assert\Type(type="bool")
      */
     protected $isRoot;
 
     /**
-     * @ODM\Boolean
+     * @ORM\Column(name="locked", type="boolean", nullable=true)
      * @Assert\Type(type="bool")
      */
     protected $locked;
 
     /**
-     * @ODM\Boolean
+     * @ORM\Column(name="expired", type="boolean", nullable=true)
      * @Assert\Type(type="bool")
      */
     protected $expired;
 
     /**
-     * @ODM\Timestamp
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable
      */
     protected $expiresAt;
 
     /**
-     * @ODM\Timestamp
+     * @ORM\Column(name="last_login", type="datetime", nullable=true)
      * @Gedmo\Timestampable
      */
     protected $lastLogin;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
      * @Assert\Type(type="string")
      */
     protected $confirmationToken;
 
     /**
-     * @ODM\Timestamp
+     * @ORM\Column(name="registered_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
      */
     protected $registeredAt;
 
     /**
-     * @ODM\Collection
+     * @ORM\Column(name="roles", type="array", nullable=true)
      */
     protected $roles;
 }

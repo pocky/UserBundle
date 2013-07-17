@@ -11,9 +11,6 @@ user:
         text: Est super-admin ?
       isLocked:
         text: Est verrouillé ?
-      person:
-        text: Associer à une fiche client
-        input: Choisir le client
       roles:
         text: Permissions
       role:
@@ -58,6 +55,8 @@ user:
         not:
           match:
             text: Les mots de passes doivent être identiques!
+      submit:
+        value: S'enregistrer
             
     settings:
       submit:

@@ -18,12 +18,14 @@ use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 class UserType extends AbstractType
 {
     protected $class;
-
+    
+    protected $dbDriver;
     /**
      * @param string $class The User class name
      */
-    public function __construct($class)
+    public function __construct($dbDriver, $class)
     {
+        $this->dbDriver = $dbDriver;
         $this->class = $class;
     }
 
@@ -69,17 +71,6 @@ class UserType extends AbstractType
                 array(
                     'label'     => 'user.admin.user.isLocked.text',
                     'required'  => false
-                )
-            )
-            ->add(
-                'person',
-                'document',
-                array(
-                    'class'         => 'ActivCompanyERPBundle:Person',
-                    'property'      => 'name',
-                    'label'         => 'user.admin.user.person.text',
-                    'empty_value'   => 'user.admin.user.person.input',
-                    'required'      => false
                 )
             )
             ->add(

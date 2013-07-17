@@ -14,6 +14,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * BlacUser Configuration
+ */
 class Configuration implements ConfigurationInterface
 {
     /**
@@ -24,7 +27,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('black_user');
 
-        $supportedDrivers = array('mongodb');
+        $supportedDrivers = array('mongodb', 'orm');
 
         $rootNode
             ->children()
@@ -42,6 +45,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('user_manager')->defaultValue('Black\\Bundle\\UserBundle\\Doctrine\\UserManager')->end()
 
             ->end();
 
@@ -55,21 +59,32 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('form')
+                ->arrayNode('user')
                     ->addDefaultsIfNotSet()
+                    ->canBeUnset()
                     ->children()
-                        ->arrayNode('user')
+                        ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('name')->defaultValue('black_user')
                                 ->end()
                                 ->scalarNode('type')->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\UserType')
                                 ->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.user')
+                                ->scalarNode('handler')->defaultValue(
+                                    'Black\\Bundle\\UserBundle\\Form\\Handler\\UserFormHandler'
+                                )
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('register')
+                    ->end()
+                 ->end()
+            ->end()
+            ->children()
+                ->arrayNode('register')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('name')->defaultValue('black_register')
@@ -78,20 +93,32 @@ class Configuration implements ConfigurationInterface
                                     'Black\\Bundle\\UserBundle\\Form\\Type\\RegisterType'
                                 )
                                 ->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.register')
+                                ->scalarNode('handler')->defaultValue(
+                                    'Black\\Bundle\\UserBundle\\Form\\Handler\\RegisterFormHandler'
+                                )
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('front_user')
+                    ->end()
+                 ->end()
+            ->end()
+            ->children()
+                ->arrayNode('front_user')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('name')->defaultValue('black_front_user')
                                 ->end()
                                 ->scalarNode('type')->defaultValue(
-                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType'
+                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserFormType'
                                 )
                                 ->end()
-                                ->scalarNode('handler')->defaultValue('black_user.form.handler.front_user')
+                                ->scalarNode('handler')->defaultValue(
+                                    'Black\\Bundle\\UserBundle\\Form\\Handler\\FrontUserHandler'
+                                )
                                 ->end()
                             ->end()
                         ->end()

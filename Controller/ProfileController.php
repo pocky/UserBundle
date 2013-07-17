@@ -29,7 +29,7 @@ class ProfileController extends Controller
             throw new AccessDeniedException('user.exception.settings');
         }
 
-        $formHandler    = $this->get('black_user.form.handler.front_user');
+        $formHandler    = $this->get('black_user.front_user.form.handler');
         $process        = $formHandler->process($user);
 
         if ($process) {

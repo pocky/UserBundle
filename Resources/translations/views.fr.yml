@@ -54,12 +54,16 @@ user:
       connect:
         text: Vous pouvez désormais vous connectez %username%
       step:
-        text: Etape 3
+        text: Troisième étape
         title:
           text: Confirmation
     
     index:
       register:
+        step:
+          text: Première étape
+          title:
+            text: Créer votre compte utilisateur
         default: Inscription
         text: >
           <p>

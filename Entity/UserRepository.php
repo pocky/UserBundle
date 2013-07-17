@@ -8,30 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Black\Bundle\UserBundle\Document;
+namespace Black\Bundle\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Doctrine\ODM\MongoDB\DocumentRepository;
-use Doctrine\ODM\MongoDB\DocumentNotFoundException;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Black\Bundle\UserBundle\Model\UserRepositoryInterface;
 
-class UserRepository extends DocumentRepository implements UserProviderInterface, UserRepositoryInterface
+class UserRepository extends EntityRepository implements UserProviderInterface, UserRepositoryInterface
 {
     public function loadUserByUsername($username)
     {
-        $qb = $this->createQueryBuilder();
+        $qb = $this->getQueryBuilder();
 
         $qb = $qb
-                ->addOr($qb->expr()->field('username')->equals($username))
-                ->addOr($qb->expr()->field('email')->equals($username))
+                ->where('u.username LIKE :username')
+                ->orWhere('u.email LIKE :email')
+                ->setParameter('username', $username)
+                ->setParameter('email', $username)
                 ->getQuery();
 
         try {
             $user = $qb->getSingleResult();
-        } catch (DocumentNotFoundException $e) {
+        } catch (EntityNotFoundException $e) {
             throw new UsernameNotFoundException(
                 sprintf('Unable to find an active user object identified by "%s".', $username)
             );
@@ -43,14 +45,17 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
     public function loadUserByConfirmationToken($token)
     {
         $qb = $this->createQueryBuilder()
-                ->field('confirmationToken')->equals($token)
-                ->field('isActive')->equals(false)
-                ->field('locked')->equals(false)
+                ->where('u.confirmation_token LIKE :token')
+                ->andWhere('u.is_active LIKE :is_active')
+                ->andWhere('u.locked LIKE :locked')
+                ->setParameter('token', $token)
+                ->setParameter('is_active', false)
+                ->setParameter('locked', false)
                 ->getQuery();
 
         try {
             $user = $qb->getSingleResult();
-        } catch (DocumentNotFoundException $e) {
+        } catch (EntityNotFoundException $e) {
             throw new UsernameNotFoundException(
                 sprintf('Unable to find an active user object identified by "%s".', $token)
             );
@@ -66,24 +71,36 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         }
 
         $qb = $this->createQueryBuilder()
-                ->field('isActive')->equals(false)
-                ->field('locked')->equals(true);
+                ->where('u.is_active LIKE :is_active')
+                ->andWhere('u.locked LIKE :locked')
+                ->setParameter('is_active', false)
+                ->setParameter('locked', true);
 
         if (null !== $username) {
             $qb = $qb
-                    ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username));
+                    ->andWhere(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb->expr()->like('u.username', ':username'),
+                                $qb->expr()->like('u.email', ':email')
+                            )
+                    )
+                    ->setParameter('username', $username)
+                    ->setParameter('email', $username);
         }
 
         if (null !== $token) {
-            $qb->expr()->field('token')->equals($token);
+            $qb = $qb
+                    ->andWhere('u.confirmation_token LIKE :token')
+                    ->setParameter('token', $token);
         }
 
         $qb = $qb->getQuery();
 
         try {
             $user = $qb->getSingleResult();
-        } catch (DocumentNotFoundException $e) {
+        } catch (EntityNotFoundException $e) {
             throw new UsernameNotFoundException(
                 sprintf('Unable to find an active user object identified by "%s".', $token)
             );
@@ -95,24 +112,36 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
     public function loadLostUser($username = null, $token = null)
     {
         $qb = $this->createQueryBuilder()
-                ->field('isActive')->equals(true)
-                ->field('locked')->equals(false);
+                ->where('u.is_active LIKE :is_active')
+                ->andWhere('u.locked LIKE :locked')
+                ->setParameter('is_active', true)
+                ->setParameter('locked', false);
 
         if (null !== $username) {
             $qb = $qb
-                    ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username));
+                    ->andWhere(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb->expr()->like('u.username', ':username'),
+                                $qb->expr()->like('u.email', ':email')
+                            )
+                    )
+                    ->setParameter('username', $username)
+                    ->setParameter('email', $username);
         }
 
         if (null !== $token) {
-            $qb->expr()->field('token')->equals($token);
+            $qb = $qb
+                    ->andWhere('u.confirmation_token LIKE :token')
+                    ->setParameter('token', $token);
         }
 
         $qb = $qb->getQuery();
 
         try {
             $user = $qb->getSingleResult();
-        } catch (DocumentNotFoundException $e) {
+        } catch (EntityNotFoundException $e) {
             throw new UsernameNotFoundException(
                 sprintf('Unable to find an active user object identified by "%s".', $token)
             );
@@ -133,6 +162,14 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        return $this->getDocumentName() === $class || is_subclass_of($class, $this->getDocumentName());
+        return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+    }
+    
+    /**
+     * @return 
+     */
+    protected function getQueryBuilder($alias = 'u')
+    {
+        return $this->createQueryBuilder($alias);
     }
 }

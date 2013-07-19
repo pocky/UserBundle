@@ -8,7 +8,7 @@
                 <h6>{% trans from "views" %}user.admin.index.title.text{% endtrans %}</h6>
                 <div class="clear"></div>
             </div>
-            {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
+            {% include 'BlackUserBundle:AdminUser:table.html.twig' with {'keys': keys, 'csrf': csrf} %}
         </div>
     </div>
 </form>

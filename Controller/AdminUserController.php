@@ -12,6 +12,7 @@
 namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,28 +34,51 @@ class AdminUserController extends Controller
      * @Route("/index.html", name="admin_users")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
+     * 
+     * @return array
      */
     public function indexAction()
     {
-        $manager        = $this->getUserManager();
-        $rawDocuments   = $manager->findAll();
         $csrf           = $this->container->get('form.csrf_provider');
 
-        $documents = array();
-
-        foreach ($rawDocuments as $document) {
-            $documents[] = array(
-                'id'                    => $document->getId(),
-                'user.admin.user.username.text' => $document->getUsername()
-            );
-        }
+        $keys = array(
+            'id',
+            'user.admin.user.username.text'
+        );
 
         return array(
-            'documents' => $documents,
+            'keys'      => $keys,
             'csrf'      => $csrf
         );
     }
 
+    /**
+     * Show lists of Users
+     *
+     * @Method("GET")
+     * @Route("/list.json", name="admin_users_json")
+     * @Secure(roles="ROLE_ADMIN")
+     * 
+     * @return Response
+     */
+    public function ajaxListAction()
+    {
+        $documentManager    = $this->getManager();
+        $repository         = $documentManager->getRepository();
+
+        $rawDocuments       = $repository->findAll();
+
+        $documents = array('aaData' => array());
+        foreach ($rawDocuments as $document) {
+            $documents['aaData'][] = array(
+                $document->getId(),
+                $document->getUserName(),
+                null
+            );
+        }
+
+        return new Response(json_encode($documents));
+    }
 
     /**
      * Displays a form to create a new User document.
@@ -63,10 +87,12 @@ class AdminUserController extends Controller
      * @Route("/new", name="admin_user_new")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
+     * 
+     * @return array
      */
     public function newAction()
     {
-        $documentManager    = $this->getUserManager();
+        $documentManager    = $this->getManager();
         $document           = $documentManager->createInstance();
 
         $formHandler    = $this->get('black_user.user.form.handler');
@@ -88,12 +114,12 @@ class AdminUserController extends Controller
     /**
      * Displays a form to edit an existing User document.
      *
+     * @param string $id The document ID
+     *
      * @Method({"GET", "POST"})
      * @Route("/{id}/edit", name="admin_user_edit")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
-     *
-     * @param string $id The document ID
      *
      * @return array
      *
@@ -101,7 +127,7 @@ class AdminUserController extends Controller
      */
     public function editAction($id)
     {
-        $documentManager = $this->getUserManager();
+        $documentManager = $this->getManager();
         $repository = $documentManager->getRepository();
 
         $document = $repository->findOneById($id);
@@ -130,11 +156,13 @@ class AdminUserController extends Controller
 
     /**
      * Deletes a User document.
-     *
+     * 
+     * @param string $id
+     * @param string $token
+     * 
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete/{token}", name="admin_user_delete")
      * @Secure(roles="ROLE_ADMIN")
-     * @param string $id The document ID
      *
      * @return array
      *
@@ -148,14 +176,14 @@ class AdminUserController extends Controller
         $form->bind($request);
 
         if (null !== $token) {
-            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete', $token);
         }
 
         if ($form->isValid() || true === $token) {
 
-            $dm         = $this->getUserManager();
+            $dm         = $this->getManager();
             $document   = $dm->findUserById($id);
-            
+
             if (!$document) {
                 throw $this->createNotFoundException('user.notFound');
             }
@@ -189,11 +217,13 @@ class AdminUserController extends Controller
 
         if (!$ids = $request->get('ids')) {
             $this->get('session')->getFlashBag()->add('error', 'error.user.admin.batch.select');
+
             return $this->redirect($this->generateUrl('admin_users'));
         }
 
         if (!$action = $request->get('batchAction')) {
             $this->get('session')->getFlashBag()->add('error', 'error.user.admin.batch.action');
+
             return $this->redirect($this->generateUrl('admin_users'));
         }
 
@@ -226,7 +256,7 @@ class AdminUserController extends Controller
         return $form;
     }
 
-    protected function getUserManager()
+    protected function getManager()
     {
         return $this->get('black_user.manager.user');
     }

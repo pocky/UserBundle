@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Black package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
 namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +20,12 @@ use Black\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
+ * Class ProfileController
+ *
+ * @package Black\Bundle\UserBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ *
  * @Route("/profile")
  */
 class ProfileController extends Controller
@@ -18,6 +34,9 @@ class ProfileController extends Controller
      * @Route("/settings.html", name="profile_settings")
      * @Secure(roles="ROLE_USER")
      * @Template()
+     *
+     * @return array
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function settingsAction()
     {

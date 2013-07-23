@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,6 +22,12 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
+ * Class RegisterController
+ *
+ * @package Black\Bundle\UserBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ *
  * @Route("/register")
  */
 class RegisterController extends Controller
@@ -29,6 +36,8 @@ class RegisterController extends Controller
      * @Route("/", name="register_index")
      * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction()
     {
@@ -55,6 +64,8 @@ class RegisterController extends Controller
      * @Route("/success.html", name="register_success")
      * @Method({"GET"})
      * @Template()
+     *
+     * @return array
      */
     public function successAction()
     {
@@ -68,8 +79,13 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param $username
+     *
      * @Route("/resend/{username}", name="register_resend")
      * @Method({"GET"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function resendConfirmation($username)
     {
@@ -87,9 +103,14 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param $token
+     *
      * @Route("/confirmation/{token}", name="register_confirmation")
      * @Method({"GET"})
      * @Template()
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function confirmationAction($token)
     {
@@ -150,6 +171,8 @@ class RegisterController extends Controller
      * @Route("/password-recovery.html", name="register_reactivation_form")
      * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function reactivationFormAction()
     {
@@ -169,6 +192,7 @@ class RegisterController extends Controller
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
                     $this->get('session')->getFlashBag()->add('error', 'error.user.www.recovery');
+
                     return $this->redirect($this->generateUrl('register_reactivation_form'));
                 }
 
@@ -179,6 +203,7 @@ class RegisterController extends Controller
                 $manager->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'success.user.www.recovery');
+
                 return $this->redirect($this->generateUrl('main_login'));
             }
         }
@@ -189,8 +214,12 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param $token
+     *
      * @Route("/reactivationlink/{token}", name="register_reactivation_link")
      * @Method({"GET"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function reactivationLinkAction($token)
     {
@@ -201,6 +230,7 @@ class RegisterController extends Controller
 
         if (!is_object($user) || !$user instanceof UserInterface) {
             $this->get('session')->getFlashBag()->add('error', 'error.user.www.reactivation');
+
             return $this->redirect($this->generateUrl('register_reactivation_form'));
         }
 
@@ -211,6 +241,7 @@ class RegisterController extends Controller
         $manager->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'success.user.www.reactivation');
+
         return $this->redirect($this->generateUrl('main_login'));
     }
 
@@ -218,6 +249,8 @@ class RegisterController extends Controller
      * @Route("/password-lost.html", name="register_password_lost")
      * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function passwordLostAction()
     {
@@ -237,6 +270,7 @@ class RegisterController extends Controller
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
                     $this->get('session')->getFlashBag()->add('error', 'error.user.www.lost');
+
                     return $this->redirect($this->generateUrl('main_login'));
                 }
 
@@ -258,8 +292,12 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param $token
+     *
      * @Route("/password-back/{token}", name="register_password_back")
      * @Method({"GET"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function passwordBackAction($token)
     {
@@ -270,6 +308,7 @@ class RegisterController extends Controller
 
         if (!is_object($user) || !$user instanceof UserInterface) {
             $this->get('session')->getFlashBag()->add('error', 'error.user.www.back');
+
             return $this->redirect($this->generateUrl('register_password_lost'));
         }
 
@@ -291,6 +330,8 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param $token
+     *
      * @Route("/delete/{token}", name="register_delete")
      * @Method({"GET"})
      *

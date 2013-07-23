@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
@@ -17,6 +18,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Black\Bundle\UserBundle\Model\UserInterface;
 use Black\Bundle\UserBundle\Mailer\Mailer;
 
+/**
+ * Class RegisterFormHandler
+ *
+ * @package Black\Bundle\UserBundle\Form\Handler
+ */
 class RegisterFormHandler
 {
     protected $request;
@@ -24,6 +30,13 @@ class RegisterFormHandler
     protected $factory;
     protected $session;
 
+    /**
+     * @param FormInterface           $form
+     * @param Request                 $request
+     * @param SessionInterface        $session
+     * @param EncoderFactoryInterface $factory
+     * @param Mailer                  $mailer
+     */
     public function __construct(
         FormInterface $form,
         Request $request,
@@ -38,6 +51,11 @@ class RegisterFormHandler
         $this->mailer   = $mailer;
     }
 
+    /**
+     * @param UserInterface $user
+     *
+     * @return bool
+     */
     public function process(UserInterface $user)
     {
         $this->form->setData($user);
@@ -60,6 +78,9 @@ class RegisterFormHandler
         }
     }
 
+    /**
+     * @return string
+     */
     public function generateToken()
     {
         $token = sha1(uniqid(mt_rand(), true));
@@ -67,16 +88,30 @@ class RegisterFormHandler
         return $token;
     }
 
+    /**
+     * @return FormInterface
+     */
     public function getForm()
     {
         return $this->form;
     }
 
+    /**
+     * @param $object
+     *
+     * @return \Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface
+     */
     protected function getEncoder($object)
     {
         return $this->factory->getEncoder($object);
     }
 
+    /**
+     * @param $name
+     * @param $msg
+     *
+     * @return mixed
+     */
     protected function setFlash($name, $msg)
     {
         return $this->session->getFlashBag()->add($name, $msg);

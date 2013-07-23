@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -15,8 +15,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
+/**
+ * Class FrontUserType
+ *
+ * @package Black\Bundle\UserBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class FrontUserType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected $class;
 
     /**
@@ -27,6 +37,10 @@ class FrontUserType extends AbstractType
         $this->class = $class;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $subscriber = new SetUserDataSubscriber($builder->getFormFactory(), $this->class);
@@ -49,6 +63,9 @@ class FrontUserType extends AbstractType
             );
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
@@ -58,6 +75,9 @@ class FrontUserType extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'blackengine_user_front_user';

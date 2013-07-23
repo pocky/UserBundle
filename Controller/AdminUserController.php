@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -21,7 +21,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
+ * Class AdminUserController
  * Controller managing the user profile
+ *
+ * @package Black\Bundle\UserBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  *
  * @Route("/admin/user")
  */
@@ -158,7 +163,7 @@ class AdminUserController extends Controller
      * Deletes a User document.
      * 
      * @param string $id
-     * @param string $token
+     * @param null $token
      * 
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete/{token}", name="admin_user_delete")
@@ -247,6 +252,11 @@ class AdminUserController extends Controller
 
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     private function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))
@@ -256,6 +266,9 @@ class AdminUserController extends Controller
         return $form;
     }
 
+    /**
+     * @return object
+     */
     protected function getManager()
     {
         return $this->get('black_user.manager.user');

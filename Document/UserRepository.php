@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -18,8 +18,21 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 use Black\Bundle\UserBundle\Model\UserRepositoryInterface;
 
+/**
+ * Class UserRepository
+ *
+ * @package Black\Bundle\UserBundle\Document
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class UserRepository extends DocumentRepository implements UserProviderInterface, UserRepositoryInterface
 {
+    /**
+     * @param string $username
+     *
+     * @return object|UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadUserByUsername($username)
     {
         $qb = $this->createQueryBuilder();
@@ -40,6 +53,12 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param $token
+     *
+     * @return object
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadUserByConfirmationToken($token)
     {
         $qb = $this->createQueryBuilder()
@@ -59,6 +78,13 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return object
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadLockedUser($username = null, $token = null)
     {
         if (null === $username && null === $token) {
@@ -92,6 +118,13 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return object
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadLostUser($username = null, $token = null)
     {
         $qb = $this->createQueryBuilder()
@@ -121,6 +154,12 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param UserInterface $user
+     *
+     * @return object|UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
+     */
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
@@ -131,6 +170,11 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         return $this->loadUserByUsername($user->getUsername());
     }
 
+    /**
+     * @param string $class
+     *
+     * @return bool
+     */
     public function supportsClass($class)
     {
         return $this->getDocumentName() === $class || is_subclass_of($class, $this->getDocumentName());

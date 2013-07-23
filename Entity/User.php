@@ -1,29 +1,37 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
 
 /**
  * User Entity
  *
+ * @package Black\Bundle\UserBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Black\Bundle\UserBundle\Entity\UserRepository")
  * @UniqueEntity("username")
  * @UniqueEntity("email")
+ */
+/**
+ * Class User
+ *
+ *
  */
 class User extends AbstractUser
 {

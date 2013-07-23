@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,13 +16,28 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
+/**
+ * Class UserType
+ *
+ * @package Black\Bundle\UserBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class UserType extends AbstractType
 {
-    protected $class;
-    
-    protected $dbDriver;
     /**
-     * @param string $class The User class name
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * @var
+     */
+    protected $dbDriver;
+
+    /**
+     * @param $dbDriver
+     * @param $class
      */
     public function __construct($dbDriver, $class)
     {
@@ -29,11 +45,12 @@ class UserType extends AbstractType
         $this->class = $class;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$subscriber = new SetUserDataSubscriber($builder->getFormFactory(), $this->class);
-        //$builder->addEventSubscriber($subscriber);
-
         $builder
             ->add(
                 'username',
@@ -94,6 +111,9 @@ class UserType extends AbstractType
             );
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
@@ -103,6 +123,9 @@ class UserType extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'blackengine_user_user';

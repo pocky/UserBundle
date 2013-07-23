@@ -48,11 +48,11 @@ class UserFormHandler
 
                 $this->addRoles($user);
 
-                $this->setFlash('success', 'user.handler.success.admin');
+                $this->setFlash('success', 'success.user.admin.edit');
 
                 return true;
             } else {
-                $this->setFlash('failure', 'user.handler.error.admin');
+                $this->setFlash('error', 'error.user.admin.edit');
             }
         }
     }

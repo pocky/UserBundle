@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -12,15 +12,43 @@
 namespace Black\Bundle\UserBundle\Mailer;
 
 use Black\Bundle\UserBundle\Model\UserInterface;
-use Black\Bundle\EngineBundle\Model\ConfigManagerInterface;
+use Black\Bundle\PersonBundle\Model\ConfigManagerInterface;
 
+/**
+ * Class Mailer
+ *
+ * @package Black\Bundle\UserBundle\Mailer
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class Mailer
 {
+    /**
+     * @var \Swift_Mailer
+     */
     protected $mailer;
+
+    /**
+     * @var \Twig_Environment
+     */
     protected $twig;
+
+    /**
+     * @var array
+     */
     protected $parameters;
+
+    /**
+     * @var
+     */
     protected $config;
 
+    /**
+     * @param \Swift_Mailer          $mailer
+     * @param \Twig_Environment      $twig
+     * @param ConfigManagerInterface $manager
+     * @param array                  $parameters
+     */
     public function __construct(
         \Swift_Mailer $mailer,
         \Twig_Environment $twig,
@@ -33,6 +61,10 @@ class Mailer
         $this->parameters   = $parameters;
     }
 
+    /**
+     * @param UserInterface $user
+     * @param               $token
+     */
     public function sendRegisterMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['register'];
@@ -53,6 +85,10 @@ class Mailer
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
 
+    /**
+     * @param UserInterface $user
+     * @param               $token
+     */
     public function sendSuspendMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['suspend'];
@@ -73,6 +109,10 @@ class Mailer
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
 
+    /**
+     * @param UserInterface $user
+     * @param               $token
+     */
     public function sendLostPasswordMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['lost'];
@@ -93,6 +133,10 @@ class Mailer
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
 
+    /**
+     * @param UserInterface $user
+     * @param               $password
+     */
     public function sendBackPasswordMessage(UserInterface $user, $password)
     {
         $template   = $this->parameters['template']['back'];
@@ -113,6 +157,9 @@ class Mailer
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
 
+    /**
+     * @param UserInterface $user
+     */
     public function sendGoodByeMessage(UserInterface $user)
     {
         $template   = $this->parameters['template']['byebye'];
@@ -160,6 +207,9 @@ class Mailer
         $this->mailer->send($message);
     }
 
+    /**
+     * @return mixed
+     */
     protected function getRegisterProperty()
     {
         $property = $this->manager->findPropertyByName('Mail');

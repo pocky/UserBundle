@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -17,7 +17,10 @@ use Black\Bundle\UserBundle\Model\User as AbstractUser;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class User
  * User Document
+ *
+ * @package Black\Bundle\UserBundle\Document
  *
  * @ODM\MappedSuperclass()
  * @Unique("username")

@@ -16,7 +16,7 @@
         <service id="black_user.mailer.default" class="Black\Bundle\UserBundle\Mailer\Mailer" public="false">
             <argument type="service" id="mailer" />
             <argument type="service" id="twig" />
-            <argument type="service" id="black_engine.manager.config" />
+            <argument type="service" id="black_config.manager.config" />
             <argument type="collection">
                 <argument key="template" type="collection">
                     <argument key="register">%black_user.register.email.template%</argument>

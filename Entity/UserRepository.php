@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,8 +19,21 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Black\Bundle\UserBundle\Model\UserRepositoryInterface;
 
+/**
+ * Class UserRepository
+ *
+ * @package Black\Bundle\UserBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class UserRepository extends EntityRepository implements UserProviderInterface, UserRepositoryInterface
 {
+    /**
+     * @param string $username
+     *
+     * @return UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadUserByUsername($username)
     {
         $qb = $this->getQueryBuilder();
@@ -42,9 +56,15 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         return $user;
     }
 
+    /**
+     * @param $token
+     *
+     * @return mixed
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadUserByConfirmationToken($token)
     {
-        $qb = $this->createQueryBuilder()
+        $qb = $this->getQueryBuilder()
                 ->where('u.confirmation_token LIKE :token')
                 ->andWhere('u.is_active LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
@@ -64,13 +84,20 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         return $user;
     }
 
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return mixed
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadLockedUser($username = null, $token = null)
     {
         if (null === $username && null === $token) {
             throw new UsernameNotFoundException('Unable to find an active user object identified by "%s".');
         }
 
-        $qb = $this->createQueryBuilder()
+        $qb = $this->getQueryBuilder()
                 ->where('u.is_active LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
                 ->setParameter('is_active', false)
@@ -109,9 +136,16 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         return $user;
     }
 
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return mixed
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function loadLostUser($username = null, $token = null)
     {
-        $qb = $this->createQueryBuilder()
+        $qb = $this->getQueryBuilder()
                 ->where('u.is_active LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
                 ->setParameter('is_active', true)
@@ -150,6 +184,12 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         return $user;
     }
 
+    /**
+     * @param UserInterface $user
+     *
+     * @return UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
+     */
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
@@ -160,13 +200,20 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         return $this->loadUserByUsername($user->getUsername());
     }
 
+    /**
+     * @param string $class
+     *
+     * @return bool
+     */
     public function supportsClass($class)
     {
         return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
     }
-    
+
     /**
-     * @return 
+     * @param string $alias
+     *
+     * @return \Doctrine\ORM\QueryBuilder
      */
     protected function getQueryBuilder($alias = 'u')
     {

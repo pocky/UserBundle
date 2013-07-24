@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -15,7 +15,12 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * BlacUser Configuration
+ * Class Configuration
+ * BlackUser Configuration
+ *
+ * @package Black\Bundle\UserBundle\DependencyInjection
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class Configuration implements ConfigurationInterface
 {
@@ -55,6 +60,9 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addUserSection(ArrayNodeDefinition $node)
     {
         $node
@@ -127,6 +135,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addServiceSection(ArrayNodeDefinition $node)
     {
         $node

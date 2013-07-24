@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -17,6 +17,13 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
+/**
+ * Class BlackUserExtension
+ *
+ * @package Black\Bundle\UserBundle\DependencyInjection
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class BlackUserExtension extends Extension
 {
     /**
@@ -53,15 +60,15 @@ class BlackUserExtension extends Extension
                 )
             )
         );
-        
+
         if (!empty($config['user'])) {
             $this->loadUser($config['user'], $container, $loader);
         }
-        
+
         if (!empty($config['register'])) {
             $this->loadRegister($config['register'], $container, $loader);
         }
-        
+
         if (!empty($config['front_user'])) {
             $this->loadFrontUser($config['front_user'], $container, $loader);
         }
@@ -72,11 +79,16 @@ class BlackUserExtension extends Extension
 
         $container->setAlias('black_user.mailer', $config['service']['mailer']);
     }
-    
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadUser(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('user.xml');
-        
+
         $this->remapParametersNamespaces(
             $config,
             $container,
@@ -85,10 +97,16 @@ class BlackUserExtension extends Extension
             )
         );
     }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadRegister(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('register.xml');
-        
+
         $this->remapParametersNamespaces(
             $config,
             $container,
@@ -97,11 +115,16 @@ class BlackUserExtension extends Extension
             )
         );
     }
-    
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadFrontUser(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('front_user.xml');
-        
+
         $this->remapParametersNamespaces(
             $config,
             $container,
@@ -111,6 +134,11 @@ class BlackUserExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
+     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -120,6 +148,11 @@ class BlackUserExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaces
+     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {
@@ -142,6 +175,9 @@ class BlackUserExtension extends Extension
         }
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return 'black_user';

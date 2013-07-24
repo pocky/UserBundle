@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -13,10 +13,19 @@ namespace Black\Bundle\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
 
+/**
+ * Class RegisterType
+ *
+ * @package Black\Bundle\UserBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class RegisterType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected $class;
 
     /**
@@ -27,6 +36,10 @@ class RegisterType extends AbstractType
         $this->class = $class;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -69,6 +82,9 @@ class RegisterType extends AbstractType
             );
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
@@ -78,6 +94,9 @@ class RegisterType extends AbstractType
         );
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'blackengine_user_register';

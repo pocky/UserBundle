@@ -93,7 +93,7 @@ class UserFormHandler
             $user->addRole('ROLE_USER');
         }
 
-        if ($user->getIsRoot() && !$user->hasRole('ROLE_SUPER_ADMIN')) {
+        if ($user->getIsRoot()) {
             $user->addRole('ROLE_SUPER_ADMIN');
         } else {
             $user->removeRole('ROLE_SUPER_ADMIN');

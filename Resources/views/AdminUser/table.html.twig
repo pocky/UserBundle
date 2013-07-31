@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         </tbody>
-        {% include 'BlackAdminBundle:AdminTable:tfoot.html.twig' %}
+        {% include 'BlackAdminBundle:AdminTable:tfoot.html.twig' with {'csrf': csrf} %}
     </table>
     <script>
         {% if app.environment == 'dev' %}

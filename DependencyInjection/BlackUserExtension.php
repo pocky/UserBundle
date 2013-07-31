@@ -54,7 +54,6 @@ class BlackUserExtension extends Extension
             $container,
             array(
                 ''  => array(
-                    'db_driver'     => 'black_user.db_driver',
                     'user_class'    => 'black_user.model.user.class',
                     'user_manager'  => 'black_user.user.manager',
                 )

@@ -31,17 +31,11 @@ class UserType extends AbstractType
     protected $class;
 
     /**
-     * @var
-     */
-    protected $dbDriver;
-
-    /**
      * @param $dbDriver
      * @param $class
      */
-    public function __construct($dbDriver, $class)
+    public function __construct($class)
     {
-        $this->dbDriver = $dbDriver;
         $this->class = $class;
     }
 

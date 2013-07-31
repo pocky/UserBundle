@@ -1,0 +1,24 @@
+{
+    "name": "black/user-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony BlackUserBundle",
+    "keywords": ["User manager"],
+    "homepage": "http://www.lablackroom.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Balmes",
+            "email": "abalmes@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "black/common-bundle": "dev-master",
+        "symfony/security-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Black\\UserBundle": "" }
+    },
+    "target-dir": "Black/UserBundle"
+}

@@ -11,8 +11,7 @@
             <argument>null</argument>
         </service>
 
-        <service id="black_user.user.form.type" class="%black_user.user.form.type%" scope="request">
-            <argument>%black_user.db_driver%</argument>
+        <service id="black_user.user.form.type" class="%black_user.user.form.type%" scope="request" public="true">
             <argument>%black_user.model.user.class%</argument>
             <tag name="form.type" alias="black_user_user" />
         </service>

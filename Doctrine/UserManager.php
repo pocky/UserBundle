@@ -180,6 +180,18 @@ class UserManager implements UserManagerInterface
      * 
      * @return array
      */
+    public function findUserById($id)
+    {
+        return $this->getRepository()->findOneBy(array('id' => $id));
+    }
+
+    /**
+     * Find user by token
+     *
+     * @param string $token
+     * 
+     * @return array
+     */
     public function findUserByToken($token)
     {
         return $this->getRepository()->loadUserByConfirmationToken($token);

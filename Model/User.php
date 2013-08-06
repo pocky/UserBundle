@@ -148,7 +148,7 @@ abstract class User implements UserInterface, \Serializable
     /**
      * Set the mail address
      *
-     * @param $mail
+     * @param $email
      */
     public function setEmail($email)
     {

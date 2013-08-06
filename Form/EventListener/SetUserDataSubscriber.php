@@ -74,10 +74,11 @@ class SetUserDataSubscriber implements EventSubscriberInterface
                     'repeated',
                     null,
                     array(
+                        'auto_initialize'   => false,
                         'type'              => 'password',
-                        'invalid_message'   => 'user.your.password.error',
-                        'first_options'     => array('label' => 'user.your.password.main'),
-                        'second_options'    => array('label' => 'user.your.password.confirm')
+                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
+                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
+                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
                     )
                 )
             );
@@ -88,11 +89,12 @@ class SetUserDataSubscriber implements EventSubscriberInterface
                     'repeated',
                     null,
                     array(
+                        'auto_initialize'   => false,
                         'type'              => 'password',
                         'required'          => false,
-                        'invalid_message'   => 'user.your.password.error',
-                        'first_options'     => array('label' => 'user.your.password.main'),
-                        'second_options'    => array('label' => 'user.your.password.confirm')
+                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
+                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
+                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
                     )
                 )
             );

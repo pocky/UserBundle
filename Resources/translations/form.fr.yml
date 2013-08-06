@@ -18,6 +18,13 @@ user:
       remove:
         role:
           text: Supprimer cette permission
+      password:
+        main:
+          text: Mot de passe
+        confirm:
+          text: Confirmer le mot de passe
+        nomatch:
+          text: Les mots de passe ne correspondent pas
        
   www:
     frontuser:

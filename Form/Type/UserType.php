@@ -61,6 +61,22 @@ class UserType extends AbstractType
                 )
             )
             ->add(
+                'rawPassword',
+                'repeated',
+                array(
+                    'type'              => 'password',
+                    'invalid_message'   => 'user.admin.user.password.nomatch.text',
+                    'first_options'     => array('label' => 'user.admin.user.password.main.text',
+                                                 'attr'              => array(
+                                                     'class'         => 'span6'
+                                                 )),
+                    'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
+                                                 'attr'              => array(
+                                                     'class'         => 'span6'
+                                                 ))
+                )
+            )
+            ->add(
                 'isActive',
                 'checkbox',
                 array(

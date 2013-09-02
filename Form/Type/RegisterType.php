@@ -79,6 +79,11 @@ class RegisterType extends AbstractType
                         'class'         => 'span6'
                     ))
                 )
+            )
+            ->add('terms', 'checkbox', array(
+                    'property_path' => 'termsAccepted',
+                    'label'         => 'user.www.register.terms.text'
+                )
             );
     }
 
@@ -89,7 +94,9 @@ class RegisterType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => $this->class,
+                'data_class'            => $this->class,
+                'intention'             => 'black_register',
+                'translation_domain'    => 'form'
             )
         );
     }

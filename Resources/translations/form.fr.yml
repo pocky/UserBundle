@@ -54,6 +54,8 @@ user:
         text: Adresse mail
       username:
         text: Nom d'utilisateur
+      terms:
+        text: J'accepte les CGU
       password:
         confirm:
           text: Confirmer le mot de passe
@@ -62,6 +64,7 @@ user:
         not:
           match:
             text: Les mots de passes doivent être identiques!
+
       submit:
         value: S'enregistrer
             

@@ -80,6 +80,6 @@ class FrontUserType extends AbstractType
      */
     public function getName()
     {
-        return 'blackengine_user_front_user';
+        return 'black_user_front_user';
     }
 }

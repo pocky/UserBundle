@@ -121,7 +121,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('black_front_user')
                                 ->end()
                                 ->scalarNode('type')->defaultValue(
-                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserFormType'
+                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType'
                                 )
                                 ->end()
                                 ->scalarNode('handler')->defaultValue(

@@ -18,6 +18,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Black\Bundle\UserBundle\Form\Type\RegisterType;
 use Black\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -33,13 +34,29 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class RegisterController extends Controller
 {
     /**
-     * @Route("/", name="register_index")
+     * @Route("/", name="_register_form")
      * @Method({"GET", "POST"})
-     * @Template()
+     * @Template
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction()
+    {
+        $formHandler    = $this->get('black_user.register.form.handler');
+
+        return array(
+            'form' => $formHandler->getForm()->createView()
+        );
+    }
+
+    /**
+     * @Route("/register", name="_register_process")
+     * @Method({"GET", "POST"})
+     * @Template
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function registerAction()
     {
         $manager    = $this->getUserManager();
         $document   = $manager->createInstance();
@@ -55,9 +72,8 @@ class RegisterController extends Controller
             );
         }
 
-        return array(
-            'form'  => $formHandler->getForm()->createView()
-        );
+        $referer = $this->get('request')->headers->get('referer');
+        return $this->redirect($referer);
     }
 
     /**
@@ -93,7 +109,7 @@ class RegisterController extends Controller
         $document   = $manager->findUserByUsername($username);
 
         if (!$document) {
-            throw new AccessDeniedException('user.exception.resend');
+            throw new AccessDeniedException($this->get('translator')->trans('www.user.register.resend.error', array(), 'views'));
         }
 
         $mailer = $this->get('black_user.mailer');
@@ -118,7 +134,7 @@ class RegisterController extends Controller
         $document   = $manager->findUserByToken($token);
 
         if (!$document) {
-            throw new AccessDeniedException('user.exception.confirmation');
+            throw new AccessDeniedException($this->get('translator')->trans('www.user.register.confirmation.error', array(), 'views'));
         }
 
         $document->setIsActive(true);
@@ -146,7 +162,7 @@ class RegisterController extends Controller
         $manager    = $this->getUserManager();
 
         if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('user.exception.suspend');
+            throw new AccessDeniedException($this->get('translator')->trans('www.user.register.suspend.error', array(), 'views'));
         }
 
         $token = sha1(uniqid().microtime().rand(0, 9999999));
@@ -162,7 +178,7 @@ class RegisterController extends Controller
 
         $security->setToken(null);
         $this->get('request')->getSession()->invalidate();
-        $this->get('session')->getFlashBag()->add('success', 'success.user.www.suspend');
+        $this->get('session')->getFlashBag()->add('success', 'www.user.register.suspend.success');
 
         return $this->redirect($this->generateUrl('index'));
     }
@@ -191,7 +207,7 @@ class RegisterController extends Controller
                 $user  = $repository->loadLockedUser($parameters['_username']);
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
-                    $this->get('session')->getFlashBag()->add('error', 'error.user.www.recovery');
+                    $this->get('session')->getFlashBag()->add('error', 'www.user.register.recovery.error');
 
                     return $this->redirect($this->generateUrl('register_reactivation_form'));
                 }
@@ -202,7 +218,7 @@ class RegisterController extends Controller
 
                 $manager->flush();
 
-                $this->get('session')->getFlashBag()->add('success', 'success.user.www.recovery');
+                $this->get('session')->getFlashBag()->add('success', 'www.user.register.recovery.success');
 
                 return $this->redirect($this->generateUrl('main_login'));
             }
@@ -229,7 +245,7 @@ class RegisterController extends Controller
         $user  = $repository->loadLockedUser(null, $token);
 
         if (!is_object($user) || !$user instanceof UserInterface) {
-            $this->get('session')->getFlashBag()->add('error', 'error.user.www.reactivation');
+            $this->get('session')->getFlashBag()->add('error', 'www.user.register.reactivation.error');
 
             return $this->redirect($this->generateUrl('register_reactivation_form'));
         }
@@ -240,7 +256,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'success.user.www.reactivation');
+        $this->get('session')->getFlashBag()->add('success', 'www.user.register.reactivation.success');
 
         return $this->redirect($this->generateUrl('main_login'));
     }
@@ -269,7 +285,7 @@ class RegisterController extends Controller
                 $user  = $repository->loadLostUser($parameters['_username']);
 
                 if (!is_object($user) || !$user instanceof UserInterface) {
-                    $this->get('session')->getFlashBag()->add('error', 'error.user.www.lost');
+                    $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.error');
 
                     return $this->redirect($this->generateUrl('main_login'));
                 }
@@ -282,6 +298,7 @@ class RegisterController extends Controller
                 $mailer = $this->get('black_user.mailer');
                 $mailer->sendLostPasswordMessage($user, $token);
 
+                $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.success');
                 return $this->redirect($this->generateUrl('main_login'));
             }
         }

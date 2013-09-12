@@ -128,7 +128,8 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => $this->class,
+                'data_class'            => $this->class,
+                'translation_domain'    => 'form'
             )
         );
     }

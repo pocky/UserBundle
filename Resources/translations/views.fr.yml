@@ -28,6 +28,11 @@ www:
             form:
                 submit:
                     button: Récupérer mon mot de passe
+
+        profile:
+            settings:
+                success: Votre mot de passe a bien été changé, vous pouvez vous reconnecter !
+
 user:
   admin:
     breadLine:

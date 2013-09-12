@@ -53,6 +53,12 @@ class ProfileController extends Controller
 
         if ($process) {
             $documentManager->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'www.user.profile.settings.success');
+
+            return $this->redirect(
+                $this->generateUrl('main_logout')
+            );
         }
 
         return array(
@@ -67,7 +73,7 @@ class ProfileController extends Controller
      *
      * @return DocumentManager
      */
-    private function getUserManager()
+    protected function getUserManager()
     {
         return $this->get('black_user.manager.user');
     }

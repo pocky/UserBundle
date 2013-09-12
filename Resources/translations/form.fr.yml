@@ -1,4 +1,10 @@
 user:
+    form:
+        type:
+            unlockAccount:
+                username:
+                    label: Saisir votre identifiant ou votre adresse mail
+user:
   admin:
     user:
       username:
@@ -25,30 +31,30 @@ user:
           text: Confirmer le mot de passe
         nomatch:
           text: Les mots de passe ne correspondent pas
-       
+
   www:
     frontuser:
       username:
         text: Nom d'utilisateur
       password:
         text: Mot de passe
-    
+
     index:
       submit:
         value: Envoyer
-    
+
     passwordLost:
       submit:
         value: Envoyer
-    
+
     unlockaccount:
       loginoremail:
         text: Adresse mail ou nom d'utilisateur
-    
+
     reactivationForm:
       submit:
         value: Envoyer
-    
+
     register:
       email:
         text: Adresse mail
@@ -67,7 +73,7 @@ user:
 
       submit:
         value: S'enregistrer
-            
+
     settings:
       submit:
         value: Envoyer

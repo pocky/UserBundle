@@ -22,6 +22,12 @@ www:
                     Votre mot de passe vient de vous être envoyé. S'il n'est pas arrivé d'ici 10 minutes, jetez un
                     oeil sur votre dossier de spam !
 
+        passwordLost:
+            header:
+                text: Mot de passe perdu ?
+            form:
+                submit:
+                    button: Récupérer mon mot de passe
 user:
   admin:
     breadLine:

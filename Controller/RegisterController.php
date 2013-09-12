@@ -198,7 +198,9 @@ class RegisterController extends Controller
         $form = $this->createForm($this->get('black_user.register.unlock_form.type'));
 
         if ('POST' === $request->getMethod()) {
-            $form->bind($request);
+
+            $form->setData($parameters);
+            $form->submit($request);
 
             if ($form->isValid()) {
                 $manager    = $this->getUserManager();
@@ -276,9 +278,12 @@ class RegisterController extends Controller
         $form = $this->createForm($this->get('black_user.register.unlock_form.type'));
 
         if ('POST' === $request->getMethod()) {
-            $form->bind($request);
+
+            $form->setData($parameters);
+            $form->submit($request);
 
             if ($form->isValid()) {
+
                 $manager    = $this->getUserManager();
                 $repository = $manager->getRepository();
 

@@ -32,11 +32,11 @@ class UnlockAccountType extends AbstractType
     {
 
         $builder
-            ->add(
-                '_username',
-                'text',
-                array(
-                    'label' => 'user.www.unlockaccount.loginoremail.text',
+            ->add('_username', 'text', array(
+                    'label' => 'user.form.type.unlockAccount.username.label',
+                    'attr'  => array(
+                        'class' => 'span12'
+                    )
                 )
             );
     }
@@ -48,7 +48,8 @@ class UnlockAccountType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => null
+                'data_class'            => null,
+                'translation_domain'    => 'form'
             )
         );
     }

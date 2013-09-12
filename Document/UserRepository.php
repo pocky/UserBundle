@@ -98,7 +98,7 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         if (null !== $username) {
             $qb = $qb
                     ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username));
+                    ->addOr($qb->expr()->field('email')->equals($username));
         }
 
         if (null !== $token) {
@@ -134,7 +134,7 @@ class UserRepository extends DocumentRepository implements UserProviderInterface
         if (null !== $username) {
             $qb = $qb
                     ->addOr($qb->expr()->field('username')->equals($username))
-                    ->addOr($qb->expr()->field('person.email')->equals($username));
+                    ->addOr($qb->expr()->field('email')->equals($username));
         }
 
         if (null !== $token) {

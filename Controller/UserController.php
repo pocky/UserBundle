@@ -20,18 +20,18 @@ use Black\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Class ProfileController
+ * Class UserController
  *
  * @package Black\Bundle\UserBundle\Controller
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  *
- * @Route("/profile")
+ * @Route("/user")
  */
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
-     * @Route("/settings.html", name="profile_settings")
+     * @Route("/settings.html", name="user_settings")
      * @Secure(roles="ROLE_USER")
      * @Template()
      *
@@ -53,6 +53,12 @@ class ProfileController extends Controller
 
         if ($process) {
             $documentManager->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'www.user.profile.settings.success');
+
+            return $this->redirect(
+                $this->generateUrl('main_logout')
+            );
         }
 
         return array(
@@ -67,7 +73,7 @@ class ProfileController extends Controller
      *
      * @return DocumentManager
      */
-    private function getUserManager()
+    protected function getUserManager()
     {
         return $this->get('black_user.manager.user');
     }

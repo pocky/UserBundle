@@ -12,7 +12,7 @@
 namespace Black\Bundle\UserBundle\Mailer;
 
 use Black\Bundle\UserBundle\Model\UserInterface;
-use Black\Bundle\PersonBundle\Model\ConfigManagerInterface;
+use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 
 /**
  * Class Mailer

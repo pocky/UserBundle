@@ -37,12 +37,8 @@ class FrontUserFormHandler
      * @param SessionInterface        $session
      * @param EncoderFactoryInterface $factory
      */
-    public function __construct(
-        FormInterface $form,
-        Request $request,
-        SessionInterface $session,
-        EncoderFactoryInterface $factory
-    ) {
+    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory)
+    {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;
@@ -57,11 +53,13 @@ class FrontUserFormHandler
     public function process(UserInterface $user)
     {
         $this->form->setData($user);
+        $user->setTermsAccepted(true);
 
         if ('POST' === $this->request->getMethod()) {
             $this->form->bind($this->request);
 
             if ($this->form->isValid()) {
+
                 $encoder = $this->getEncoder($user);
 
                 $user->encodePassword($encoder);

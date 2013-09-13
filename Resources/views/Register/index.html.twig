@@ -1,30 +1,16 @@
-{% extends '::base.html.twig' %}
+<div class="span6">
+    <h3>{% trans from "views" %}user.www.index.register.form.title.text{% endtrans %}</h3>
+    <form id="register" action="{{ path("_register_process") }}" method="post">
 
-{% block body %}
-    <div class="loginWrapper container">
+        {% if error is defined %}
+            <div class="alert alert-error">{{ error.message|trans() }}</div>
+        {% endif %}
 
-        <div class="row">
-            <div class="span6">
-                <h3>{% trans from "views" %}user.www.index.register.default.text{% endtrans %}</h3>
-                {% trans from "views" %}user.www.index.register.text{% endtrans %}
-            </div>
+        {{ form_widget(form) }}
 
-            <div class="span6">
-                <h3>{% trans from "views" %}user.www.index.register.form.title.text{% endtrans %}</h3>
-                <form id="register" action="{{ path("register_index") }}" method="post">
-
-                    {% if error is defined %}
-                        <div class="alert alert-error">{{ error.message|trans() }}</div>
-                    {% endif %}
-
-                    {{ form_widget(form) }}
-
-                    <div class="logControl">
-                        <input type="submit" name="_submit" value="{% trans from "form" %}user.www.index.submit.value{% endtrans %}"class="btn btn-primary span2 pull-right" />
-                    </div>
-                </form>
-            </div>
+        <div class="logControl">
+            <input type="submit" name="_submit" value="{% trans from "form" %}user.www.index.submit.value{% endtrans %}"class="btn btn-primary span2 pull-right" />
         </div>
+    </form>
+</div>
 
-    </div>
-{% endblock body %}

@@ -20,18 +20,18 @@ use Black\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Class ProfileController
+ * Class UserController
  *
  * @package Black\Bundle\UserBundle\Controller
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  *
- * @Route("/profile")
+ * @Route("/user")
  */
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
-     * @Route("/settings.html", name="profile_settings")
+     * @Route("/settings.html", name="user_settings")
      * @Secure(roles="ROLE_USER")
      * @Template()
      *

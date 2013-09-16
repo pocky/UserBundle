@@ -26,9 +26,24 @@ use Black\Bundle\UserBundle\Model\UserInterface;
  */
 class UserFormHandler
 {
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
     protected $request;
+
+    /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
     protected $form;
+
+    /**
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
+     */
     protected $factory;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
     protected $session;
 
     /**
@@ -37,12 +52,7 @@ class UserFormHandler
      * @param SessionInterface        $session
      * @param EncoderFactoryInterface $factory
      */
-    public function __construct(
-        FormInterface $form,
-        Request $request,
-        SessionInterface $session,
-        EncoderFactoryInterface $factory
-    ) {
+    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory) {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;
@@ -64,6 +74,7 @@ class UserFormHandler
             if ($this->form->isValid()) {
                 $encoder = $this->getEncoder($user);
                 $user->encodePassword($encoder);
+                $user->setTermsAccepted(true);
 
                 $this->addRoles($user);
 

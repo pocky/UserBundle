@@ -118,14 +118,14 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('black_front_user')
+                                ->scalarNode('name')->defaultValue('black_user_front_user')
                                 ->end()
                                 ->scalarNode('type')->defaultValue(
-                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserFormType'
+                                    'Black\\Bundle\\UserBundle\\Form\\Type\\FrontUserType'
                                 )
                                 ->end()
                                 ->scalarNode('handler')->defaultValue(
-                                    'Black\\Bundle\\UserBundle\\Form\\Handler\\FrontUserHandler'
+                                    'Black\\Bundle\\UserBundle\\Form\\Handler\\FrontUserFormHandler'
                                 )
                                 ->end()
                             ->end()

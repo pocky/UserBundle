@@ -524,6 +524,22 @@ abstract class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getTermsAccepted()
+    {
+        return $this->termsAccepted;
+    }
+
+    /**
+     * @param $termsAccepted
+     */
+    public function setTermsAccepted($termsAccepted)
+    {
+        $this->termsAccepted = (boolean)$termsAccepted;
+    }
+
+    /**
      * Test if the account is enabled
      *
      * @return bool

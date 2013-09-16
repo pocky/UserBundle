@@ -47,18 +47,12 @@ class FrontUserType extends AbstractType
         $builder->addEventSubscriber($subscriber);
 
         $builder
-            ->add(
-                'username',
-                'text',
-                array(
-                    'label'     => 'user.www.frontuser.username.text'
+            ->add('username', 'text', array(
+                    'label' => 'user.www.frontuser.username.text'
                 )
             )
-            ->add(
-                'email',
-                'email',
-                array(
-                    'label'     => 'user.www.frontuser.password.text'
+            ->add('email', 'email', array(
+                    'label' => 'user.www.frontuser.password.text'
                 )
             );
     }
@@ -70,7 +64,8 @@ class FrontUserType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => $this->class,
+                'data_class'            => $this->class,
+                'translation_domain'    => 'form'
             )
         );
     }
@@ -80,6 +75,6 @@ class FrontUserType extends AbstractType
      */
     public function getName()
     {
-        return 'blackengine_user_front_user';
+        return 'black_user_front_user';
     }
 }

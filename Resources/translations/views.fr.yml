@@ -1,3 +1,38 @@
+www:
+    user:
+        register:
+            resend:
+                error: Le compte utilisateur n'existe pas !
+            confirmation:
+                error: L'adresse est invalide ou le compte utilisateur a déjà été activé !
+            suspend:
+                error: Vous n'êtes pas autorisé à suspendre ce compte !
+                success: Le compte a bien été désactivé !
+            recovery:
+                error: Votre mot de passe ne peut être retrouvé !
+                success: >
+                    Un mail de récupération de mot de passe. S'il n'est pas arrivé d'ici 10 minutes, jetez
+                    un oeil sur votre dossier de spam !
+            reactivation:
+                error: Votre compte ne peux être réactivé !
+                success: Votre compte a bien été réactivé !
+            lost:
+                error: Votre mot de passe ne peux être retrouvé
+                success: >
+                    Votre mot de passe vient de vous être envoyé. S'il n'est pas arrivé d'ici 10 minutes, jetez un
+                    oeil sur votre dossier de spam !
+
+        passwordLost:
+            header:
+                text: Mot de passe perdu ?
+            form:
+                submit:
+                    button: Récupérer mon mot de passe
+
+        profile:
+            settings:
+                success: Votre mot de passe a bien été changé, vous pouvez vous reconnecter !
+
 user:
   admin:
     breadLine:
@@ -94,4 +129,9 @@ user:
             text: Suppression du compte (message à compléter user.www.setings.account.delete.content.text)
             
     success:
-      text: Votre compte a bien été créé !
+      text: >
+        <p>Votre compte a bien été créé !<br />
+        Vous recevrez bientôt un email de confirmation vous permettant d'accéder à un lien de confirmation
+        pour votre compte.</p>
+        <p>Si vous ne recevez pas cet email dans les 10 minutes, regardez vos mails dans votre dossier de spam ou
+        cliquez sur <a href="%mail%" title="Recevoir un nouveau mail">ce lien</a></p>

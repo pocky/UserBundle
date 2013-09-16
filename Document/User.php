@@ -115,4 +115,10 @@ class User extends AbstractUser
      * @ODM\Collection
      */
     protected $roles;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\True()
+     */
+    protected $termsAccepted;
 }

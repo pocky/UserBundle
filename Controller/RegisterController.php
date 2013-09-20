@@ -145,7 +145,7 @@ class RegisterController extends Controller
         $token = new UsernamePasswordToken($document, null, 'main', array('ROLE_USER'));
         $this->get('security.context')->setToken($token);
 
-        return $this->redirect($this->generateUrl('profile_me'));
+        return $this->redirect($this->generateUrl('person_me'));
     }
 
     /**

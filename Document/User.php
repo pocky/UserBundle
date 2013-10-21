@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -17,7 +18,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class User
- * User Document
  *
  * @package Black\Bundle\UserBundle\Document
  *

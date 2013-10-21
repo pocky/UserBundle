@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -43,10 +44,7 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'username',
-                'text',
-                array(
+            ->add('username', 'text', array(
                     'label'             => 'user.www.register.username.text',
                     'attr'              => array(
                         'class'         => 'span6',
@@ -54,20 +52,14 @@ class RegisterType extends AbstractType
                     )
                 )
             )
-            ->add(
-                'email',
-                'email',
-                array(
+            ->add('email', 'email', array(
                     'label'             => 'user.www.register.email.text',
                     'attr'              => array(
                         'class'         => 'span6'
                     )
                 )
             )
-            ->add(
-                'rawPassword',
-                'repeated',
-                array(
+            ->add('rawPassword', 'repeated', array(
                 'type'              => 'password',
                 'invalid_message'   => 'user.www.register.password.not.match.text',
                 'first_options'     => array('label' => 'user.www.register.password.main.text',

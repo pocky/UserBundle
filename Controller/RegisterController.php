@@ -73,6 +73,7 @@ class RegisterController extends Controller
         }
 
         $referer = $this->get('request')->headers->get('referer');
+
         return $this->redirect($referer);
     }
 

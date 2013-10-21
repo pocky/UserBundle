@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -107,6 +107,9 @@ abstract class User implements UserInterface, \Serializable
      */
     protected $person;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->isActive = false;
@@ -115,11 +118,17 @@ abstract class User implements UserInterface, \Serializable
         $this->roles    = array();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->getUsername();
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -479,9 +488,9 @@ abstract class User implements UserInterface, \Serializable
     }
 
     /**
-     * Encode Password and Salt when user account is created
+     * @param PasswordEncoderInterface $encoder
      *
-     * @param \Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface $encoder
+     * @return mixed|void
      */
     public function encodePassword(PasswordEncoderInterface $encoder)
     {
@@ -549,6 +558,9 @@ abstract class User implements UserInterface, \Serializable
         return $this->isActive;
     }
 
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize(
@@ -567,6 +579,9 @@ abstract class User implements UserInterface, \Serializable
         );
     }
 
+    /**
+     * @param string $serialized
+     */
     public function unserialize($serialized)
     {
         list(
@@ -583,12 +598,17 @@ abstract class User implements UserInterface, \Serializable
         ) = unserialize($serialized);
     }
 
-
+    /**
+     * @param $person
+     */
     public function setPerson($person)
     {
         $this->person = $person;
     }
 
+    /**
+     * @return string
+     */
     public function getPerson()
     {
         return $this->person;

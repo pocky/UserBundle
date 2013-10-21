@@ -26,9 +26,24 @@ use Black\Bundle\UserBundle\Model\UserInterface;
  */
 class FrontUserFormHandler
 {
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
     protected $request;
+
+    /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
     protected $form;
+
+    /**
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
+     */
     protected $factory;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
     protected $session;
 
     /**

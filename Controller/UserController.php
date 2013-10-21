@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,8 +68,6 @@ class UserController extends Controller
     }
 
     /**
-     * Returns the User Manager
-     *
      * @return DocumentManager
      */
     protected function getUserManager()

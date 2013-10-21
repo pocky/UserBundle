@@ -22,19 +22,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class AdminUserController
- * Controller managing the user profile
+ *
+ * @Route("/admin/user")
  *
  * @package Black\Bundle\UserBundle\Controller
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
- *
- * @Route("/admin/user")
  */
 class AdminUserController extends Controller
 {
     /**
-     * Show lists of Users
-     *
      * @Method("GET")
      * @Route("/index.html", name="admin_users")
      * @Secure(roles="ROLE_ADMIN")
@@ -58,8 +55,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Show lists of Users
-     *
      * @Method("GET")
      * @Route("/list.json", name="admin_users_json")
      * @Secure(roles="ROLE_ADMIN")
@@ -86,8 +81,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Displays a form to create a new User document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_user_new")
      * @Secure(roles="ROLE_ADMIN")
@@ -117,8 +110,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing User document.
-     *
      * @param string $id The document ID
      *
      * @Method({"GET", "POST"})
@@ -160,8 +151,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Deletes a User document.
-     * 
      * @param string $id
      * @param null $token
      * 
@@ -206,8 +195,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Deletes a User document.
-     *
      * @Method({"POST"})
      * @Route("/batch", name="admin_user_batch")
      *
@@ -253,8 +240,6 @@ class AdminUserController extends Controller
     }
 
     /**
-     * @param $id
-     *
      * @return \Symfony\Component\Form\Form
      */
     private function createDeleteForm($id)

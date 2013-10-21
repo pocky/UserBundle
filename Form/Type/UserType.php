@@ -31,7 +31,6 @@ class UserType extends AbstractType
     protected $class;
 
     /**
-     * @param $dbDriver
      * @param $class
      */
     public function __construct($class)
@@ -46,24 +45,15 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'username',
-                'text',
-                array(
+            ->add('username', 'text', array(
                     'label'     => 'user.admin.user.username.text'
                 )
             )
-            ->add(
-                'email',
-                'email',
-                array(
+            ->add('email', 'email', array(
                     'label'     => 'user.admin.user.email.text'
                 )
             )
-            ->add(
-                'rawPassword',
-                'repeated',
-                array(
+            ->add('rawPassword', 'repeated', array(
                     'type'              => 'password',
                     'invalid_message'   => 'user.admin.user.password.nomatch.text',
                     'first_options'     => array('label' => 'user.admin.user.password.main.text',
@@ -76,34 +66,22 @@ class UserType extends AbstractType
                                                  ))
                 )
             )
-            ->add(
-                'isActive',
-                'checkbox',
-                array(
+            ->add('isActive', 'checkbox', array(
                     'label'     => 'user.admin.user.isActive.text',
                     'required'  => false
                 )
             )
-            ->add(
-                'isRoot',
-                'checkbox',
-                array(
+            ->add('isRoot', 'checkbox', array(
                     'label'     => 'user.admin.user.isRoot.text',
                     'required'  => false
                 )
             )
-            ->add(
-                'locked',
-                'checkbox',
-                array(
+            ->add('locked', 'checkbox', array(
                     'label'     => 'user.admin.user.isLocked.text',
                     'required'  => false
                 )
             )
-            ->add(
-                'roles',
-                'collection',
-                array(
+            ->add('roles', 'collection', array(
                     'type'          => 'text',
                     'required'      => false,
                     'label'         => 'user.admin.user.roles.text',

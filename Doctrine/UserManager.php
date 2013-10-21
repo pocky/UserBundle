@@ -40,8 +40,6 @@ class UserManager implements UserManagerInterface
     protected $class;
 
     /**
-     * Constructor
-     *
      * @param ObjectManager $dm
      * @param string        $class
      */
@@ -85,7 +83,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Flush
+     *
      */
     public function flush()
     {
@@ -93,8 +91,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Remove the document
-     * 
      * @param object $model
      *
      * @throws \InvalidArgumentException
@@ -108,8 +104,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Save and Flush a new document
-     *
      * @param mixed $model
      */
     public function persistAndFlush($model)
@@ -119,8 +113,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Remove and flush
-     * 
      * @param mixed $model
      */
     public function removeAndFlush($model)
@@ -130,8 +122,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Create a new model
-     *
      * @return $config object
      */
     public function createInstance()
@@ -174,11 +164,9 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Find user by token
+     * @param $id
      *
-     * @param string $token
-     * 
-     * @return array
+     * @return mixed
      */
     public function findUserById($id)
     {
@@ -186,8 +174,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Find user by token
-     *
      * @param string $token
      * 
      * @return array
@@ -198,8 +184,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Find user by username
-     *
      * @param string $username
      * 
      * @return UserInterface
@@ -210,8 +194,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * Find property by it's id
-     *
      * @param integer $id
      * 
      * @return \Black\Bundle\UserBundle\Model\UserInterface|object

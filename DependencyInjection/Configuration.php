@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -16,7 +17,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class Configuration
- * BlackUser Configuration
  *
  * @package Black\Bundle\UserBundle\DependencyInjection
  * @author  Alexandre Balmes <albalmes@gmail.com>
@@ -25,7 +25,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {

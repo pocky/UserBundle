@@ -49,12 +49,8 @@ class Mailer
      * @param ConfigManagerInterface $manager
      * @param array                  $parameters
      */
-    public function __construct(
-        \Swift_Mailer $mailer,
-        \Twig_Environment $twig,
-        ConfigManagerInterface $manager,
-        array $parameters
-    ) {
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, ConfigManagerInterface $manager, array $parameters)
+    {
         $this->mailer       = $mailer;
         $this->twig         = $twig;
         $this->manager      = $manager;

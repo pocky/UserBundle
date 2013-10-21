@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
 
 /**
- * User Entity
+ * Class User
  *
  * @package Black\Bundle\UserBundle\Entity
  * @author  Alexandre Balmes <albalmes@gmail.com>
@@ -27,11 +27,6 @@ use Black\Bundle\UserBundle\Model\User as AbstractUser;
  * @ORM\Entity(repositoryClass="Black\Bundle\UserBundle\Entity\UserRepository")
  * @UniqueEntity("username")
  * @UniqueEntity("email")
- */
-/**
- * Class User
- *
- *
  */
 class User extends AbstractUser
 {

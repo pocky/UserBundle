@@ -22,12 +22,29 @@ use Black\Bundle\UserBundle\Mailer\Mailer;
  * Class RegisterFormHandler
  *
  * @package Black\Bundle\UserBundle\Form\Handler
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class RegisterFormHandler
 {
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
     protected $request;
+
+    /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
     protected $form;
+
+    /**
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
+     */
     protected $factory;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
     protected $session;
 
     /**
@@ -37,13 +54,8 @@ class RegisterFormHandler
      * @param EncoderFactoryInterface $factory
      * @param Mailer                  $mailer
      */
-    public function __construct(
-        FormInterface $form,
-        Request $request,
-        SessionInterface $session,
-        EncoderFactoryInterface $factory,
-        Mailer $mailer
-    ) {
+    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory, Mailer $mailer)
+    {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;

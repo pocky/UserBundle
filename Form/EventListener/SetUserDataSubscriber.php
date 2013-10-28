@@ -41,10 +41,6 @@ class SetUserDataSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (!$data) {
-            return;
-        }
-
         $this->addPassword($data, $form);
     }
 
@@ -54,32 +50,43 @@ class SetUserDataSubscriber implements EventSubscriberInterface
      */
     private function addPassword($data, $form)
     {
-        if (null === $data && null === $data->getId()) {
-            $form->add('rawPassword', 'repeated', array(
-                'type'              => 'password',
-                'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                'first_options'     => array('label' => 'user.admin.user.password.main.text',
-                    'attr'              => array(
-                        'class'         => 'span6'
-                    )),
-                'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
-                    'attr'              => array(
-                        'class'         => 'span6'
-                    ))
+        if (null === $data) {
+            $form
+                ->add('rawPassword', 'repeated', array(
+                    'type'              => 'password',
+                    'invalid_message'   => 'user.www.register.password.not.match.text',
+                    'first_options'     => array(
+                        'label'             => 'user.www.register.password.main.text',
+                        'attr'              => array(
+                            'placeholder'   => 'user.www.register.password.main.text',
+                            'class'         => 'span12'
+                        )),
+                    'second_options'    => array(
+                        'label'             => 'user.www.register.password.confirm.text',
+                        'attr'              => array(
+                            'placeholder'   => 'user.www.register.password.confirm.text',
+                            'class'         => 'span12'
+                        ))
                 )
             );
         } else {
-            $form->add('rawPassword', 'repeated', array(
+
+            $form
+                ->add('oldPassword', 'password', array(
+                        'label'             => 'user.www.register.oldPassword.label'
+                    )
+                )
+                ->add('rawPassword', 'repeated', array(
                 'type'              => 'password',
                 'required'          => false,
                 'invalid_message'   => 'user.admin.user.password.nomatch.text',
                 'first_options'     => array('label' => 'user.admin.user.password.main.text',
                     'attr'              => array(
-                        'class'         => 'span6'
+                        'class'         => 'span12'
                     )),
                 'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
                     'attr'              => array(
-                        'class'         => 'span6'
+                        'class'         => 'span12'
                     ))
                 )
             );

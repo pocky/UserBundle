@@ -13,6 +13,7 @@ namespace Black\Bundle\UserBundle\Model;
 
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -33,6 +34,11 @@ abstract class User implements UserInterface, \Serializable
      * @var email
      */
     protected $email;
+
+    /**
+     * @SecurityAssert\UserPassword()
+     */
+    protected $oldPassword;
 
     /**
      * Encrypted password, must be persisted
@@ -172,6 +178,22 @@ abstract class User implements UserInterface, \Serializable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @param $oldPassword
+     */
+    public function setOldPassword($oldPassword)
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOldPassword()
+    {
+        return $this->oldPassword;
     }
 
     /**

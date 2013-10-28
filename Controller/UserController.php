@@ -56,7 +56,7 @@ class UserController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'www.user.profile.settings.success');
 
             return $this->redirect(
-                $this->generateUrl('main_logout')
+                $this->generateUrl('user_settings')
             );
         }
 

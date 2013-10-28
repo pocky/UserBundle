@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\UserBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Black\Bundle\UserBundle\Model;
 
 /**
- * Class BlackUserBundle
+ * Class RegisterInterface
  *
- * @package Black\Bundle\UserBundle
+ * @package Black\Bundle\UserBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class BlackUserBundle extends Bundle
+interface RegistrationInterface
 {
-}
+    function getUser();
+
+    function getTermsAccepted();
+} 

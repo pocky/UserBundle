@@ -20,4 +20,40 @@ namespace Black\Bundle\UserBundle\Model;
  */
 interface UserRepositoryInterface
 {
+    /**
+     * @param $username
+     *
+     * @return mixed
+     */
+    function loadUserByUsername($username);
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    function loadUserByConfirmationToken($token);
+
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return mixed
+     */
+    function loadLockedUser($username = null, $token = null);
+
+    /**
+     * @param null $username
+     * @param null $token
+     *
+     * @return mixed
+     */
+    function loadLostUser($username = null, $token = null);
+
+    /**
+     * @param $class
+     *
+     * @return mixed
+     */
+    function supportsClass($class);
 }

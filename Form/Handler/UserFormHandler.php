@@ -11,8 +11,11 @@
 
 namespace Black\Bundle\UserBundle\Form\Handler;
 
+use Black\Bundle\UserBundle\Model\UserManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Black\Bundle\UserBundle\Model\UserInterface;
@@ -27,19 +30,29 @@ use Black\Bundle\UserBundle\Model\UserInterface;
 class UserFormHandler
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
      * @var \Symfony\Component\Form\FormInterface
      */
     protected $form;
 
     /**
-     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
+     * @var
      */
     protected $factory;
+
+    /**
+     * @var \Black\Bundle\UserBundle\Model\UserManagerInterface
+     */
+    protected $userManager;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    protected $router;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
@@ -47,16 +60,24 @@ class UserFormHandler
     protected $session;
 
     /**
+     * @var
+     */
+    protected $url;
+
+    /**
      * @param FormInterface           $form
      * @param Request                 $request
      * @param SessionInterface        $session
      * @param EncoderFactoryInterface $factory
      */
-    public function __construct(FormInterface $form, Request $request, SessionInterface $session, EncoderFactoryInterface $factory) {
-        $this->form     = $form;
-        $this->request  = $request;
-        $this->session  = $session;
-        $this->factory  = $factory;
+    public function __construct(FormInterface $form, UserManagerInterface $userManager, Request $request, Router $router, SessionInterface $session, EncoderFactoryInterface $factory)
+    {
+        $this->form         = $form;
+        $this->userManager  = $userManager;
+        $this->request      = $request;
+        $this->router       = $router;
+        $this->session      = $session;
+        $this->factory      = $factory;
     }
 
     /**
@@ -69,30 +90,51 @@ class UserFormHandler
         $this->form->setData($user);
 
         if ('POST' === $this->request->getMethod()) {
-            $this->form->bind($this->request);
+            $this->form->handleRequest($this->request);
 
             if ($this->form->isValid()) {
-                $encoder = $this->getEncoder($user);
-                $user->encodePassword($encoder);
-                $user->setTermsAccepted(true);
-
-                $this->addRoles($user);
-
-                $this->setFlash('success', 'success.user.admin.edit');
-
-                return true;
+                return $this->onSave($user);
             } else {
-                $this->setFlash('error', 'error.user.admin.edit');
+                return $this->onFailed();
             }
         }
     }
 
     /**
-     * @return FormInterface
+     * @param PageInterface $page
+     *
+     * @return mixed
      */
-    public function getForm()
+    protected function onSave(UserInterface $user)
     {
-        return $this->form;
+        $encoder = $this->getEncoder($user);
+        $user->encodePassword($encoder);
+
+        $this->addRoles($user);
+
+        if (!$user->getId()) {
+            $this->userManager->persist($user);
+        }
+
+        $this->userManager->flush();
+
+        $this->setFlash('success', 'success.user.admin.edit');
+
+        if ($this->form->get('save')->isClicked()) {
+            $this->setUrl($this->generateUrl('admin_user_edit', array('id' => $user->getId())));
+
+            return true;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function onFailed()
+    {
+        $this->setFlash('error', 'error.user.admin.edit');
+
+        return false;
     }
 
     /**
@@ -109,6 +151,40 @@ class UserFormHandler
         } else {
             $user->removeRole('ROLE_SUPER_ADMIN');
         }
+    }
+
+    /**
+     * @return FormInterface
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    /**
+     * @param $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateToken()
+    {
+        $token = sha1(uniqid(mt_rand(), true));
+
+        return $token;
     }
 
     /**
@@ -130,5 +206,17 @@ class UserFormHandler
     protected function setFlash($name, $msg)
     {
         return $this->session->getFlashBag()->add($name, $msg);
+    }
+
+    /**
+     * @param       $route
+     * @param array $parameters
+     * @param       $referenceType
+     *
+     * @return mixed
+     */
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->router->generate($route, $parameters, $referenceType);
     }
 }

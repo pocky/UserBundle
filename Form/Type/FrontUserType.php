@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -48,11 +49,32 @@ class FrontUserType extends AbstractType
 
         $builder
             ->add('username', 'text', array(
-                    'label' => 'user.www.frontuser.username.text'
+                    'label'             => 'black.user.form.type.frontUser.username.label',
+                    'position'          => 'first',
+                    'attr'              => array(
+                        'placeholder'   => 'black.user.form.type.frontUser.username.placeholder',
+                        'pattern'       => '.{6,15}',
+                        'class'         => 'span12'
+                    )
                 )
             )
             ->add('email', 'email', array(
-                    'label' => 'user.www.frontuser.password.text'
+                    'label'             => 'black.user.form.type.frontUser.email.label',
+                    'position'          => array(
+                        'after'         => 'username'
+                    ),
+                    'attr'              => array(
+                        'placeholder'   => 'black.user.form.type.frontUser.email.placeholder',
+                        'class'         => 'span12'
+                    )
+                )
+            )
+            ->add('save', 'submit', array(
+                    'label'     => 'black.user.form.type.frontUser.save.label',
+                    'attr'      => array(
+                        'class'     => 'btn btn-success pull-right',
+                        'style'     => 'margin-top: 10px'
+                    )
                 )
             );
     }
@@ -65,6 +87,7 @@ class FrontUserType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class'            => $this->class,
+                'intention'             => 'black_front',
                 'translation_domain'    => 'form'
             )
         );

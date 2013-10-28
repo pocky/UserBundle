@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Black\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,13 +51,7 @@ class UserController extends Controller
         $process        = $formHandler->process($user);
 
         if ($process) {
-            $documentManager->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'www.user.profile.settings.success');
-
-            return $this->redirect(
-                $this->generateUrl('main_logout')
-            );
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
@@ -69,8 +62,6 @@ class UserController extends Controller
     }
 
     /**
-     * Returns the User Manager
-     *
      * @return DocumentManager
      */
     protected function getUserManager()

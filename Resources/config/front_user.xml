@@ -18,7 +18,9 @@
 
         <service id="black_user.front_user.form.handler" class="%black_user.front_user.form.handler%" scope="request" public="true">
             <argument type="service" id="black_user.front_user.form" />
+            <argument type="service" id="black_user.manager.user" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="security.encoder_factory" />
         </service>

@@ -58,21 +58,18 @@ class RegisterController extends Controller
      */
     public function registerAction()
     {
-        $manager    = $this->getUserManager();
+        $manager    = $this->getRegistrationManager();
         $document   = $manager->createInstance();
 
         $formHandler    = $this->get('black_user.register.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $manager->persistAndFlush($document);
-
-            return $this->redirect(
-                $this->generateUrl('register_success', array('username' => $document->getUsername()))
-            );
+            return $this->redirect($formHandler->getUrl());
         }
 
         $referer = $this->get('request')->headers->get('referer');
+
         return $this->redirect($referer);
     }
 
@@ -142,7 +139,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $token = new UsernamePasswordToken($document, null, 'main', array('ROLE_USER'));
+        $token = new UsernamePasswordToken($document, null, 'social', array('ROLE_USER'));
         $this->get('security.context')->setToken($token);
 
         return $this->redirect($this->generateUrl('person_me'));
@@ -222,7 +219,7 @@ class RegisterController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', 'www.user.register.recovery.success');
 
-                return $this->redirect($this->generateUrl('main_login'));
+                return $this->redirect($this->generateUrl('social_login'));
             }
         }
 
@@ -260,7 +257,7 @@ class RegisterController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'www.user.register.reactivation.success');
 
-        return $this->redirect($this->generateUrl('main_login'));
+        return $this->redirect($this->generateUrl('social_login'));
     }
 
     /**
@@ -292,7 +289,7 @@ class RegisterController extends Controller
                 if (!is_object($user) || !$user instanceof UserInterface) {
                     $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.error');
 
-                    return $this->redirect($this->generateUrl('main_login'));
+                    return $this->redirect($this->generateUrl('social_login'));
                 }
 
                 $token = sha1(uniqid().microtime().rand(0, 9999999));
@@ -304,7 +301,7 @@ class RegisterController extends Controller
                 $mailer->sendLostPasswordMessage($user, $token);
 
                 $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.success');
-                return $this->redirect($this->generateUrl('main_login'));
+                return $this->redirect($this->generateUrl('social_login'));
             }
         }
 
@@ -348,7 +345,7 @@ class RegisterController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'success.user.www.back');
 
-        return $this->redirect($this->generateUrl('main_login'));
+        return $this->redirect($this->generateUrl('social_login'));
     }
 
     /**
@@ -385,16 +382,22 @@ class RegisterController extends Controller
         $this->get('request')->getSession()->invalidate();
         $this->get('session')->getFlashBag()->add('success', 'success.user.www.delete');
 
-        return $this->redirect($this->generateUrl('index'));
+        return $this->redirect($this->generateUrl('social_index'));
     }
 
     /**
-     * Returns the UserManager
-     *
      * @return UserManager
      */
     private function getUserManager()
     {
         return $this->get('black_user.manager.user');
+    }
+
+    /**
+     * @return UserManager
+     */
+    private function getRegistrationManager()
+    {
+        return $this->get('black_user.manager.registration');
     }
 }

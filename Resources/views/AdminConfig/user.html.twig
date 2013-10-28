@@ -1,0 +1,21 @@
+{% extends 'BlackConfigBundle:AdminConfig:base.html.twig' %}
+
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "config.admin.contentTop.config.mail.text"} %}
+{% endblock %}
+{% block page_content %}
+    <div class="fluid">
+        <form id="validate" novalidate class="main grid9" action="{{ path('admin_config_user') }}" method="post" {{ form_enctype(form) }}>
+            {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "config.admin.fieldset.config.mail.text"} %}
+        </form>
+
+        <div class="grid3">
+            <div class="widget">
+                <div class="whead"><h6>{% trans from "views" %}config.admin.mail.actions.text{% endtrans %}</h6><div class="clear"></div></div>
+                <div class="body">
+                    <input type="submit" value="{% trans from "form" %}config.admin.mail.update.submit.value{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -4,21 +4,33 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="black_user.manager.registration">%black_user.registration.manager%</parameter>
+    </parameters>
+
     <services>
-        <service id="black_user.register.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+
+        <service id="black_user.manager.registration" class="%black_user.manager.registration%">
+            <argument>%black_user.model.registration.class%</argument>
+        </service>
+
+        <service id="black_user.register.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form" scope="request">
             <argument>%black_user.register.form.name%</argument>
             <argument type="service" id="black_user.register.form.type" />
             <argument>null</argument>
         </service>
 
-        <service id="black_user.register.form.type" class="%black_user.register.form.type%">
-            <argument>%black_user.model.user.class%</argument>
+        <service id="black_user.register.form.type" class="%black_user.register.form.type%" scope="request">
+            <argument>%black_user.model.registration.class%</argument>
+            <argument type="service" id="black_user.front_user.form.type" />
             <tag name="form.type" alias="black_user_register"  />
         </service>
 
         <service id="black_user.register.form.handler" class="%black_user.register.form.handler%" scope="request" public="true">
             <argument type="service" id="black_user.register.form" />
+            <argument type="service" id="black_user.manager.user" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="security.encoder_factory" />
             <argument type="service" id="black_user.mailer.default" />

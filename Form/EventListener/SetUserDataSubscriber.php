@@ -25,19 +25,6 @@ use Symfony\Component\Form\FormEvent;
  */
 class SetUserDataSubscriber implements EventSubscriberInterface
 {
-    private $factory;
-    private $class;
-
-    /**
-     * @param FormFactoryInterface $factory
-     * @param                      $class
-     */
-    public function __construct(FormFactoryInterface $factory, $class)
-    {
-        $this->factory = $factory;
-        $this->class = $class;
-    }
-
     /**
      * @return array
      */
@@ -54,10 +41,6 @@ class SetUserDataSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (!$data) {
-            return;
-        }
-
         $this->addPassword($data, $form);
     }
 
@@ -67,36 +50,60 @@ class SetUserDataSubscriber implements EventSubscriberInterface
      */
     private function addPassword($data, $form)
     {
-        if (!$data->getId()) {
-            $form->add(
-                $this->factory->createNamed(
-                    'rawPassword',
-                    'repeated',
-                    null,
-                    array(
-                        'auto_initialize'   => false,
-                        'type'              => 'password',
-                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
-                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
-                    )
+        if (null === $data) {
+            $form
+                ->add('rawPassword', 'repeated', array(
+                    'type'              => 'password',
+                    'invalid_message'   => 'black.user.form.event.user.rawPassword.invalid',
+                    'position'          => array(
+                        'after'         => 'email'
+                    ),
+                    'first_options'     => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.first.label',
+                        'attr'              => array(
+                            'placeholder'   => 'black.user.form.event.user.rawPassword.first.placeholder',
+                            'class'         => 'span12'
+                        )),
+                    'second_options'    => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.second.label',
+                        'attr'              => array(
+                            'placeholder'   => 'black.user.form.event.user.rawPassword.second.placeholder',
+                            'class'         => 'span12'
+                        ))
                 )
             );
         } else {
-            $form->add(
-                $this->factory->createNamed(
-                    'rawPassword',
-                    'repeated',
-                    null,
-                    array(
-                        'auto_initialize'   => false,
-                        'type'              => 'password',
-                        'required'          => false,
-                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
-                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
+
+            $form
+                ->add('oldPassword', 'password', array(
+                        'label'             => 'black.user.form.event.user.oldPassword.label',
+                        'position'          => array(
+                            'after'         => 'email'
+                        ),
+                        'attr'              => array(
+                            'placeholder'   => 'black.user.form.event.user.oldPassword.placeholder',
+                            'class'         => 'span12'
+                        )
                     )
                 )
+                ->add('rawPassword', 'repeated', array(
+                    'type'              => 'password',
+                    'required'          => false,
+                    'invalid_message'   => 'black.user.form.event.user.rawPassword.invalid',
+                    'position'          => array(
+                        'after'         => 'oldPassword'
+                    ),
+                    'first_options'     => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.first.label',
+                        'attr'              => array(
+                            'class'         => 'span12'
+                        )),
+                    'second_options'    => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.second.label',
+                        'attr'              => array(
+                            'class'         => 'span12'
+                        ))
+                    )
             );
         }
     }

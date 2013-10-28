@@ -51,13 +51,7 @@ class UserController extends Controller
         $process        = $formHandler->process($user);
 
         if ($process) {
-            $documentManager->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'www.user.profile.settings.success');
-
-            return $this->redirect(
-                $this->generateUrl('user_settings')
-            );
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(

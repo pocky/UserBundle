@@ -54,17 +54,20 @@ class SetUserDataSubscriber implements EventSubscriberInterface
             $form
                 ->add('rawPassword', 'repeated', array(
                     'type'              => 'password',
-                    'invalid_message'   => 'user.www.register.password.not.match.text',
+                    'invalid_message'   => 'black.user.form.event.user.rawPassword.invalid',
+                    'position'          => array(
+                        'after'         => 'email'
+                    ),
                     'first_options'     => array(
-                        'label'             => 'user.www.register.password.main.text',
+                        'label'             => 'black.user.form.event.user.rawPassword.first.label',
                         'attr'              => array(
-                            'placeholder'   => 'user.www.register.password.main.text',
+                            'placeholder'   => 'black.user.form.event.user.rawPassword.first.placeholder',
                             'class'         => 'span12'
                         )),
                     'second_options'    => array(
-                        'label'             => 'user.www.register.password.confirm.text',
+                        'label'             => 'black.user.form.event.user.rawPassword.second.label',
                         'attr'              => array(
-                            'placeholder'   => 'user.www.register.password.confirm.text',
+                            'placeholder'   => 'black.user.form.event.user.rawPassword.second.placeholder',
                             'class'         => 'span12'
                         ))
                 )
@@ -73,22 +76,34 @@ class SetUserDataSubscriber implements EventSubscriberInterface
 
             $form
                 ->add('oldPassword', 'password', array(
-                        'label'             => 'user.www.register.oldPassword.label'
+                        'label'             => 'black.user.form.event.user.oldPassword.label',
+                        'position'          => array(
+                            'after'         => 'email'
+                        ),
+                        'attr'              => array(
+                            'placeholder'   => 'black.user.form.event.user.oldPassword.placeholder',
+                            'class'         => 'span12'
+                        )
                     )
                 )
                 ->add('rawPassword', 'repeated', array(
-                'type'              => 'password',
-                'required'          => false,
-                'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                'first_options'     => array('label' => 'user.admin.user.password.main.text',
-                    'attr'              => array(
-                        'class'         => 'span12'
-                    )),
-                'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
-                    'attr'              => array(
-                        'class'         => 'span12'
-                    ))
-                )
+                    'type'              => 'password',
+                    'required'          => false,
+                    'invalid_message'   => 'black.user.form.event.user.rawPassword.invalid',
+                    'position'          => array(
+                        'after'         => 'oldPassword'
+                    ),
+                    'first_options'     => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.first.label',
+                        'attr'              => array(
+                            'class'         => 'span12'
+                        )),
+                    'second_options'    => array(
+                        'label'             => 'black.user.form.event.user.rawPassword.second.label',
+                        'attr'              => array(
+                            'class'         => 'span12'
+                        ))
+                    )
             );
         }
     }

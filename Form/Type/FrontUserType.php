@@ -49,18 +49,22 @@ class FrontUserType extends AbstractType
 
         $builder
             ->add('username', 'text', array(
-                    'label'             => 'user.www.register.username.text',
+                    'label'             => 'black.user.form.type.frontUser.username.label',
+                    'position'          => 'first',
                     'attr'              => array(
-                        'placeholder'   => 'user.www.register.username.text',
+                        'placeholder'   => 'black.user.form.type.frontUser.username.placeholder',
                         'pattern'       => '.{6,15}',
                         'class'         => 'span12'
                     )
                 )
             )
             ->add('email', 'email', array(
-                    'label'             => 'user.www.register.email.text',
+                    'label'             => 'black.user.form.type.frontUser.email.label',
+                    'position'          => array(
+                        'after'         => 'username'
+                    ),
                     'attr'              => array(
-                        'placeholder'   => 'user.www.register.email.text',
+                        'placeholder'   => 'black.user.form.type.frontUser.email.plaholder',
                         'class'         => 'span12'
                     )
                 )
@@ -68,7 +72,8 @@ class FrontUserType extends AbstractType
             ->add('save', 'submit', array(
                     'label'     => 'black.user.form.type.frontUser.save.label',
                     'attr'      => array(
-                        'class'     => 'buttonL bBlue floatL mb10 mr10'
+                        'class'     => 'btn btn-success pull-right',
+                        'style'     => 'margin-top: 10px'
                     )
                 )
             );

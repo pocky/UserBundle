@@ -44,6 +44,11 @@ class Mailer
     protected $config;
 
     /**
+     * @var
+     */
+    protected $root;
+
+    /**
      * @param \Swift_Mailer          $mailer
      * @param \Twig_Environment      $twig
      * @param ConfigManagerInterface $manager
@@ -55,6 +60,7 @@ class Mailer
         $this->twig         = $twig;
         $this->manager      = $manager;
         $this->parameters   = $parameters;
+        $this->root         = $this->getMailProperty()['mail_root'];
     }
 
     /**
@@ -64,7 +70,7 @@ class Mailer
     public function sendRegisterMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['register'];
-        $property   = $this->getRegisterProperty();
+        $property   = $this->getUserProperty();
 
         $context    = array(
             'subject'   => $property['mail_register_header'] ?
@@ -73,10 +79,10 @@ class Mailer
                             $property['mail_register_text'] : 'user.mailer.register.message',
             'token'     => $token,
             'user'      => $user,
-            'footer'    => $property['mail_footer_note']
+            'footer'    => $this->getMailProperty()['mail_footer_note']
         );
 
-        $author = $property['mail_root'];
+        $author = $this->root;
 
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
@@ -88,7 +94,7 @@ class Mailer
     public function sendSuspendMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['suspend'];
-        $property   = $this->getRegisterProperty();
+        $property   = $this->getUserProperty();
 
         $context    = array(
             'subject'   => $property['mail_suspend_header'] ?
@@ -97,10 +103,10 @@ class Mailer
                             $property['mail_suspend_text'] : 'user.mailer.suspend.message',
             'token'     => $token,
             'user'      => $user,
-            'footer'    => $property['mail_footer_note']
+            'footer'    => $this->getMailProperty()['mail_footer_note']
         );
 
-        $author = $property['mail_root'];
+        $author = $this->root;
 
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
@@ -112,7 +118,7 @@ class Mailer
     public function sendLostPasswordMessage(UserInterface $user, $token)
     {
         $template   = $this->parameters['template']['lost'];
-        $property   = $this->getRegisterProperty();
+        $property   = $this->getUserProperty();
 
         $context    = array(
             'subject'   => $property['mail_lost_header'] ?
@@ -121,10 +127,10 @@ class Mailer
                             $property['mail_lost_text'] : 'user.mailer.lost.message',
             'token'     => $token,
             'user'      => $user,
-            'footer'    => $property['mail_footer_note']
+            'footer'    => $this->getMailProperty()['mail_footer_note']
         );
 
-        $author = $property['mail_root'];
+        $author = $this->root;
 
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
@@ -136,7 +142,7 @@ class Mailer
     public function sendBackPasswordMessage(UserInterface $user, $password)
     {
         $template   = $this->parameters['template']['back'];
-        $property   = $this->getRegisterProperty();
+        $property   = $this->getUserProperty();
 
         $context    = array(
             'subject'   => $property['mail_back_header'] ?
@@ -145,10 +151,10 @@ class Mailer
                             $property['mail_back_text'] : 'user.mailer.back.message',
             'user'      => $user,
             'password'  => $password,
-            'footer'    => $property['mail_footer_note']
+            'footer'    => $this->getMailProperty()['mail_footer_note']
         );
 
-        $author = $property['mail_root'];
+        $author = $this->root;
 
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
@@ -159,7 +165,7 @@ class Mailer
     public function sendGoodByeMessage(UserInterface $user)
     {
         $template   = $this->parameters['template']['byebye'];
-        $property   = $this->getRegisterProperty();
+        $property   = $this->getUserProperty();
 
         $context    = array(
             'subject'   => $property['mail_byebye_header'] ?
@@ -167,10 +173,10 @@ class Mailer
             'message'   => $property['mail_byebye_text'] ?
                             $property['mail_byebye_text'] : 'user.mailer.bye.message',
             'user'      => $user,
-            'footer'    => $property['mail_footer_note']
+            'footer'    => $this->getMailProperty()['mail_footer_note']
         );
 
-        $author = $property['mail_root'];
+        $author = $this->root;
 
         $this->sendMessage($template, $context, $author, $user->getEmail());
     }
@@ -206,9 +212,19 @@ class Mailer
     /**
      * @return mixed
      */
-    protected function getRegisterProperty()
+    protected function getMailProperty()
     {
         $property = $this->manager->findPropertyByName('Mail');
+
+        return $property->getValue();
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getUserProperty()
+    {
+        $property = $this->manager->findPropertyByName('User');
 
         return $property->getValue();
     }

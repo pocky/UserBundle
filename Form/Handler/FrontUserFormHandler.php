@@ -68,10 +68,9 @@ class FrontUserFormHandler
     public function process(UserInterface $user)
     {
         $this->form->setData($user);
-        $user->setTermsAccepted(true);
 
         if ('POST' === $this->request->getMethod()) {
-            $this->form->bind($this->request);
+            $this->form->handleRequest($this->request);
 
             if ($this->form->isValid()) {
 

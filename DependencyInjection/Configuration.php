@@ -50,12 +50,15 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('registration_class')->defaultValue('Black\\Bundle\\UserBundle\\Model\\Registration')->end()
                 ->scalarNode('user_manager')->defaultValue('Black\\Bundle\\UserBundle\\Doctrine\\UserManager')->end()
+                ->scalarNode('registration_manager')->defaultValue('Black\\Bundle\\UserBundle\\Doctrine\\RegistrationManager')->end()
 
             ->end();
 
         $this->addUserSection($rootNode);
         $this->addServiceSection($rootNode);
+        $this->addConfigSection($rootNode);
 
         return $treeBuilder;
     }
@@ -147,6 +150,34 @@ class Configuration implements ConfigurationInterface
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('mailer')->defaultValue('black_user.mailer.default')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addConfigSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('config')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                        ->children()
+                        ->arrayNode('form')
+                        ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('user_config_name')->defaultValue('black_user_config')->end()
+                                ->scalarNode('user_config_type')
+                                    ->defaultValue('Black\\Bundle\\UserBundle\\Form\\Type\\UserConfigType')
+                                ->end()
+                                ->scalarNode('user_config_handler')
+                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler')
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()

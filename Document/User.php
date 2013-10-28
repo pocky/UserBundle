@@ -15,19 +15,21 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
 /**
  * Class User
  *
  * @package Black\Bundle\UserBundle\Document
  *
  * @ODM\MappedSuperclass()
+ * @Unique(fields="username")
+ * @Unique(fields="email")
  */
 class User extends AbstractUser
 {
     /**
      * @ODM\String
-     * @ODM\UniqueIndex
+     *
      * @Assert\Type(type="string")
      * @Assert\NotBlank()
      * @Assert\Length(min="6", max="15")
@@ -37,7 +39,6 @@ class User extends AbstractUser
 
     /**
      * @ODM\String
-     * @ODM\UniqueIndex
      * @Assert\Type(type="string")
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -115,10 +116,4 @@ class User extends AbstractUser
      * @ODM\Collection
      */
     protected $roles;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\True()
-     */
-    protected $termsAccepted;
 }

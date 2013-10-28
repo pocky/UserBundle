@@ -58,18 +58,14 @@ class RegisterController extends Controller
      */
     public function registerAction()
     {
-        $manager    = $this->getUserManager();
+        $manager    = $this->getRegistrationManager();
         $document   = $manager->createInstance();
 
         $formHandler    = $this->get('black_user.register.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $manager->persistAndFlush($document);
-
-            return $this->redirect(
-                $this->generateUrl('register_success', array('username' => $document->getUsername()))
-            );
+            return $this->redirect($formHandler->getUrl());
         }
 
         $referer = $this->get('request')->headers->get('referer');
@@ -143,7 +139,7 @@ class RegisterController extends Controller
 
         $manager->flush();
 
-        $token = new UsernamePasswordToken($document, null, 'main', array('ROLE_USER'));
+        $token = new UsernamePasswordToken($document, null, 'social', array('ROLE_USER'));
         $this->get('security.context')->setToken($token);
 
         return $this->redirect($this->generateUrl('person_me'));
@@ -390,12 +386,18 @@ class RegisterController extends Controller
     }
 
     /**
-     * Returns the UserManager
-     *
      * @return UserManager
      */
     private function getUserManager()
     {
         return $this->get('black_user.manager.user');
+    }
+
+    /**
+     * @return UserManager
+     */
+    private function getRegistrationManager()
+    {
+        return $this->get('black_user.manager.registration');
     }
 }

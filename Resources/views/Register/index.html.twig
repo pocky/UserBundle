@@ -6,7 +6,7 @@
             <div class="alert alert-error">{{ error.message|trans() }}</div>
         {% endif %}
 
-        {{ form_widget(form) }}
+        {{ form_rest(form) }}
 
         <div class="logControl">
             <input type="submit" name="_submit" value="{% trans from "form" %}user.www.index.submit.value{% endtrans %}"class="btn btn-primary span2 pull-right" />

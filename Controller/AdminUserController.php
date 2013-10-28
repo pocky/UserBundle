@@ -97,10 +97,7 @@ class AdminUserController extends Controller
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->persist($document);
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $document->getId())));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
@@ -123,30 +120,23 @@ class AdminUserController extends Controller
      */
     public function editAction($id)
     {
-        $documentManager = $this->getManager();
-        $repository = $documentManager->getRepository();
-
-        $document = $repository->findOneById($id);
+        $documentManager    = $this->getManager();
+        $document           = $documentManager->findUserById($id);
 
         if (!$document) {
             throw $this->createNotFoundException('user.notFound');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         $formHandler    = $this->get('black_user.user.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
             'document'      => $document,
-            'form'          => $formHandler->getForm()->createView(),
-            'delete_form'   => $deleteForm->createView()
+            'form'          => $formHandler->getForm()->createView()
         );
     }
 

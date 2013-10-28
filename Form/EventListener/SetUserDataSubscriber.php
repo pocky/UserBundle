@@ -25,19 +25,6 @@ use Symfony\Component\Form\FormEvent;
  */
 class SetUserDataSubscriber implements EventSubscriberInterface
 {
-    private $factory;
-    private $class;
-
-    /**
-     * @param FormFactoryInterface $factory
-     * @param                      $class
-     */
-    public function __construct(FormFactoryInterface $factory, $class)
-    {
-        $this->factory = $factory;
-        $this->class = $class;
-    }
-
     /**
      * @return array
      */
@@ -67,35 +54,33 @@ class SetUserDataSubscriber implements EventSubscriberInterface
      */
     private function addPassword($data, $form)
     {
-        if (!$data->getId()) {
-            $form->add(
-                $this->factory->createNamed(
-                    'rawPassword',
-                    'repeated',
-                    null,
-                    array(
-                        'auto_initialize'   => false,
-                        'type'              => 'password',
-                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
-                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
-                    )
+        if (null === $data && null === $data->getId()) {
+            $form->add('rawPassword', 'repeated', array(
+                'type'              => 'password',
+                'invalid_message'   => 'user.admin.user.password.nomatch.text',
+                'first_options'     => array('label' => 'user.admin.user.password.main.text',
+                    'attr'              => array(
+                        'class'         => 'span6'
+                    )),
+                'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
+                    'attr'              => array(
+                        'class'         => 'span6'
+                    ))
                 )
             );
         } else {
-            $form->add(
-                $this->factory->createNamed(
-                    'rawPassword',
-                    'repeated',
-                    null,
-                    array(
-                        'auto_initialize'   => false,
-                        'type'              => 'password',
-                        'required'          => false,
-                        'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                        'first_options'     => array('label' => 'user.admin.user.password.main.text'),
-                        'second_options'    => array('label' => 'user.admin.user.password.confirm.text')
-                    )
+            $form->add('rawPassword', 'repeated', array(
+                'type'              => 'password',
+                'required'          => false,
+                'invalid_message'   => 'user.admin.user.password.nomatch.text',
+                'first_options'     => array('label' => 'user.admin.user.password.main.text',
+                    'attr'              => array(
+                        'class'         => 'span6'
+                    )),
+                'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
+                    'attr'              => array(
+                        'class'         => 'span6'
+                    ))
                 )
             );
         }

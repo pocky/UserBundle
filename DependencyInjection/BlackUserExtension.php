@@ -58,8 +58,10 @@ class BlackUserExtension extends Extension
             $container,
             array(
                 ''  => array(
-                    'user_class'    => 'black_user.model.user.class',
-                    'user_manager'  => 'black_user.user.manager',
+                    'user_class'            => 'black_user.model.user.class',
+                    'registration_class'    => 'black_user.model.registration.class',
+                    'user_manager'          => 'black_user.user.manager',
+                    'registration_manager'  => 'black_user.registration.manager'
                 )
             )
         );
@@ -78,6 +80,10 @@ class BlackUserExtension extends Extension
 
         foreach (array('mailer', 'unlock') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        if (!empty($config['config'])) {
+            $this->loadConfig($config['config'], $container, $loader);
         }
 
         $container->setAlias('black_user.mailer', $config['service']['mailer']);
@@ -133,6 +139,24 @@ class BlackUserExtension extends Extension
             $container,
             array(
                 'form' => 'black_user.front_user.form.%s',
+            )
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('config.xml');
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'form' => 'black_user.config.form.%s',
             )
         );
     }

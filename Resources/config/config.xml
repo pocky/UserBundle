@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="black_user.config.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>%black_user.config.form.user_config_name%</argument>
+            <argument type="service" id="black_user.config.form.type" />
+            <argument>null</argument>
+        </service>
+
+        <service id="black_user.config.form.type" class="%black_user.config.form.user_config_type%">
+            <argument>%black_config.config.model.class%</argument>
+            <tag name="form.type" alias="black_user_config" />
+        </service>
+
+        <service id="black_user.config.form.handler" class="%black_user.config.form.user_config_handler%" scope="request" public="true">
+            <argument type="service" id="black_user.config.form" />
+            <argument type="service" id="black_config.manager.config" />
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+        </service>
+    </services>
+</container>

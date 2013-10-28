@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Black\Bundle\UserBundle\Form\EventListener\SetUserDataSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class UserType
@@ -31,11 +32,23 @@ class UserType extends AbstractType
     protected $class;
 
     /**
+     * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
+     */
+    protected $buttonSubscriber;
+
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
+     */
+    protected $passwordSubscriber;
+
+    /**
      * @param $class
      */
-    public function __construct($class)
+    public function __construct($class, EventSubscriberInterface $passwordSubscriber, EventSubscriberInterface $buttonSubscriber)
     {
-        $this->class = $class;
+        $this->class                = $class;
+        $this->passwordSubscriber   = $passwordSubscriber;
+        $this->buttonSubscriber     = $buttonSubscriber;
     }
 
     /**
@@ -45,6 +58,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber($this->passwordSubscriber)
+            ->addEventSubscriber($this->buttonSubscriber);
+
+        $builder
             ->add('username', 'text', array(
                     'label'     => 'user.admin.user.username.text'
                 )
@@ -53,19 +70,7 @@ class UserType extends AbstractType
                     'label'     => 'user.admin.user.email.text'
                 )
             )
-            ->add('rawPassword', 'repeated', array(
-                    'type'              => 'password',
-                    'invalid_message'   => 'user.admin.user.password.nomatch.text',
-                    'first_options'     => array('label' => 'user.admin.user.password.main.text',
-                                                 'attr'              => array(
-                                                     'class'         => 'span6'
-                                                 )),
-                    'second_options'    => array('label' => 'user.admin.user.password.confirm.text',
-                                                 'attr'              => array(
-                                                     'class'         => 'span6'
-                                                 ))
-                )
-            )
+
             ->add('isActive', 'checkbox', array(
                     'label'     => 'user.admin.user.isActive.text',
                     'required'  => false
@@ -107,6 +112,7 @@ class UserType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class'            => $this->class,
+                'intention'             => 'black_user',
                 'translation_domain'    => 'form'
             )
         );
@@ -117,6 +123,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'blackengine_user_user';
+        return 'black_user_user';
     }
 }

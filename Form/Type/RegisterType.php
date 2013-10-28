@@ -30,11 +30,17 @@ class RegisterType extends AbstractType
     protected $class;
 
     /**
+     * @var
+     */
+    protected $userType;
+
+    /**
      * @param string $class The User class name
      */
-    public function __construct($class)
+    public function __construct($class, $userType)
     {
-        $this->class = $class;
+        $this->class    = $class;
+        $this->userType = $userType;
     }
 
     /**
@@ -44,37 +50,24 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text', array(
-                    'label'             => 'user.www.register.username.text',
-                    'attr'              => array(
-                        'class'         => 'span6',
-                        'pattern'       => '.{6,15}'
-                    )
-                )
-            )
-            ->add('email', 'email', array(
-                    'label'             => 'user.www.register.email.text',
-                    'attr'              => array(
-                        'class'         => 'span6'
-                    )
-                )
-            )
-            ->add('rawPassword', 'repeated', array(
-                'type'              => 'password',
-                'invalid_message'   => 'user.www.register.password.not.match.text',
-                'first_options'     => array('label' => 'user.www.register.password.main.text',
-                    'attr'              => array(
-                        'class'         => 'span6'
-                    )),
-                'second_options'    => array('label' => 'user.www.register.password.confirm.text',
-                    'attr'              => array(
-                        'class'         => 'span6'
-                    ))
-                )
-            )
+            ->add('user', $this->userType)
             ->add('terms', 'checkbox', array(
                     'property_path' => 'termsAccepted',
-                    'label'         => 'user.www.register.terms.text'
+                    'label'         => 'user.www.register.terms.text',
+                    'attr'          => array(
+                        'placeholder'   => 'user.www.register.terms.text',
+                        'class'         => 'checkLabel'
+                    ),
+                    'label_attr'          => array(
+                        'class'         => 'checkLabel'
+                    )
+                )
+            )
+            ->add('save', 'submit', array(
+                    'label'     => 'black.user.form.type.register.save.label',
+                    'attr'      => array(
+                        'class'     => 'btn btn-success span5 pull-right'
+                    )
                 )
             );
     }
@@ -98,6 +91,6 @@ class RegisterType extends AbstractType
      */
     public function getName()
     {
-        return 'blackengine_user_register';
+        return 'black_user_register';
     }
 }

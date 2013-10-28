@@ -49,11 +49,51 @@ class FrontUserType extends AbstractType
 
         $builder
             ->add('username', 'text', array(
-                    'label' => 'user.www.frontuser.username.text'
+                    'label'             => 'user.www.register.username.text',
+                    'attr'              => array(
+                        'placeholder'   => 'user.www.register.username.text',
+                        'pattern'       => '.{6,15}',
+                        'class'         => 'span12'
+                    )
                 )
             )
             ->add('email', 'email', array(
-                    'label' => 'user.www.frontuser.password.text'
+                    'label'             => 'user.www.register.email.text',
+                    'attr'              => array(
+                        'placeholder'   => 'user.www.register.email.text',
+                        'class'         => 'span12'
+                    )
+                )
+            )
+            ->add('rawPassword', 'repeated', array(
+                    'type'              => 'password',
+                    'invalid_message'   => 'user.www.register.password.not.match.text',
+                    'first_options'     => array(
+                        'label'             => 'user.www.register.password.main.text',
+                        'attr'              => array(
+                            'placeholder'   => 'user.www.register.password.main.text',
+                            'class'         => 'span12'
+                        )),
+                    'second_options'    => array(
+                        'label'             => 'user.www.register.password.confirm.text',
+                        'attr'              => array(
+                            'placeholder'   => 'user.www.register.password.confirm.text',
+                            'class'         => 'span12'
+                        ))
+                )
+            )
+            ->add('save', 'submit', array(
+                    'label'     => 'black.user.form.type.frontUser.save.label',
+                    'attr'      => array(
+                        'class'     => 'buttonL bBlue floatL mb10 mr10'
+                    )
+                )
+            )
+            ->add('reset', 'reset', array(
+                    'label'     => 'black.user.form.type.frontUser.reset.label',
+                    'attr'      => array(
+                        'class'     => 'buttonL bDefault floatL mb10 mr10'
+                    )
                 )
             );
     }
@@ -66,6 +106,7 @@ class FrontUserType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class'            => $this->class,
+                'intention'             => 'black_front',
                 'translation_domain'    => 'form'
             )
         );

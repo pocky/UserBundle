@@ -35,7 +35,16 @@ class UnlockAccountType extends AbstractType
             ->add('_username', 'text', array(
                     'label' => 'user.form.type.unlockAccount.username.label',
                     'attr'  => array(
-                        'class' => 'span12'
+                        'class'         => 'span12',
+                        'placeholder'   => 'user.form.type.unlockAccount.username.label'
+                    )
+                )
+            )
+            ->add('save', 'submit', array(
+                    'label'     => 'black.user.form.type.frontUser.save.label',
+                    'attr'      => array(
+                        'class'     => 'btn btn-success pull-right',
+                        'style'     => 'margin-top: 10px'
                     )
                 )
             );

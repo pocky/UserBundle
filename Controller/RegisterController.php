@@ -219,7 +219,7 @@ class RegisterController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', 'www.user.register.recovery.success');
 
-                return $this->redirect($this->generateUrl('main_login'));
+                return $this->redirect($this->generateUrl('social_login'));
             }
         }
 
@@ -257,7 +257,7 @@ class RegisterController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'www.user.register.reactivation.success');
 
-        return $this->redirect($this->generateUrl('main_login'));
+        return $this->redirect($this->generateUrl('social_login'));
     }
 
     /**
@@ -289,7 +289,7 @@ class RegisterController extends Controller
                 if (!is_object($user) || !$user instanceof UserInterface) {
                     $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.error');
 
-                    return $this->redirect($this->generateUrl('main_login'));
+                    return $this->redirect($this->generateUrl('social_login'));
                 }
 
                 $token = sha1(uniqid().microtime().rand(0, 9999999));
@@ -301,7 +301,7 @@ class RegisterController extends Controller
                 $mailer->sendLostPasswordMessage($user, $token);
 
                 $this->get('session')->getFlashBag()->add('error', 'www.user.register.lost.success');
-                return $this->redirect($this->generateUrl('main_login'));
+                return $this->redirect($this->generateUrl('social_login'));
             }
         }
 
@@ -345,7 +345,7 @@ class RegisterController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'success.user.www.back');
 
-        return $this->redirect($this->generateUrl('main_login'));
+        return $this->redirect($this->generateUrl('social_login'));
     }
 
     /**
@@ -382,7 +382,7 @@ class RegisterController extends Controller
         $this->get('request')->getSession()->invalidate();
         $this->get('session')->getFlashBag()->add('success', 'success.user.www.delete');
 
-        return $this->redirect($this->generateUrl('index'));
+        return $this->redirect($this->generateUrl('social_index'));
     }
 
     /**

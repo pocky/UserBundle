@@ -64,7 +64,7 @@ class FrontUserType extends AbstractType
                         'after'         => 'username'
                     ),
                     'attr'              => array(
-                        'placeholder'   => 'black.user.form.type.frontUser.email.plaholder',
+                        'placeholder'   => 'black.user.form.type.frontUser.email.placeholder',
                         'class'         => 'span12'
                     )
                 )

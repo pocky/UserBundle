@@ -18,6 +18,9 @@ black:
                         placeholder: Votre adresse email
                     save:
                         label: Enregistrer
+                register:
+                    save:
+                        label: S'inscrire
                 unlockAccount:
                     username:
                         label: Saisir votre identifiant ou votre adresse mail

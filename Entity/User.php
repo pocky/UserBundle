@@ -15,30 +15,24 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\UserBundle\Model\User as AbstractUser;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class User
  *
+ * @ORM\MappedSuperClass
+ * @ORM\Table(name="user",indexes={
+ *          @ORM\Index(name="username_idx", columns={"username"})
+ *      })
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
+ *
  * @package Black\Bundle\UserBundle\Entity
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
- *
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="Black\Bundle\UserBundle\Entity\UserRepository")
- * @UniqueEntity("username")
- * @UniqueEntity("email")
  */
-class User extends AbstractUser
+abstract class User extends AbstractUser
 {
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
     /**
      * @ORM\Column(name="username", type="string", length=15, unique=true)
      * @Assert\Type(type="string")

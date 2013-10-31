@@ -20,7 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Class User
  *
- * @ORM\MappedSuperClass
+ * @ORM\MappedSuperclass
  * @ORM\Table(name="user",indexes={
  *          @ORM\Index(name="username_idx", columns={"username"})
  *      })

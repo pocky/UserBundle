@@ -65,12 +65,12 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
     public function loadUserByConfirmationToken($token)
     {
         $qb = $this->getQueryBuilder()
-                ->where('u.confirmation_token LIKE :token')
-                ->andWhere('u.is_active LIKE :is_active')
+                ->where('u.confirmationToken LIKE :token')
+                ->andWhere('u.isActive LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
                 ->setParameter('token', $token)
-                ->setParameter('is_active', false)
-                ->setParameter('locked', false)
+                ->setParameter('is_active', 0)
+                ->setParameter('locked', 0)
                 ->getQuery();
 
         try {
@@ -98,7 +98,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
         }
 
         $qb = $this->getQueryBuilder()
-                ->where('u.is_active LIKE :is_active')
+                ->where('u.isActive LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
                 ->setParameter('is_active', false)
                 ->setParameter('locked', true);
@@ -146,7 +146,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
     public function loadLostUser($username = null, $token = null)
     {
         $qb = $this->getQueryBuilder()
-                ->where('u.is_active LIKE :is_active')
+                ->where('u.isActive LIKE :is_active')
                 ->andWhere('u.locked LIKE :locked')
                 ->setParameter('is_active', true)
                 ->setParameter('locked', false);
@@ -167,7 +167,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface, 
 
         if (null !== $token) {
             $qb = $qb
-                    ->andWhere('u.confirmation_token LIKE :token')
+                    ->andWhere('u.confirmationToken LIKE :token')
                     ->setParameter('token', $token);
         }
 

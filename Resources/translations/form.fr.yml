@@ -1,0 +1,14 @@
+application:
+    form:
+
+        login:
+            username:
+                label: "Nom d'utilisateur"
+                placeholder: "Nom d'utilisateur"
+            password:
+                label: "Mot de passe"
+                placeholder: "Mot de passe"
+            rememberMe:
+                label: "Se souvenir de moi"
+            submit:
+                label: "Se connecter"

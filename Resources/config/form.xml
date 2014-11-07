@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_user.application.form.type.login.class">Black\Bundle\UserBundle\Application\Form\Type\LoginType</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="black_user.application.form.login" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>login</argument>
+            <argument type="service" id="black_user.application.form.type.login" />
+            <argument>null</argument>
+        </service>
+
+        <service id="black_user.application.form.type.login" class="%black_user.application.form.type.login.class%" public="false">
+            <argument>login</argument>
+            <tag name="form.type" alias="login" />
+        </service>
+    </services>
+</container>

@@ -61,7 +61,7 @@ class BlackUserExtension extends Extension
             ]
         ]);
 
-        foreach ([] as $basename) {
+        foreach (['form'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
     }

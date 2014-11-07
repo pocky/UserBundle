@@ -1,0 +1,14 @@
+black_user:
+    form:
+
+        login:
+            username:
+                label: "Username"
+                placeholder: "Username"
+            password:
+                label: "Password"
+                placeholder: "Password"
+            rememberMe:
+                label: "Remember me"
+            submit:
+                label: "Sign me in"

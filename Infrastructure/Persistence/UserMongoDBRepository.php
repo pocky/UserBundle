@@ -35,6 +35,19 @@ class UserMongoDBRepository extends DocumentRepository implements UserRepository
     }
 
     /**
+     * @param $username
+     * @return array|null|object
+     */
+    public function loadUser($username)
+    {
+        $query = $this->getQueryBuilder()
+            ->field('name')->equals($username)
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
+
+    /**
      * @return \Doctrine\ODM\MongoDB\Query\Builder
      */
     public function getQueryBuilder()

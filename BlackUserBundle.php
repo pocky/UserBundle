@@ -53,14 +53,14 @@ class BlackUserBundle extends Bundle
      */
     public function registerCommands(Application $application)
     {
-        if (!is_dir($dir = $this->getPath().'/Command')) {
+        if (!is_dir($dir = $this->getPath().'/Application/Command')) {
             return;
         }
 
         $finder = new Finder();
         $finder->files()->name('*Command.php')->in($dir);
 
-        $prefix = $this->getNamespace().'\\Command';
+        $prefix = $this->getNamespace().'\\Application\\Command';
         foreach ($finder as $file) {
             $ns = $prefix;
 

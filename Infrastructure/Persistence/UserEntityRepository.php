@@ -28,8 +28,22 @@ class UserEntityRepository extends EntityRepository implements UserRepository
     public function findUserByUserId(UserId $userId)
     {
         $query = $this->getQueryBuilder()
-            ->where('p.userId.value = :id', $userId)
+            ->where('p.userId.value = :id')
             ->setParameter('id', $userId->getValue())
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
+
+    /**
+     * @param UserId $userId
+     * @return mixed
+     */
+    public function loadUser($username)
+    {
+        $query = $this->getQueryBuilder()
+            ->where('p.name = :name')
+            ->setParameter('name', $username)
             ->getQuery();
 
         return $query->getSingleResult();

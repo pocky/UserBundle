@@ -57,4 +57,4 @@ class UserEntityRepository extends EntityRepository implements UserRepository
     {
         return $this->createQueryBuilder($alias);
     }
-} 
+}

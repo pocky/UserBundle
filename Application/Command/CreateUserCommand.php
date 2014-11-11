@@ -143,4 +143,4 @@ class CreateUserCommand extends ContainerAwareCommand
             $input->getArgument('password')
         ));
     }
-} 
+}

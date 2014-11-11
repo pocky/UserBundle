@@ -25,6 +25,8 @@
 
         <field name="locked" fieldName="locked" type="boolean" />
 
+        <field name="numberOfConnection" fieldName="numberOfConnection" type="int" />
+
         <field name="lastConnection" fieldName="lastConnection" type="date" />
 
         <field name="updatedAt" fieldName="updatedAt" type="date" />

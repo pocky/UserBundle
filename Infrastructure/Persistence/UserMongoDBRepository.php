@@ -54,4 +54,4 @@ class UserMongoDBRepository extends DocumentRepository implements UserRepository
     {
         return $this->createQueryBuilder();
     }
-} 
+}

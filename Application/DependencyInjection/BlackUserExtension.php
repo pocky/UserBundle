@@ -61,7 +61,7 @@ class BlackUserExtension extends Extension
             ]
         ]);
 
-        foreach (['command', 'cqrs', 'form', 'infrastructure_services'] as $basename) {
+        foreach (['controller', 'command', 'cqrs', 'domain_event', 'form', 'infrastructure_services'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
     }

@@ -12,3 +12,9 @@ application:
                 label: "Se souvenir de moi"
             submit:
                 label: "Se connecter"
+
+        create_user:
+            name:
+                label: Nom d'utilisateur
+            email:
+                label: Address email

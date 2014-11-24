@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="black_user.application.controller.list.class">Black\Component\User\Application\Controller\ListController</parameter>
+        <parameter key="black_user.application.controller.create.class">Black\Component\User\Application\Controller\CreateController</parameter>
         <parameter key="black_user.application.controller.remove.class">Black\Component\User\Application\Controller\RemoveController</parameter>
     </parameters>
 
@@ -13,6 +14,12 @@
 
         <service id="black_user.application.controller.list" class="%black_user.application.controller.list.class%">
             <argument type="service" id="black_user.infrastructure.service.read" />
+        </service>
+
+        <service id="black_user.application.controller.create" class="%black_user.application.controller.create.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_user.infrastructure.cqrs.handler.create" />
+            <argument>Black\Component\User\Infrastructure\CQRS\Command\CreateUserCommand</argument>
         </service>
 
         <service id="black_user.application.controller.remove" class="%black_user.application.controller.remove.class%">

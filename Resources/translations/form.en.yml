@@ -12,3 +12,9 @@ black_user:
                 label: "Remember me"
             submit:
                 label: "Sign me in"
+
+        create_user:
+            name:
+                label: Username
+            email:
+                label: Email address

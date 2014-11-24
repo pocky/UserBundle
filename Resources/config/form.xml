@@ -6,19 +6,48 @@
 
     <parameters>
         <parameter key="black_user.application.form.type.login.class">Black\Bundle\UserBundle\Application\Form\Type\LoginType</parameter>
+
+        <parameter key="black_user.application.form.type.create_user.class">Black\Bundle\UserBundle\Application\Form\Type\CreateUserType</parameter>
+        <parameter key="black_user.application.form.handler.create_user.class">Black\Bundle\UserBundle\Application\Form\Handler\CreateUserHandler</parameter>
     </parameters>
 
     <services>
 
+        <!-- Forms -->
         <service id="black_user.application.form.login" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
             <argument>login</argument>
             <argument type="service" id="black_user.application.form.type.login" />
             <argument>null</argument>
         </service>
 
+        <service id="black_user.application.form.create_user"
+                 factory-method="createNamed"
+                 factory-service="form.factory"
+                 class="Symfony\Component\Form\Form">
+            <argument>black_user_create_user</argument>
+            <argument type="service" id="black_user.application.form.type.create_user" />
+            <argument>null</argument>
+        </service>
+
+        <!-- Form Types -->
         <service id="black_user.application.form.type.login" class="%black_user.application.form.type.login.class%" public="false">
             <argument>login</argument>
             <tag name="form.type" alias="login" />
+        </service>
+
+        <service id="black_user.application.form.type.create_user"
+                 class="%black_user.application.form.type.create_user.class%">
+            <argument>%black_user.application.dto.create_user.class%</argument>
+            <argument>black_user_create_user</argument>
+            <tag name="form.type" alias="black_user_create_user" />
+        </service>
+
+        <!-- Form Handler -->
+        <service id="black_user.application.form.handler.create_user"
+                 class="%black_user.application.form.handler.create_user.class%"
+                 scope="request">
+            <argument type="service" id="black_user.application.form.create_user" />
+            <argument type="service" id="request_stack" />
         </service>
     </services>
 </container>

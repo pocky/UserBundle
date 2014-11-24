@@ -10,7 +10,7 @@
 namespace Black\Bundle\UserBundle\Application\Command;
 
 use Black\Component\User\Domain\Model\UserId;
-use Black\Component\User\Infrastructure\CQRS\Handler\CreateUserHandler;
+use Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler;
 use Black\Component\User\Infrastructure\Doctrine\UserManager;
 use Black\Component\User\Infrastructure\Service\RegisterService;
 use Black\DDD\CQRSinPHP\Infrastructure\CQRS\Bus;
@@ -57,7 +57,7 @@ class CreateUserCommand extends ContainerAwareCommand
     public function __construct(
         UserManager $manager,
         Bus $bus,
-        CreateUserHandler $handler,
+        RegisterUserHandler $handler,
         $commandName
     ) {
         $this->manager = $manager;

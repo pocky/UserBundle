@@ -5,19 +5,27 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_user.infrastructure.cqrs.handler.register.class">Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler</parameter>
+        <parameter key="black_user.infrastructure.cqrs.handler.active.class">Black\Component\User\Infrastructure\CQRS\Handler\ActiveUserHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.create.class">Black\Component\User\Infrastructure\CQRS\Handler\CreateUserHandler</parameter>
+        <parameter key="black_user.infrastructure.cqrs.handler.register.class">Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.remove.class">Black\Component\User\Infrastructure\CQRS\Handler\RemoveUserHandler</parameter>
     </parameters>
 
     <services>
 
-        <service id="black_user.infrastructure.cqrs.handler.register" class="%black_user.infrastructure.cqrs.handler.register.class%">
+        <service id="black_user.infrastructure.cqrs.handler.active" class="%black_user.infrastructure.cqrs.handler.active.class%">
+            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.infrastructure.service.status" />
+            <argument type="service" id="debug.event_dispatcher" />
+            <argument type="service" id="black_user.infrastructure.domain_event.subscriber.activate" />
+        </service>
+
+        <service id="black_user.infrastructure.cqrs.handler.create" class="%black_user.infrastructure.cqrs.handler.create.class%">
             <argument type="service" id="black_user.infrastructure.manager.user" />
             <argument type="service" id="black_user.infrastructure.service.register" />
         </service>
 
-        <service id="black_user.infrastructure.cqrs.handler.create" class="%black_user.infrastructure.cqrs.handler.create.class%">
+        <service id="black_user.infrastructure.cqrs.handler.register" class="%black_user.infrastructure.cqrs.handler.register.class%">
             <argument type="service" id="black_user.infrastructure.manager.user" />
             <argument type="service" id="black_user.infrastructure.service.register" />
         </service>

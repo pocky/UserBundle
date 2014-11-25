@@ -5,17 +5,28 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_user.infrastructure.service.read.class">Black\Component\User\Infrastructure\Service\UserReadService</parameter>
         <parameter key="black_user.infrastructure.service.register.class">Black\Component\User\Infrastructure\Service\RegisterService</parameter>
+        <parameter key="black_user.infrastructure.service.read.class">Black\Component\User\Infrastructure\Service\UserReadService</parameter>
+        <parameter key="black_user.infrastructure.service.status.class">Black\Component\User\Infrastructure\Service\UserStatusService</parameter>
+        <parameter key="black_user.infrastructure.service.write.class">Black\Component\User\Infrastructure\Service\UserWriteService</parameter>
     </parameters>
 
     <services>
+
+        <service id="black_user.infrastructure.service.register" class="%black_user.infrastructure.service.register.class%" public="false">
+            <argument type="service" id="black_user.infrastructure.manager.user" />
+        </service>
 
         <service id="black_user.infrastructure.service.read" class="%black_user.infrastructure.service.read.class%" public="false">
             <argument type="service" id="black_user.infrastructure.manager.user" />
         </service>
 
-        <service id="black_user.infrastructure.service.register" class="%black_user.infrastructure.service.register.class%" public="false">
+        <service id="black_user.infrastructure.service.status" class="%black_user.infrastructure.service.status.class%" public="false">
+            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.infrastructure.write.status" />
+        </service>
+
+        <service id="black_user.infrastructure.write.status" class="%black_user.infrastructure.service.write.class%" public="false">
             <argument type="service" id="black_user.infrastructure.manager.user" />
         </service>
 

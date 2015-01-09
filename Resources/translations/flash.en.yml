@@ -1,0 +1,9 @@
+application:
+    user:
+        flash:
+
+            success:
+                activated: "L'utilisateur a bien été activé"
+                created: "L'utilisateur a bien été créé"
+                registered: "L'utilisateur a bien été enregistré"
+                removed: "L'utilisateur a bien été supprimé"

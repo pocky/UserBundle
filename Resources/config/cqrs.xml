@@ -17,7 +17,6 @@
             <argument type="service" id="black_user.infrastructure.manager.user" />
             <argument type="service" id="black_user.infrastructure.service.status" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_user.infrastructure.domain_event.subscriber.activate" />
         </service>
 
         <service id="black_user.infrastructure.cqrs.handler.create" class="%black_user.infrastructure.cqrs.handler.create.class%">
@@ -33,7 +32,6 @@
         <service id="black_user.infrastructure.cqrs.handler.remove" class="%black_user.infrastructure.cqrs.handler.remove.class%">
             <argument type="service" id="black_user.infrastructure.manager.user" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_user.infrastructure.domain_event.subscriber.removed" />
         </service>
 
     </services>

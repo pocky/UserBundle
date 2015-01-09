@@ -1,20 +1,9 @@
 application:
-    form:
+    user:
+        flash:
 
-        login:
-            username:
-                label: "Nom d'utilisateur"
-                placeholder: "Nom d'utilisateur"
-            password:
-                label: "Mot de passe"
-                placeholder: "Mot de passe"
-            rememberMe:
-                label: "Se souvenir de moi"
-            submit:
-                label: "Se connecter"
-
-        create_user:
-            name:
-                label: Nom d'utilisateur
-            email:
-                label: Address email
+            success:
+                activated: "L'utilisateur a bien été activé"
+                created: "L'utilisateur a bien été créé"
+                registered: "L'utilisateur a bien été enregistré"
+                removed: "L'utilisateur a bien été supprimé"

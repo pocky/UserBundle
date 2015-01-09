@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Black\Component\User\Infrastructure\DomainEvent;
+namespace Black\Bundle\UserBundle\Infrastructure\DomainListener;
 
 use Black\Component\User\UserDomainEvents;
 use Psr\Log\LoggerInterface;
@@ -15,11 +15,12 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class FlashListener
  */
-class FlashListener implements EventSubscriberInterface
+class FlashSuccessListener implements EventSubscriberInterface
 {
     /**
      * @var Session
@@ -43,14 +44,17 @@ class FlashListener implements EventSubscriberInterface
 
     /**
      * @param Session $session
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      */
-    public function __construct(Session $session, Translator $translator)
+    public function __construct(Session $session, TranslatorInterface $translator)
     {
         $this->session = $session;
         $this->translator = $translator;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -61,6 +65,9 @@ class FlashListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param Event $event
+     */
     public function addSuccessFlash(Event $event)
     {
         if (!isset(self::$successMessages[$event->getName()])) {

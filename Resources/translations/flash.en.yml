@@ -3,7 +3,7 @@ application:
         flash:
 
             success:
-                activated: "L'utilisateur a bien été activé"
-                created: "L'utilisateur a bien été créé"
-                registered: "L'utilisateur a bien été enregistré"
-                removed: "L'utilisateur a bien été supprimé"
+                activated: "The user has successfuly activated"
+                created: The user has successfuly created"
+                registered: "The user has successfuly registered"
+                removed: "The user has successfuly removed"

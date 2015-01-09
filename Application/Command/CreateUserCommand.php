@@ -14,6 +14,7 @@ use Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler;
 use Black\Component\User\Infrastructure\Doctrine\UserManager;
 use Black\Component\User\Infrastructure\Service\RegisterService;
 use Black\DDD\CQRSinPHP\Infrastructure\CQRS\Bus;
+use Email\EmailAddress;
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -51,7 +52,7 @@ class CreateUserCommand extends ContainerAwareCommand
     /**
      * @param UserManager $manager
      * @param Bus $bus
-     * @param CreateUserHandler $handler
+     * @param RegisterUserHandler $handler
      * @param $commandName
      */
     public function __construct(
@@ -111,7 +112,7 @@ class CreateUserCommand extends ContainerAwareCommand
                 }
             );
 
-            $input->setArgument('email', $email);
+            $input->setArgument('email', new EmailAddress($email));
         }
 
         if (!$input->getArgument('password')) {

@@ -36,13 +36,15 @@ class UserEntityRepository extends EntityRepository implements UserRepository
     }
 
     /**
-     * @param UserId $userId
+     * @param $username
      * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function loadUser($username)
     {
         $query = $this->getQueryBuilder()
-            ->where('p.name = :name')
+            ->where('p.name = :name AND p.locked = false')
             ->setParameter('name', $username)
             ->getQuery();
 

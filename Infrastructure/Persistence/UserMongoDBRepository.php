@@ -42,6 +42,7 @@ class UserMongoDBRepository extends DocumentRepository implements UserRepository
     {
         $query = $this->getQueryBuilder()
             ->field('name')->equals($username)
+            ->field('locked')->equals(false)
             ->getQuery();
 
         return $query->getSingleResult();

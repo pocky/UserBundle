@@ -6,6 +6,10 @@
 
     <parameters>
         <parameter key="black_user.application.dto.active_user.class">Black\Component\User\Application\DTO\ActiveUserDTO</parameter>
+
+        <parameter key="black_user.application.dto.lock_user.class">Black\Component\User\Application\DTO\LockUserDTO</parameter>
+        <parameter key="black_user.application.dto.unlock_user.class">Black\Component\User\Application\DTO\UnlockUserDTO</parameter>
+
         <parameter key="black_user.application.dto.create_user.class">Black\Component\User\Application\DTO\CreateUserDTO</parameter>
 
         <parameter key="black_user.application.assembler.create_user.class">Black\Component\User\Application\DTOAssembler\CreateUserAssembler</parameter>
@@ -13,6 +17,10 @@
 
     <services>
         <service id="black_user.application.dto.active_user" class="%black_user.application.dto.active_user.class%" />
+
+        <service id="black_user.application.dto.lock_user" class="%black_user.application.dto.lock_user.class%" />
+
+        <service id="black_user.application.dto.unlock_user" class="%black_user.application.dto.unlock_user.class%" />
 
         <service id="black_user.application.dto.create_user" class="%black_user.application.dto.create_user.class%" />
 

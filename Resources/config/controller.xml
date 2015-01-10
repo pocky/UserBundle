@@ -5,10 +5,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_user.application.controller.active.class">Black\Component\User\Application\Controller\ActiveController</parameter>
-        <parameter key="black_user.application.controller.create.class">Black\Component\User\Application\Controller\CreateController</parameter>
-        <parameter key="black_user.application.controller.list.class">Black\Component\User\Application\Controller\ListController</parameter>
-        <parameter key="black_user.application.controller.remove.class">Black\Component\User\Application\Controller\RemoveController</parameter>
+        <parameter key="black_user.application.controller.active.class">Black\Component\User\Application\Controller\ActiveUserController</parameter>
+        <parameter key="black_user.application.controller.lock.class">Black\Component\User\Application\Controller\LockUserController</parameter>
+        <parameter key="black_user.application.controller.unlock.class">Black\Component\User\Application\Controller\UnlockUserController</parameter>
+        <parameter key="black_user.application.controller.create.class">Black\Component\User\Application\Controller\CreateUserController</parameter>
+        <parameter key="black_user.application.controller.list.class">Black\Component\User\Application\Controller\ListUsersController</parameter>
+        <parameter key="black_user.application.controller.remove.class">Black\Component\User\Application\Controller\RemoveUserController</parameter>
     </parameters>
 
     <services>
@@ -17,6 +19,18 @@
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_user.infrastructure.cqrs.handler.active" />
             <argument>Black\Component\User\Infrastructure\CQRS\Command\ActiveUserCommand</argument>
+        </service>
+
+        <service id="black_user.application.controller.lock" class="%black_user.application.controller.lock.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_user.infrastructure.cqrs.handler.lock" />
+            <argument>Black\Component\User\Infrastructure\CQRS\Command\LockUserCommand</argument>
+        </service>
+
+        <service id="black_user.application.controller.unlock" class="%black_user.application.controller.unlock.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_user.infrastructure.cqrs.handler.unlock" />
+            <argument>Black\Component\User\Infrastructure\CQRS\Command\UnlockUserCommand</argument>
         </service>
 
         <service id="black_user.application.controller.create" class="%black_user.application.controller.create.class%">

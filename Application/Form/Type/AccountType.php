@@ -17,12 +17,12 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class CreateUserType
+ * Class AccountType
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class CreateUserType extends AbstractType
+class AccountType extends AbstractType
 {
     /**
      * @var type
@@ -52,12 +52,12 @@ class CreateUserType extends AbstractType
     {
         $builder
             ->add('name', 'text', [
-                    'label'  => 'black_user.form.create_user.name.label',
+                    'label'  => 'black_user.form.account.name.label',
                     'required' => true,
                 ]
             )
             ->add('email', 'text', [
-                    'label'  => 'black_user.form.create_user.email.label',
+                    'label'  => 'black_user.form.account.email.label',
                     'required' => true,
                 ]
             );

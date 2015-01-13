@@ -10,9 +10,9 @@
         <parameter key="black_user.application.dto.lock_user.class">Black\Component\User\Application\DTO\LockUserDTO</parameter>
         <parameter key="black_user.application.dto.unlock_user.class">Black\Component\User\Application\DTO\UnlockUserDTO</parameter>
 
-        <parameter key="black_user.application.dto.create_user.class">Black\Component\User\Application\DTO\CreateUserDTO</parameter>
+        <parameter key="black_user.application.dto.account_user.class">Black\Component\User\Application\DTO\AccountUserDTO</parameter>
 
-        <parameter key="black_user.application.assembler.create_user.class">Black\Component\User\Application\DTOAssembler\CreateUserAssembler</parameter>
+        <parameter key="black_user.application.assembler.account_user.class">Black\Component\User\Application\DTOAssembler\AccountUserAssembler</parameter>
     </parameters>
 
     <services>
@@ -22,11 +22,11 @@
 
         <service id="black_user.application.dto.unlock_user" class="%black_user.application.dto.unlock_user.class%" />
 
-        <service id="black_user.application.dto.create_user" class="%black_user.application.dto.create_user.class%" />
+        <service id="black_user.application.dto.account_user" class="%black_user.application.dto.account_user.class%" />
 
-        <service id="black_user.application.assembler.create_user" class="%black_user.application.assembler.create_user.class%">
+        <service id="black_user.application.assembler.account_user" class="%black_user.application.assembler.account_user.class%">
             <argument>%black_user.user.model.class%</argument>
-            <argument>%black_user.application.dto.create_user.class%</argument>
+            <argument>%black_user.application.dto.account_user.class%</argument>
         </service>
     </services>
 </container>

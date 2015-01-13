@@ -7,8 +7,8 @@
     <parameters>
         <parameter key="black_user.application.form.type.login.class">Black\Bundle\UserBundle\Application\Form\Type\LoginType</parameter>
 
-        <parameter key="black_user.application.form.type.create_user.class">Black\Bundle\UserBundle\Application\Form\Type\CreateUserType</parameter>
-        <parameter key="black_user.application.form.handler.create_user.class">Black\Bundle\UserBundle\Application\Form\Handler\CreateUserHandler</parameter>
+        <parameter key="black_user.application.form.type.account.class">Black\Bundle\UserBundle\Application\Form\Type\AccountType</parameter>
+        <parameter key="black_user.application.form.handler.account.class">Black\Bundle\UserBundle\Application\Form\Handler\AccountHandler</parameter>
     </parameters>
 
     <services>
@@ -20,12 +20,12 @@
             <argument>null</argument>
         </service>
 
-        <service id="black_user.application.form.create_user"
+        <service id="black_user.application.form.account"
                  factory-method="createNamed"
                  factory-service="form.factory"
                  class="Symfony\Component\Form\Form">
-            <argument>black_user_create_user</argument>
-            <argument type="service" id="black_user.application.form.type.create_user" />
+            <argument>black_user_account</argument>
+            <argument type="service" id="black_user.application.form.type.account" />
             <argument>null</argument>
         </service>
 
@@ -35,18 +35,18 @@
             <tag name="form.type" alias="login" />
         </service>
 
-        <service id="black_user.application.form.type.create_user"
-                 class="%black_user.application.form.type.create_user.class%">
-            <argument>%black_user.application.dto.create_user.class%</argument>
-            <argument>black_user_create_user</argument>
-            <tag name="form.type" alias="black_user_create_user" />
+        <service id="black_user.application.form.type.account"
+                 class="%black_user.application.form.type.account.class%">
+            <argument>%black_user.application.dto.account_user.class%</argument>
+            <argument>black_user_account</argument>
+            <tag name="form.type" alias="black_user_account" />
         </service>
 
         <!-- Form Handler -->
-        <service id="black_user.application.form.handler.create_user"
-                 class="%black_user.application.form.handler.create_user.class%"
+        <service id="black_user.application.form.handler.account"
+                 class="%black_user.application.form.handler.account.class%"
                  scope="request">
-            <argument type="service" id="black_user.application.form.create_user" />
+            <argument type="service" id="black_user.application.form.account" />
             <argument type="service" id="request_stack" />
         </service>
     </services>

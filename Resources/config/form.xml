@@ -6,7 +6,6 @@
 
     <parameters>
         <parameter key="black_user.application.form.type.login.class">Black\Bundle\UserBundle\Application\Form\Type\LoginType</parameter>
-
         <parameter key="black_user.application.form.type.account.class">Black\Bundle\UserBundle\Application\Form\Type\AccountType</parameter>
         <parameter key="black_user.application.form.handler.account.class">Black\Bundle\UserBundle\Application\Form\Handler\AccountHandler</parameter>
     </parameters>

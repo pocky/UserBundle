@@ -9,7 +9,7 @@
  */
 namespace Black\Bundle\UserBundle\Infrastructure\Persistence;
 
-use Black\Component\User\Infrastructure\Persistence\UserRepository;
+use Black\Component\User\Domain\Model\UserRepository;
 use Black\Component\User\Domain\Model\UserId;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 

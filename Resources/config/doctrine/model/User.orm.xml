@@ -18,8 +18,6 @@
 
         <field name="registeredAt" type="date" />
 
-        <field name="salt" type="string" />
-
         <field name="active" type="boolean" />
 
         <field name="locked" type="boolean" />

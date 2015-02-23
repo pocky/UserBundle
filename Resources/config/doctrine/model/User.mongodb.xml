@@ -19,8 +19,6 @@
 
         <field name="registeredAt" fieldName="registeredAt" type="date" />
 
-        <field name="salt" fieldName="salt" type="string" />
-
         <field name="active" fieldName="active" type="boolean" />
 
         <field name="locked" fieldName="locked" type="boolean" />

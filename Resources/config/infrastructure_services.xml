@@ -23,10 +23,10 @@
 
         <service id="black_user.infrastructure.service.status" class="%black_user.infrastructure.service.status.class%" public="false">
             <argument type="service" id="black_user.infrastructure.manager.user" />
-            <argument type="service" id="black_user.infrastructure.write.status" />
+            <argument type="service" id="black_user.infrastructure.service.write" />
         </service>
 
-        <service id="black_user.infrastructure.write.status" class="%black_user.infrastructure.service.write.class%" public="false">
+        <service id="black_user.infrastructure.service.write" class="%black_user.infrastructure.service.write.class%" public="false">
             <argument type="service" id="black_user.infrastructure.manager.user" />
         </service>
 

@@ -10,6 +10,8 @@
         <parameter key="black_user.infrastructure.cqrs.handler.lock.class">Black\Component\User\Infrastructure\CQRS\Handler\LockUserHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.unlock.class">Black\Component\User\Infrastructure\CQRS\Handler\UnlockUserHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.create.class">Black\Component\User\Infrastructure\CQRS\Handler\CreateUserHandler</parameter>
+        <parameter key="black_user.infrastructure.cqrs.handler.update_account.class">Black\Component\User\Infrastructure\CQRS\Handler\UpdateAccountHandler</parameter>
+        <parameter key="black_user.infrastructure.cqrs.handler.update_password.class">Black\Component\User\Infrastructure\CQRS\Handler\UpdatePasswordHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.register.class">Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler</parameter>
         <parameter key="black_user.infrastructure.cqrs.handler.remove.class">Black\Component\User\Infrastructure\CQRS\Handler\RemoveUserHandler</parameter>
     </parameters>
@@ -42,7 +44,19 @@
 
         <service id="black_user.infrastructure.cqrs.handler.create" class="%black_user.infrastructure.cqrs.handler.create.class%">
             <argument type="service" id="black_user.infrastructure.manager.user" />
-            <argument type="service" id="black_user.infrastructure.service.register" />
+            <argument type="service" id="black_user.infrastructure.service.status" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="black_user.infrastructure.cqrs.handler.update_account" class="%black_user.infrastructure.cqrs.handler.update_account.class%">
+            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.infrastructure.service.write" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="black_user.infrastructure.cqrs.handler.update_password" class="%black_user.infrastructure.cqrs.handler.update_password.class%">
+            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.infrastructure.service.write" />
             <argument type="service" id="event_dispatcher" />
         </service>
 

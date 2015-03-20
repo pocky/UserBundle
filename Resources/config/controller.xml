@@ -10,6 +10,8 @@
         <parameter key="black_user.application.controller.lock.class">Black\Component\User\Application\Controller\LockUserController</parameter>
         <parameter key="black_user.application.controller.unlock.class">Black\Component\User\Application\Controller\UnlockUserController</parameter>
         <parameter key="black_user.application.controller.create.class">Black\Component\User\Application\Controller\CreateUserController</parameter>
+        <parameter key="black_user.application.controller.update_account.class">Black\Component\User\Application\Controller\UpdateAccountController</parameter>
+        <parameter key="black_user.application.controller.update_password.class">Black\Component\User\Application\Controller\UpdatePasswordController</parameter>
         <parameter key="black_user.application.controller.list.class">Black\Component\User\Application\Controller\ListUsersController</parameter>
         <parameter key="black_user.application.controller.remove.class">Black\Component\User\Application\Controller\RemoveUserController</parameter>
     </parameters>
@@ -44,6 +46,18 @@
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_user.infrastructure.cqrs.handler.create" />
             <argument>Black\Component\User\Infrastructure\CQRS\Command\CreateUserCommand</argument>
+        </service>
+
+        <service id="black_user.application.controller.update_account" class="%black_user.application.controller.update_account.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_user.infrastructure.cqrs.handler.update_account" />
+            <argument>Black\Component\User\Infrastructure\CQRS\Command\UpdateAccountCommand</argument>
+        </service>
+
+        <service id="black_user.application.controller.update_password" class="%black_user.application.controller.update_password.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_user.infrastructure.cqrs.handler.update_password" />
+            <argument>Black\Component\User\Infrastructure\CQRS\Command\UpdatePasswordCommand</argument>
         </service>
 
         <service id="black_user.application.controller.list" class="%black_user.application.controller.list.class%">

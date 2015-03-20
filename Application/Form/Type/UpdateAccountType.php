@@ -17,12 +17,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class AccountType
- *
- * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
+ * Class UpdateAccountType
  */
-class AccountType extends AbstractType
+class UpdateAccountType extends AbstractType
 {
     /**
      * @var type
@@ -51,6 +48,7 @@ class AccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id', 'hidden')
             ->add('name', 'text', [
                     'label'  => 'black_user.form.account.name.label',
                     'required' => true,
@@ -72,7 +70,7 @@ class AccountType extends AbstractType
                 'data_class' => $this->class,
                 'empty_data' => function (FormInterface $form) {
                     return new $this->class(
-                        null,
+                        $form->get('id')->getData(),
                         $form->get('name')->getData(),
                         $form->get('email')->getData()
                     );

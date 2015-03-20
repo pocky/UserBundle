@@ -14,12 +14,9 @@ namespace Black\Bundle\UserBundle\Application\Form\Handler;
 use Black\Bundle\CommonBundle\Application\Form\Handler\AbstractFormHandler;
 
 /**
- * Class AccountHandler
- *
- * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
+ * Class UpdatePasswordHandler
  */
-class AccountHandler extends AbstractFormHandler
+class UpdatePasswordHandler extends AbstractFormHandler
 {
 
 }

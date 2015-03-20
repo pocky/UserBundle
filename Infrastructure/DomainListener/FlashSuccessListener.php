@@ -10,7 +10,6 @@
 namespace Black\Bundle\UserBundle\Infrastructure\DomainListener;
 
 use Black\Component\User\UserDomainEvents;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -36,10 +35,14 @@ class FlashSuccessListener implements EventSubscriberInterface
      * @var array
      */
     protected static $successMessages = [
-        UserDomainEvents::USER_DOMAIN_ACTIVATED => 'application.user.flash.success.activated',
         UserDomainEvents::USER_DOMAIN_CREATED => 'application.user.flash.success.created',
+        UserDomainEvents::USER_DOMAIN_UPDATED => 'application.user.flash.success.updated',
         UserDomainEvents::USER_DOMAIN_REGISTERED => 'application.user.flash.success.registered',
-        UserDomainEvents::USER_DOMAIN_REMOVED => 'application.user.flash.success.removed'
+        UserDomainEvents::USER_DOMAIN_REMOVED => 'application.user.flash.success.removed',
+        UserDomainEvents::USER_DOMAIN_ACTIVATED => 'application.user.flash.success.activated',
+        UserDomainEvents::USER_DOMAIN_DEACTIVATED => 'application.user.flash.success.deactivated',
+        UserDomainEvents::USER_DOMAIN_LOCKED => 'application.user.flash.success.locked',
+        UserDomainEvents::USER_DOMAIN_UNLOCKED => 'application.user.flash.success.unlocked',
     ];
 
     /**
@@ -58,10 +61,14 @@ class FlashSuccessListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            UserDomainEvents::USER_DOMAIN_ACTIVATED => 'addSuccessFlash',
             UserDomainEvents::USER_DOMAIN_CREATED => 'addSuccessFlash',
+            UserDomainEvents::USER_DOMAIN_UPDATED => 'addSuccessFlash',
             UserDomainEvents::USER_DOMAIN_REGISTERED => 'addSuccessFlash',
-            UserDomainEvents::USER_DOMAIN_REMOVED => 'addSuccessFlash'
+            UserDomainEvents::USER_DOMAIN_REMOVED => 'addSuccessFlash',
+            UserDomainEvents::USER_DOMAIN_ACTIVATED => 'addSuccessFlash',
+            UserDomainEvents::USER_DOMAIN_DEACTIVATED => 'addSuccessFlash',
+            UserDomainEvents::USER_DOMAIN_LOCKED => 'addSuccessFlash',
+            UserDomainEvents::USER_DOMAIN_UNLOCKED => 'addSuccessFlash',
         ];
     }
 

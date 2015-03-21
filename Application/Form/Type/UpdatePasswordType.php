@@ -51,6 +51,7 @@ class UpdatePasswordType extends AbstractType
             ->add('id', 'hidden')
             ->add('password', 'repeated', [
                     'type' => 'password',
+                    'invalid_message' => 'black_user.form.password.invalid',
                     'first_options' => ['label' => 'black_user.form.password.password.label'],
                     'second_options' => ['label' => 'black_user.form.password.password_repeat.label'],
                     'options' => [

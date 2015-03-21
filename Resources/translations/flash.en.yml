@@ -1,9 +1,12 @@
 application:
     user:
         flash:
-
             success:
-                activated: "The user has successfuly activated"
-                created: The user has successfuly created"
-                registered: "The user has successfuly registered"
-                removed: "The user has successfuly removed"
+                created: "The user has been created"
+                updated: "The user has been updated"
+                registered: "The user has been registered"
+                removed: "The user has been removed"
+                activated: "The user has been activated"
+                deactivated: "The user has been deactivated"
+                locked: The user has been locked"
+                unlocked: "The user has been unlocked"

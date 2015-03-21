@@ -13,8 +13,15 @@ application:
             submit:
                 label: "Se connecter"
 
-        create_user:
+        account:
             name:
                 label: Nom d'utilisateur
             email:
-                label: Address email
+                label: Addresse email
+
+        password:
+            invalid: Les mots de passe ne sont pas identiques
+            password:
+                label: Nouveau mot de passe
+            password_repeat:
+                label: Répéter le nouveau mot de passe

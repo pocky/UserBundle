@@ -15,11 +15,17 @@ use Symfony\Component\Console\Application;
  */
 class BlackUserBundle extends Bundle
 {
+    /**
+     * @return BlackUserExtension
+     */
     public function getContainerExtension()
     {
         return new BlackUserExtension();
     }
 
+    /**
+     * @param ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

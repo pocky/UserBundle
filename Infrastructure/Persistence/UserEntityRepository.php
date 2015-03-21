@@ -15,9 +15,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class UserEntityRepository
- *
- * @author Alexandre Balmes <${COPYRIGHT_NAME}>
- * @license ${COPYRIGHT_LICENCE}
  */
 class UserEntityRepository extends EntityRepository implements UserRepository
 {

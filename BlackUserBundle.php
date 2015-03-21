@@ -10,6 +10,9 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Console\Application;
 
+/**
+ * Class BlackUserBundle
+ */
 class BlackUserBundle extends Bundle
 {
     public function getContainerExtension()

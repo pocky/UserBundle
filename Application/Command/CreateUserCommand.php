@@ -23,9 +23,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class CreateUserCommand
- *
- * @author Alexandre Balmes <${COPYRIGHT_NAME}>
- * @license ${COPYRIGHT_LICENCE}
  */
 class CreateUserCommand extends ContainerAwareCommand
 {
@@ -69,6 +66,9 @@ class CreateUserCommand extends ContainerAwareCommand
         parent::__construct();
     }
 
+    /**
+     *
+     */
     protected function configure()
     {
         $this
@@ -79,6 +79,10 @@ class CreateUserCommand extends ContainerAwareCommand
             ->addArgument('password', InputArgument::OPTIONAL, 'The password');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         $dialog = $this->getHelperSet()->get('dialog');

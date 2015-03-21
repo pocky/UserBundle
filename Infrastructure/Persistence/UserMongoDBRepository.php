@@ -15,9 +15,6 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
  * Class UserMongoDBRepository
- *
- * @author Alexandre Balmes <${COPYRIGHT_NAME}>
- * @license ${COPYRIGHT_LICENCE}
  */
 class UserMongoDBRepository extends DocumentRepository implements UserRepository
 {

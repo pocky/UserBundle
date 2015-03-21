@@ -16,9 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class LoginType
- *
- * @author Alexandre Balmes <${COPYRIGHT_NAME}>
- * @license ${COPYRIGHT_LICENCE}
  */
 class LoginType extends AbstractType
 {

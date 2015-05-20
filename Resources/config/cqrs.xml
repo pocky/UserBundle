@@ -51,7 +51,7 @@
 
         <service id="black_user.infrastructure.cqrs.handler.create" class="%black_user.infrastructure.cqrs.handler.create.class%">
             <argument type="service" id="black_user.infrastructure.manager.user" />
-            <argument type="service" id="black_user.infrastructure.service.status" />
+            <argument type="service" id="black_user.infrastructure.service.register" />
             <argument type="service" id="event_dispatcher" />
         </service>
 

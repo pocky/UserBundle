@@ -48,7 +48,7 @@ class UpdatePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'hidden')
+            ->add('userId', 'hidden')
             ->add('password', 'repeated', [
                     'type' => 'password',
                     'invalid_message' => 'black_user.form.password.invalid',
@@ -70,7 +70,7 @@ class UpdatePasswordType extends AbstractType
                 'data_class' => $this->class,
                 'empty_data' => function (FormInterface $form) {
                     return new $this->class(
-                        $form->get('id')->getData(),
+                        $form->get('userId')->getData(),
                         $form->get('password')->getData()
                     );
                 },

@@ -13,8 +13,6 @@
 
         <field name="name" fieldName="name" type="string" unique="true" />
 
-        <field name="email" fieldName="email" type="string" unique="true" />
-
         <field name="password" fieldName="password" type="string" />
 
         <field name="registeredAt" fieldName="registeredAt" type="date" />
@@ -30,6 +28,8 @@
         <field name="updatedAt" fieldName="updatedAt" type="date" />
 
         <embed-one field="userId" target-document="Black\Component\User\Domain\Model\UserId" />
+
+        <embed-one field="email" target-document="Email\EmailAddress" />
 
     </mapped-superclass>
 

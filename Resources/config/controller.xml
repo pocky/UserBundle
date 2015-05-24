@@ -14,6 +14,7 @@
         <parameter key="black_user.application.controller.update_password.class">Black\Component\User\Application\Controller\UpdatePasswordController</parameter>
         <parameter key="black_user.application.controller.list.class">Black\Component\User\Application\Controller\ListUsersController</parameter>
         <parameter key="black_user.application.controller.remove.class">Black\Component\User\Application\Controller\RemoveUserController</parameter>
+        <parameter key="black_user.application.controller.show.class">Black\Component\User\Application\Controller\ShowUserController</parameter>
     </parameters>
 
     <services>
@@ -68,6 +69,10 @@
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_user.infrastructure.cqrs.handler.remove" />
             <argument>Black\Component\User\Infrastructure\CQRS\Command\RemoveUserCommand</argument>
+        </service>
+
+        <service id="black_user.application.controller.show" class="%black_user.application.controller.show.class%">
+            <argument type="service" id="black_user.infrastructure.service.read" />
         </service>
 
     </services>

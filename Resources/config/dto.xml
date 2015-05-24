@@ -12,10 +12,7 @@
         <parameter key="black_user.application.dto.create_account.class">Black\Component\User\Application\DTO\CreateAccountDTO</parameter>
         <parameter key="black_user.application.dto.update_account.class">Black\Component\User\Application\DTO\UpdateAccountDTO</parameter>
         <parameter key="black_user.application.dto.update_password.class">Black\Component\User\Application\DTO\UpdatePasswordDTO</parameter>
-
-        <parameter key="black_user.application.assembler.create_account.class">Black\Component\User\Application\DTOAssembler\CreateAccountAssembler</parameter>
-        <parameter key="black_user.application.assembler.update_account.class">Black\Component\User\Application\DTOAssembler\UpdateAccountAssembler</parameter>
-        <parameter key="black_user.application.assembler.update_password.class">Black\Component\User\Application\DTOAssembler\UpdatePasswordAssembler</parameter>
+        <parameter key="black_user.application.dto.show_user.class">Black\Component\User\Application\DTO\ShowUserDTO</parameter>
     </parameters>
 
     <services>
@@ -33,19 +30,6 @@
 
         <service id="black_user.application.dto.update_password" class="%black_user.application.dto.update_password.class%" />
 
-        <service id="black_user.application.assembler.create_account" class="%black_user.application.assembler.create_account.class%">
-            <argument>%black_user.user.model.class%</argument>
-            <argument>%black_user.application.dto.create_account.class%</argument>
-        </service>
-
-        <service id="black_user.application.assembler.update_account" class="%black_user.application.assembler.update_account.class%">
-            <argument>%black_user.user.model.class%</argument>
-            <argument>%black_user.application.dto.update_account.class%</argument>
-        </service>
-
-        <service id="black_user.application.assembler.update_password" class="%black_user.application.assembler.update_password.class%">
-            <argument>%black_user.user.model.class%</argument>
-            <argument>%black_user.application.dto.update_password.class%</argument>
-        </service>
+        <service id="black_user.application.dto.show_user" class="%black_user.application.dto.show_user.class%" />
     </services>
 </container>

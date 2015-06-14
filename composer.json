@@ -14,9 +14,9 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "~0.3",
+        "black/common-bundle": "0.3.*",
         "black/email-bundle": "~1.0",
-        "black/user": "@dev",
+        "black/user": "dev-master",
         "symfony/security-bundle": "~2.3"
     },
     "autoload": {

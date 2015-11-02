@@ -11,7 +11,6 @@ namespace Black\Bundle\UserBundle\Application\Command;
 
 use Black\Component\User\Domain\Model\UserId;
 use Black\Component\User\Infrastructure\CQRS\Handler\RegisterUserHandler;
-use Black\Component\User\Infrastructure\Doctrine\UserManager;
 use Black\Component\User\Infrastructure\Service\RegisterService;
 use Black\DDD\CQRSinPHP\Infrastructure\CQRS\Bus;
 use Email\EmailAddress;
@@ -26,11 +25,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CreateUserCommand extends ContainerAwareCommand
 {
-    /**
-     * @var UserManager
-     */
-    protected $manager;
-
     /**
      * @var RegisterService
      */
@@ -47,18 +41,15 @@ class CreateUserCommand extends ContainerAwareCommand
     protected $dialog;
 
     /**
-     * @param UserManager $manager
      * @param Bus $bus
      * @param RegisterUserHandler $handler
      * @param $commandName
      */
     public function __construct(
-        UserManager $manager,
         Bus $bus,
         RegisterUserHandler $handler,
         $commandName
     ) {
-        $this->manager = $manager;
         $this->bus = $bus;
         $this->handler = $handler;
         $this->commandName = $commandName;

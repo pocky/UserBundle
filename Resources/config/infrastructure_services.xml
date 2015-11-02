@@ -14,20 +14,20 @@
     <services>
 
         <service id="black_user.infrastructure.service.register" class="%black_user.infrastructure.service.register.class%" public="false">
-            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.persistence.user_write" />
         </service>
 
         <service id="black_user.infrastructure.service.read" class="%black_user.infrastructure.service.read.class%" public="false">
-            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.persistence.user_read" />
         </service>
 
         <service id="black_user.infrastructure.service.status" class="%black_user.infrastructure.service.status.class%" public="false">
-            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.persistence.user_write" />
             <argument type="service" id="black_user.infrastructure.service.write" />
         </service>
 
         <service id="black_user.infrastructure.service.write" class="%black_user.infrastructure.service.write.class%" public="false">
-            <argument type="service" id="black_user.infrastructure.manager.user" />
+            <argument type="service" id="black_user.persistence.user_write" />
         </service>
 
     </services>

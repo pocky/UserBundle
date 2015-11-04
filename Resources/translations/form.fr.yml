@@ -1,4 +1,4 @@
-application:
+black_user:
     form:
 
         login:
@@ -11,17 +11,17 @@ application:
             rememberMe:
                 label: "Se souvenir de moi"
             submit:
-                label: "Se connecter"
+                label: "Connexion"
 
         account:
             name:
-                label: Nom d'utilisateur
+                label: "Nom d'utilisateur"
             email:
-                label: Addresse email
+                label: "Addresse email"
 
         password:
-            invalid: Les mots de passe ne sont pas identiques
+            invalid: "Les mots de passe ne sont pas identiques"
             password:
-                label: Nouveau mot de passe
+                label: "Nouveau mot de passe"
             password_repeat:
-                label: Répéter le nouveau mot de passe
+                label: "Répéter le nouveau mot de passe"

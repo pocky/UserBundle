@@ -3,25 +3,25 @@ black_user:
 
         login:
             username:
-                label: Username
-                placeholder: Username
+                label: "Username"
+                placeholder: "Username"
             password:
-                label: Password
-                placeholder: Password
+                label: "Password"
+                placeholder: "Password"
             rememberMe:
-                label: Remember me
+                label: "Remember me"
             submit:
-                label: Sign me in
+                label: "Sign in"
 
         account:
             name:
-                label: Username
+                label: "Username"
             email:
-                label: Email address
+                label: "Email address"
 
         password:
-            invalid: Passwords do not match
+            invalid: "Passwords do not match"
             password:
-                label: New password
+                label: "New password"
             password_repeat:
-                label: Repeat the new password
+                label: "Repeat the new password"

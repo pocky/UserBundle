@@ -12,17 +12,17 @@
 
         <field name="name" type="string" unique="true" />
 
-        <field name="password" type="string" />
+        <field name="password" type="string" nullable="true" />
 
-        <field name="registeredAt" type="date" />
+        <field name="registeredAt" type="date" nullable="true" />
 
         <field name="active" type="boolean" />
 
         <field name="locked" type="boolean" />
 
-        <field name="lastConnection" type="date" />
+        <field name="lastConnection" type="date" nullable="true" />
 
-        <field name="updatedAt" type="date" />
+        <field name="updatedAt" type="date" nullable="true" />
 
         <embedded class="Black\Component\User\Domain\Model\UserId" name="userId" />
 

@@ -13,9 +13,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "0.3.*",
+        "black/common-bundle": "~1.0",
         "black/email-bundle": "~1.0",
-        "black/user": "dev-master",
+        "black/user": "~1.0",
         "symfony/security-bundle": "~2.3"
     },
     "autoload": {
